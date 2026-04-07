@@ -1,930 +1,200 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Notilea — Nueva Asunción · Paraguay · Mundo</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet"/>
-  <style>
-    :root {
-      --ink: #0d0d0d;
-      --ink2: #2b2b2b;
-      --muted: #6b6b6b;
-      --rule: #d4d0c8;
-      --page: #f7f4ee;
-      --white: #ffffff;
-      --red: #c0392b;
-      --amber: #c67c00;
-      --blue: #1a4a8a;
-      --green: #1a6e3a;
-      --col: 72px;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Noticias Nueva Asunción</title>
 
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
-    body {
-      font-family: 'IBM Plex Sans', sans-serif;
-      background: var(--page);
-      color: var(--ink);
-      min-height: 100vh;
-    }
+<style>
+body {
+  margin: 0;
+  font-family: 'Inter', sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
 
-    /* ─── MASTHEAD ─── */
-    .masthead {
-      background: var(--ink);
-      color: var(--white);
-      text-align: center;
-      padding: 2.5rem 1rem 1.5rem;
-      border-bottom: 3px solid var(--red);
-      position: relative;
-      overflow: hidden;
-    }
-    .masthead::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: repeating-linear-gradient(
-        90deg,
-        transparent,
-        transparent 59px,
-        rgba(255,255,255,0.03) 59px,
-        rgba(255,255,255,0.03) 60px
-      );
-      pointer-events: none;
-    }
-    .masthead-eyebrow {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.45);
-      margin-bottom: .75rem;
-    }
-    .masthead-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(3rem, 8vw, 6rem);
-      font-weight: 900;
-      letter-spacing: -.03em;
-      line-height: .9;
-      color: var(--white);
-    }
-    .masthead-title span { color: var(--red); }
-    .masthead-tagline {
-      font-size: 11px;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.5);
-      margin-top: .9rem;
-      font-weight: 300;
-    }
-    .masthead-meta {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 1.5rem;
-      margin-top: 1.5rem;
-      padding-top: 1rem;
-      border-top: 1px solid rgba(255,255,255,.12);
-      flex-wrap: wrap;
-    }
-    .masthead-meta span {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .1em;
-      color: rgba(255,255,255,.4);
-    }
-    .live-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: var(--red);
-      color: white;
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: .12em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: 2px;
-    }
-    .live-dot {
-      width: 6px; height: 6px;
-      background: white;
-      border-radius: 50%;
-      animation: pulse 1.3s ease-in-out infinite;
-    }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.2} }
+header {
+  padding: 40px 20px;
+  background: linear-gradient(135deg, #1e293b, #020617);
+}
 
-    /* ─── NAV BAR ─── */
-    .nav-bar {
-      background: var(--white);
-      border-bottom: 1px solid var(--rule);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    .nav-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      gap: 0;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-    .nav-inner::-webkit-scrollbar { display: none; }
-    .nav-btn {
-      font-family: 'IBM Plex Sans', sans-serif;
-      font-size: 12px;
-      font-weight: 500;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-      padding: .85rem 1.4rem;
-      background: none;
-      border: none;
-      border-bottom: 2px solid transparent;
-      cursor: pointer;
-      color: var(--muted);
-      white-space: nowrap;
-      transition: color .2s, border-color .2s;
-    }
-    .nav-btn:hover { color: var(--ink); }
-    .nav-btn.active { color: var(--ink); border-bottom-color: var(--ink); }
+header h1 {
+  margin: 0;
+  font-size: 32px;
+}
 
-    /* ─── LAYOUT ─── */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 2rem 1.25rem;
-    }
+header p {
+  opacity: 0.7;
+}
 
-    /* Sections */
-    .section { display: none; }
-    .section.visible { display: block; }
+nav {
+  background: #020617;
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #1e293b;
+}
 
-    /* Section divider */
-    .section-head {
-      display: flex;
-      align-items: baseline;
-      gap: 1rem;
-      margin-bottom: 1.5rem;
-      padding-bottom: .75rem;
-      border-bottom: 2px solid var(--ink);
-    }
-    .section-head h2 {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.7rem;
-      font-weight: 700;
-    }
-    .section-head .section-kicker {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .15em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
+nav a {
+  color: #38bdf8;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: 600;
+}
 
-    /* ─── HERO GRID ─── */
-    .hero-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      border: 1px solid var(--rule);
-      background: var(--white);
-      margin-bottom: 2rem;
-    }
-    @media(max-width: 640px) {
-      .hero-grid { grid-template-columns: 1fr; }
-    }
-    .hero-main {
-      border-right: 1px solid var(--rule);
-      padding: 2rem;
-    }
-    @media(max-width: 640px) { .hero-main { border-right: none; border-bottom: 1px solid var(--rule); } }
-    .hero-stack { display: flex; flex-direction: column; }
-    .hero-secondary { padding: 0; }
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
 
-    .kicker {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      font-weight: 500;
-      margin-bottom: .5rem;
-    }
-    .kicker.red { color: var(--red); }
-    .kicker.blue { color: var(--blue); }
-    .kicker.green { color: var(--green); }
-    .kicker.amber { color: var(--amber); }
-    .kicker.gray { color: var(--muted); }
+.hero {
+  background: #1e293b;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
 
-    .headline {
-      font-family: 'Playfair Display', serif;
-      line-height: 1.15;
-    }
-    .headline.xl { font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: .75rem; }
-    .headline.lg { font-size: clamp(1.2rem, 2.5vw, 1.7rem); font-weight: 700; margin-bottom: .5rem; }
-    .headline.md { font-size: 1.05rem; font-weight: 700; margin-bottom: .35rem; }
+.hero h2 {
+  margin-top: 0;
+}
 
-    .dek {
-      font-size: 14px;
-      color: var(--ink2);
-      line-height: 1.65;
-      margin-bottom: .75rem;
-    }
+.grid {
+  display: grid;
+  gap: 15px;
+}
 
-    .byline {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-top: .5rem;
-    }
+.card {
+  background: #020617;
+  padding: 15px;
+  border-radius: 10px;
+  border: 1px solid #1e293b;
+  transition: 0.2s;
+}
 
-    /* Card in stack */
-    .story-card {
-      padding: 1.25rem 1.5rem;
-      border-bottom: 1px solid var(--rule);
-    }
-    .story-card:last-child { border-bottom: none; }
+.card:hover {
+  transform: translateY(-3px);
+  border-color: #38bdf8;
+}
 
-    /* ─── CLIMA WIDGET ─── */
-    .clima-banner {
-      background: var(--ink);
-      color: var(--white);
-      padding: 1.5rem 2rem;
-      margin-bottom: 2rem;
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      gap: 2rem;
-      align-items: center;
-      border: 1px solid var(--rule);
-    }
-    @media(max-width: 640px) {
-      .clima-banner { grid-template-columns: 1fr; gap: 1rem; }
-    }
-    .clima-now { display: flex; align-items: baseline; gap: .5rem; }
-    .clima-temp {
-      font-family: 'Playfair Display', serif;
-      font-size: 4rem;
-      font-weight: 700;
-      line-height: 1;
-    }
-    .clima-unit { font-size: 1.5rem; color: rgba(255,255,255,.5); }
-    .clima-cond { font-size: 13px; color: rgba(255,255,255,.6); margin-top: 4px; }
-    .clima-loc { font-family: 'IBM Plex Mono', monospace; font-size: 10px; letter-spacing: .15em; text-transform: uppercase; color: rgba(255,255,255,.4); }
-    .clima-forecast {
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-    .clima-day {
-      text-align: center;
-      min-width: 44px;
-    }
-    .clima-day-name { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.4); }
-    .clima-day-temp { font-size: 18px; font-weight: 600; margin: 3px 0; }
-    .clima-day-rain { font-size: 10px; color: rgba(255,255,255,.5); }
-    .clima-alert {
-      background: rgba(192,57,43,.25);
-      border: 1px solid rgba(192,57,43,.6);
-      border-radius: 2px;
-      padding: .6rem 1rem;
-      font-size: 12px;
-      color: #ffb3ae;
-    }
+.card h3 {
+  margin: 0 0 8px;
+}
 
-    /* ─── TIMELINE (Irán) ─── */
-    .timeline {
-      position: relative;
-      padding-left: 1.5rem;
-    }
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 5px; top: 0; bottom: 0;
-      width: 1px;
-      background: var(--rule);
-    }
-    .tl-item {
-      position: relative;
-      padding: 0 0 1.5rem 1rem;
-    }
-    .tl-item::before {
-      content: '';
-      position: absolute;
-      left: -1rem;
-      top: 6px;
-      width: 8px; height: 8px;
-      background: var(--rule);
-      border-radius: 50%;
-    }
-    .tl-item.hot::before { background: var(--red); }
-    .tl-time {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 4px;
-    }
-    .tl-head { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; margin-bottom: 5px; line-height: 1.3; }
-    .tl-body { font-size: 13px; color: var(--ink2); line-height: 1.6; }
+.tag {
+  font-size: 12px;
+  color: #38bdf8;
+}
 
-    /* ─── STATS ROW ─── */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-      gap: 1px;
-      background: var(--rule);
-      border: 1px solid var(--rule);
-      margin-bottom: 2rem;
-    }
-    .stat-box {
-      background: var(--white);
-      padding: 1.25rem 1.5rem;
-    }
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2rem;
-      font-weight: 900;
-      line-height: 1;
-      margin-bottom: 4px;
-    }
-    .stat-num.red { color: var(--red); }
-    .stat-num.blue { color: var(--blue); }
-    .stat-num.amber { color: var(--amber); }
-    .stat-label { font-size: 11px; color: var(--muted); line-height: 1.4; }
+.section-title {
+  margin: 30px 0 15px;
+  font-size: 20px;
+  border-left: 4px solid #38bdf8;
+  padding-left: 10px;
+}
 
-    /* ─── TWO-COL LAYOUT ─── */
-    .two-col {
-      display: grid;
-      grid-template-columns: 2fr 1fr;
-      gap: 2rem;
-    }
-    @media(max-width: 768px) { .two-col { grid-template-columns: 1fr; } }
-
-    /* Sidebar */
-    .sidebar-module {
-      background: var(--white);
-      border: 1px solid var(--rule);
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
-    }
-    .sidebar-title {
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .18em;
-      text-transform: uppercase;
-      color: var(--muted);
-      border-bottom: 1px solid var(--rule);
-      padding-bottom: .6rem;
-      margin-bottom: .75rem;
-    }
-    .sidebar-item {
-      padding: .6rem 0;
-      border-bottom: 1px solid var(--rule);
-      font-size: 13px;
-      line-height: 1.5;
-      color: var(--ink2);
-    }
-    .sidebar-item:last-child { border-bottom: none; }
-
-    /* ─── RULE DIVIDER ─── */
-    .rule { border: none; border-top: 1px solid var(--rule); margin: 2rem 0; }
-    .rule.thick { border-top: 2px solid var(--ink); }
-
-    /* ─── BADGE ─── */
-    .badge {
-      display: inline-block;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 9px;
-      font-weight: 500;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      padding: 2px 7px;
-      border-radius: 1px;
-      margin-right: 4px;
-    }
-    .badge.red { background: #fdecea; color: var(--red); }
-    .badge.blue { background: #e8eef8; color: var(--blue); }
-    .badge.green { background: #e6f4ec; color: var(--green); }
-    .badge.amber { background: #fef4e4; color: var(--amber); }
-    .badge.gray { background: #f0ede8; color: var(--muted); }
-
-    /* ─── FOOTER ─── */
-    footer {
-      background: var(--ink);
-      color: rgba(255,255,255,.4);
-      text-align: center;
-      padding: 2rem;
-      margin-top: 3rem;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 10px;
-      letter-spacing: .1em;
-    }
-    footer strong { color: rgba(255,255,255,.7); }
-
-    /* ─── ANIMATIONS ─── */
-    @keyframes fadein {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .section.visible { animation: fadein .3s ease; }
-
-    /* Responsive tweaks */
-    @media(max-width: 480px) {
-      .masthead-title { font-size: 3rem; }
-      .clima-banner { padding: 1rem; }
-    }
-  </style>
+footer {
+  text-align: center;
+  padding: 20px;
+  border-top: 1px solid #1e293b;
+  margin-top: 30px;
+  font-size: 14px;
+  opacity: 0.6;
+}
+</style>
 </head>
+
 <body>
 
-<!-- MASTHEAD -->
-<header class="masthead">
-  <div class="masthead-eyebrow">Edición digital · Departamento Presidente Hayes · Paraguay</div>
-  <div class="masthead-title">Notile<span>a</span></div>
-  <div class="masthead-tagline">Nueva Asunción · Paraguay · El Mundo</div>
-  <div class="masthead-meta">
-    <span id="fecha-hoy">Martes, 7 de abril de 2026</span>
-    <div class="live-chip"><div class="live-dot"></div>En vivo</div>
-    <span>Actualización automática</span>
-    <span>🌡 23°C · Lluvia</span>
-  </div>
+<header>
+  <h1>Noticias Nueva Asunción</h1>
+  <p>Presidente Hayes · Paraguay</p>
 </header>
 
-<!-- NAV -->
-<nav class="nav-bar">
-  <div class="nav-inner">
-    <button class="nav-btn active" onclick="showSection('home')">Portada</button>
-    <button class="nav-btn" onclick="showSection('local')">Local · Pte. Hayes</button>
-    <button class="nav-btn" onclick="showSection('clima')">Clima</button>
-    <button class="nav-btn" onclick="showSection('iran')">Guerra en Irán 🔴</button>
-    <button class="nav-btn" onclick="showSection('paraguay')">Paraguay</button>
-  </div>
+<nav>
+  <a href="#noticias">Noticias</a>
+  <a href="#internacional">Internacional</a>
+  <a href="#contacto">Contacto</a>
 </nav>
 
-<!-- MAIN -->
-<main class="container">
+<div class="container">
 
-  <!-- ═══════════════ HOME ═══════════════ -->
-  <section class="section visible" id="home">
-    <div class="hero-grid">
-      <!-- HERO MAIN -->
-      <div class="hero-main">
-        <div class="kicker red">Guerra · Irán · 7 abr 2026</div>
-        <h1 class="headline xl">Arabia Saudí intercepta 7 misiles iraníes mientras escalada global se intensifica</h1>
-        <p class="dek">En las primeras horas del martes, Arabia Saudita destruyó siete misiles balísticos lanzados desde Irán. Los restos cayeron cerca de instalaciones energéticas en la región oriental. Trump mantiene el ultimátum sobre centrales eléctricas iraníes.</p>
-        <div class="byline">7 abril 2026 · 01:43 · Fuente: El Español / CNN en Español</div>
-      </div>
-      <!-- SECONDARY STACK -->
-      <div class="hero-secondary">
-        <div class="story-card">
-          <div class="kicker green">Local · Nueva Asunción</div>
-          <h2 class="headline md">Puente Pararã llega al 95% en ruta PY12</h2>
-          <p class="dek">La obra de 75 metros y doble vía reemplazará la pasarela metálica en el km 4,20. Restan losas de aproximación y juntas de dilatación.</p>
-          <div class="byline">Feb 2026 · MOPC</div>
-        </div>
-        <div class="story-card">
-          <div class="kicker amber">Paraguay · Economía</div>
-          <h2 class="headline md">Inflación de marzo cerró en 0,8% — BCP</h2>
-          <p class="dek">Aumentos en combustible, frutas, hortalizas y huevo encabezaron el alza mensual, informó el Banco Central.</p>
-          <div class="byline">7 abr 2026 · BCP / Diario HOY</div>
-        </div>
-        <div class="story-card">
-          <div class="kicker red">Seguridad · Chaco'i</div>
-          <h2 class="headline md">Cinco detenidos por asalto en estación de servicio</h2>
-          <p class="dek">Policía de Presidente Hayes capturó a los sospechosos en Nueva Asunción vinculados al ataque en José Falcón.</p>
-          <div class="byline">Reciente · ABC Color</div>
-        </div>
-      </div>
-    </div><!-- /hero-grid -->
+  <div class="hero">
+    <h2>🌍 Conflicto global en foco</h2>
+    <p>Escalada entre EE.UU, Israel e Irán. Petróleo supera USD 100. Tensión en máximos.</p>
+  </div>
 
-    <!-- STATS: Irán snapshot -->
-    <div class="stats-row">
-      <div class="stat-box">
-        <div class="stat-num red">1.900+</div>
-        <div class="stat-label">Muertos en Irán desde el 28 feb</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num red">1.268+</div>
-        <div class="stat-label">Muertos en Líbano (desde 2 mar)</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num amber">$113</div>
-        <div class="stat-label">Petróleo WTI por barril (USD)</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num blue">−95%</div>
-        <div class="stat-label">Caída del tránsito en Estrecho de Ormuz</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num red">37°</div>
-        <div class="stat-label">Días de guerra activa al 7 abr</div>
-      </div>
+  <h2 class="section-title" id="noticias">Noticias locales</h2>
+
+  <div class="grid">
+    <div class="card">
+      <span class="tag">Infraestructura</span>
+      <h3>Puente Pararã al 95%</h3>
+      <p>Obra clave en ruta PY12. Última fase en ejecución.</p>
     </div>
 
-    <!-- CLIMATE PREVIEW -->
-    <div class="clima-banner">
-      <div>
-        <div class="clima-loc">Nueva Asunción · Presidente Hayes</div>
-        <div class="clima-now">
-          <div class="clima-temp">23</div>
-          <div class="clima-unit">°C</div>
-        </div>
-        <div class="clima-cond">🌧 Lluvia · Humedad 67% · Máx 24°C</div>
-      </div>
-      <div class="clima-forecast">
-        <div class="clima-day">
-          <div class="clima-day-name">Mié</div>
-          <div class="clima-day-temp">25°</div>
-          <div class="clima-day-rain">10%🌧</div>
-        </div>
-        <div class="clima-day">
-          <div class="clima-day-name">Jue</div>
-          <div class="clima-day-temp">25°</div>
-          <div class="clima-day-rain">10%🌧</div>
-        </div>
-        <div class="clima-day">
-          <div class="clima-day-name">Vie</div>
-          <div class="clima-day-temp">28°</div>
-          <div class="clima-day-rain">10%🌤</div>
-        </div>
-        <div class="clima-day">
-          <div class="clima-day-name">Sáb</div>
-          <div class="clima-day-temp">31°</div>
-          <div class="clima-day-rain">25%🌤</div>
-        </div>
-      </div>
-      <div class="clima-alert">⚠ Lluvia hoy · 65% de probabilidad<br>Se espera mejora desde el miércoles</div>
-    </div>
-  </section>
-
-  <!-- ═══════════════ LOCAL ═══════════════ -->
-  <section class="section" id="local">
-    <div class="section-head">
-      <h2>Noticias Locales</h2>
-      <span class="section-kicker">Nueva Asunción · Departamento Presidente Hayes</span>
-    </div>
-    <div class="two-col">
-      <div>
-        <!-- Story 1 -->
-        <div style="background:var(--white);border:1px solid var(--rule);padding:2rem;margin-bottom:1.5rem;">
-          <span class="badge green">Infraestructura</span>
-          <h2 class="headline lg" style="margin-top:.5rem;">Puente Pararã alcanza 95% de ejecución en ruta PY12</h2>
-          <p class="dek">La obra de 75 metros con doble vía de circulación reemplazará la antigua pasarela metálica en el kilómetro 4,20 de Nueva Asunción, fortaleciendo la conexión entre el tramo Remanso–Falcón y la ciudad de Nanawa. El proyecto, licitado por el Ministerio de Obras Públicas y Comunicaciones (MOPC), está a cargo del Consorcio TEC — integrado por Tocsa, Ecomipa y Concremix.</p>
-          <p class="dek">Actualmente restan la ejecución de losas de aproximación en ambos extremos y la instalación de juntas de dilatación en los estribos. Del lado de Nueva Asunción continúa la carga de arena refulada para el avance del terraplén, con colocación de gaviones con piedra embolsada para reforzar estabilidad frente a crecidas.</p>
-          <div class="byline">Febrero 2026 · MOPC / Peru Construye</div>
-        </div>
-
-        <!-- Story 2 -->
-        <div style="background:var(--white);border:1px solid var(--rule);padding:2rem;margin-bottom:1.5rem;">
-          <span class="badge red">Seguridad</span>
-          <h2 class="headline lg" style="margin-top:.5rem;">Cinco detenidos por asalto a estación de servicio en José Falcón</h2>
-          <p class="dek">La Policía del departamento de Presidente Hayes capturó en el nuevo distrito de Nueva Asunción a cinco hombres vinculados a un asalto perpetrado contra una estación de servicio en el municipio de José Falcón. Los detenidos fueron identificados y puestos a disposición de la Fiscalía para el inicio de las investigaciones correspondientes.</p>
-          <div class="byline">Reciente · ABC Color</div>
-        </div>
-
-        <!-- Story 3 -->
-        <div style="background:var(--white);border:1px solid var(--rule);padding:2rem;margin-bottom:1.5rem;">
-          <span class="badge red">Seguridad</span>
-          <h2 class="headline lg" style="margin-top:.5rem;">Vecinos del barrio San Juan denuncian ola de inseguridad</h2>
-          <p class="dek">Residentes del barrio San Juan en el distrito de Nueva Asunción denuncian el aumento de la inseguridad por la falta de presencia policial y de alumbrado público. Según los pobladores, la zona está asediada por personas vinculadas al consumo de sustancias que aprovechan la oscuridad para delinquir. Los vecinos reclaman respuestas urgentes de las autoridades municipales y departamentales.</p>
-          <div class="byline">Reciente · ABC Color</div>
-        </div>
-
-        <!-- Story 4 -->
-        <div style="background:var(--white);border:1px solid var(--rule);padding:2rem;margin-bottom:1.5rem;">
-          <span class="badge amber">Educación</span>
-          <h2 class="headline lg" style="margin-top:.5rem;">Estudiantes de Chaco'i dan clases bajo un árbol y comparten pizarra</h2>
-          <p class="dek">En condiciones deplorables estudian niños de varios grados en la escuela Nueva Asunción de Chaco'i, donde la falta de infraestructura obliga a los alumnos a recibir clases a la intemperie. La situación fue denunciada públicamente por docentes y familias que aguardan desde hace tiempo la reparación o construcción de un nuevo edificio escolar.</p>
-          <div class="byline">Reciente · ABC Color</div>
-        </div>
-
-        <!-- Story 5 -->
-        <div style="background:var(--white);border:1px solid var(--rule);padding:2rem;margin-bottom:1.5rem;">
-          <span class="badge amber">Incendios</span>
-          <h2 class="headline lg" style="margin-top:.5rem;">100 militares combatieron incendios forestales cerca del Puente Héroes del Chaco</h2>
-          <p class="dek">Un contingente de unos 100 efectivos del Ejército, la Armada y el Comando Logístico fue desplegado al distrito de Nueva Asunción para combatir incendios forestales muy cerca del Puente Héroes del Chaco. Las fuerzas contaron con el apoyo de un camión cisterna de 10.000 litros y el helicóptero UH-1H de la Fuerza Aérea equipado con sistema Bambi Bucket. El humo de los focos llegó a extenderse hasta la ciudad de Asunción.</p>
-          <div class="byline">Febrero 2026 · Última Hora / Ejército Paraguayo</div>
-        </div>
-
-        <!-- Story 6 -->
-        <div style="background:var(--white);border:1px solid var(--rule);padding:2rem;margin-bottom:1.5rem;">
-          <span class="badge blue">Justicia</span>
-          <h2 class="headline lg" style="margin-top:.5rem;">Juez desaforado de Nueva Asunción podría recibir entre 8 y 9 años de cárcel</h2>
-          <p class="dek">Jorge Adolfo Franco Garelik, juez desaforado por el Jurado de Enjuiciamiento de Magistrados (JEM) por participar presuntamente en un esquema de estafa y secuestro de autos, se expone a una pena carcelaria de entre ocho y nueve años. La fiscalía no descarta que el número de víctimas de la playa de vehículos vinculada al caso alcance las 200 personas.</p>
-          <div class="byline">Reciente · ABC Color</div>
-        </div>
-      </div>
-
-      <!-- SIDEBAR -->
-      <aside>
-        <div class="sidebar-module">
-          <div class="sidebar-title">Gobernación · Pte. Hayes</div>
-          <div class="sidebar-item">📋 Mitigación y Riesgo acompaña a familias del distrito de Nueva Asunción — 28 ene 2026</div>
-          <div class="sidebar-item">💼 72 personas seleccionadas en la Expo Feria de Empleos impulsada por la Secretaría de la Juventud — 27 ene 2026</div>
-          <div class="sidebar-item">🎓 Secretaría de la Juventud acompañó curso de nivelación académica preparatorio para examen probatorio — 26 ene 2026</div>
-          <div class="sidebar-item">🪡 Acompañamiento a artesanos del pueblo Qom, comunidad Rosarino, en recolección de materia prima — Reciente</div>
-        </div>
-        <div class="sidebar-module">
-          <div class="sidebar-title">Datos del Distrito</div>
-          <div class="sidebar-item"><strong>Departamento:</strong> Presidente Hayes</div>
-          <div class="sidebar-item"><strong>Región:</strong> Chaco Paraguayo (Chaco'i)</div>
-          <div class="sidebar-item"><strong>Ruta clave:</strong> PY12 (Puente Héroes del Chaco)</div>
-          <div class="sidebar-item"><strong>Intendente:</strong> Juan Vera Maciel (Honor Colorado)</div>
-        </div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- ═══════════════ CLIMA ═══════════════ -->
-  <section class="section" id="clima">
-    <div class="section-head">
-      <h2>Clima</h2>
-      <span class="section-kicker">Nueva Asunción · Presidente Hayes · Paraguay</span>
+    <div class="card">
+      <span class="tag">Seguridad</span>
+      <h3>Cinco detenidos</h3>
+      <p>Asalto a estación de servicio resuelto.</p>
     </div>
 
-    <!-- Current big -->
-    <div style="background:var(--ink);color:white;padding:3rem 2.5rem;margin-bottom:2rem;border:1px solid #333;">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:1rem;">📍 Nueva Asunción, Departamento Presidente Hayes · Martes 7 abril 2026</div>
-      <div style="display:flex;align-items:baseline;gap:1rem;flex-wrap:wrap;">
-        <div style="font-family:'Playfair Display',serif;font-size:7rem;font-weight:900;line-height:1;">23°</div>
-        <div>
-          <div style="font-size:1.5rem;font-weight:500;margin-bottom:.5rem;">🌧 Lluvia</div>
-          <div style="font-size:14px;color:rgba(255,255,255,.6);">Humedad: 67%</div>
-          <div style="font-size:14px;color:rgba(255,255,255,.6);">Temperatura máxima: 24°C</div>
-          <div style="font-size:14px;color:rgba(255,255,255,.6);">Probabilidad de lluvia: 65%</div>
-        </div>
-      </div>
+    <div class="card">
+      <span class="tag">Seguridad</span>
+      <h3>Denuncias vecinales</h3>
+      <p>Falta de luz impulsa inseguridad.</p>
     </div>
 
-    <!-- 5-day forecast -->
-    <h3 style="font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:1rem;">Pronóstico extendido</h3>
-    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;background:var(--rule);border:1px solid var(--rule);margin-bottom:2rem;">
-      <div style="background:var(--white);padding:1.5rem;text-align:center;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Hoy · Mar 7</div>
-        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin:.5rem 0;">23°</div>
-        <div style="font-size:13px;color:var(--muted);">Máx 24° · 65% 🌧</div>
-      </div>
-      <div style="background:var(--white);padding:1.5rem;text-align:center;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Mié 8</div>
-        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin:.5rem 0;">25°</div>
-        <div style="font-size:13px;color:var(--muted);">10% 🌤</div>
-      </div>
-      <div style="background:var(--white);padding:1.5rem;text-align:center;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Jue 9</div>
-        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin:.5rem 0;">25°</div>
-        <div style="font-size:13px;color:var(--muted);">10% 🌤</div>
-      </div>
-      <div style="background:var(--white);padding:1.5rem;text-align:center;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Vie 10</div>
-        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin:.5rem 0;">28°</div>
-        <div style="font-size:13px;color:var(--muted);">10% ☀</div>
-      </div>
-      <div style="background:var(--white);padding:1.5rem;text-align:center;">
-        <div style="font-family:'IBM Plex Mono',monospace;font-size:11px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);">Sáb 11</div>
-        <div style="font-family:'Playfair Display',serif;font-size:2.5rem;font-weight:700;margin:.5rem 0;">31°</div>
-        <div style="font-size:13px;color:var(--muted);">25% 🌤</div>
-      </div>
+    <div class="card">
+      <span class="tag">Educación</span>
+      <h3>Clases precarias</h3>
+      <p>Alumnos estudian bajo un árbol.</p>
     </div>
 
-    <div style="background:#fff8e1;border:1px solid #f0c040;padding:1.25rem 1.5rem;font-size:13px;color:#7a5a00;">
-      <strong>⚠ Aviso meteorológico:</strong> Se registra lluvia activa este martes en el área del Chaco'i y zonas del Bajo Chaco. La visibilidad en el puente Héroes del Chaco puede verse reducida. Se prevé mejora gradual a partir del miércoles con temperaturas en ascenso hacia el fin de semana.
+    <div class="card">
+      <span class="tag">Emergencia</span>
+      <h3>Incendios controlados</h3>
+      <p>Militares actuaron en zona crítica.</p>
     </div>
-  </section>
+  </div>
 
-  <!-- ═══════════════ IRÁN ═══════════════ -->
-  <section class="section" id="iran">
-    <div class="section-head">
-      <h2>Guerra en Irán</h2>
-      <span class="section-kicker">
-        <div class="live-chip" style="font-size:9px;"><div class="live-dot"></div>En vivo · 7 abril 2026</div>
-      </span>
-    </div>
+  <h2 class="section-title">Clima hoy</h2>
 
-    <!-- Context box -->
-    <div style="background:var(--white);border-left:4px solid var(--red);padding:1.25rem 1.5rem;margin-bottom:2rem;border-top:1px solid var(--rule);border-right:1px solid var(--rule);border-bottom:1px solid var(--rule);">
-      <div style="font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.5rem;">Contexto del conflicto</div>
-      <p style="font-size:14px;line-height:1.7;color:var(--ink2);">El 28 de febrero de 2026, EE.UU. e Israel lanzaron ataques conjuntos contra Irán. El conflicto lleva más de 37 días activo. El Estrecho de Ormuz está efectivamente bloqueado, interrumpiendo el 20% del flujo global de petróleo y gas. El tránsito de buques cayó de 130 al día (febrero) a solo 6 en marzo, una reducción del 95% (UNCTAD).</p>
-    </div>
+  <div class="card">
+    <h3>23°C · Lluvia</h3>
+    <p>Humedad 67% · Máx 24°C · Prob lluvia 65%</p>
+  </div>
 
-    <!-- Stats -->
-    <div class="stats-row" style="margin-bottom:2rem;">
-      <div class="stat-box">
-        <div class="stat-num red">1.900+</div>
-        <div class="stat-label">Muertos en Irán desde el inicio</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num red">1.268+</div>
-        <div class="stat-label">Muertos en Líbano (desde 2 mar)</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num red">101+</div>
-        <div class="stat-label">Muertos en Irak</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num amber">$113</div>
-        <div class="stat-label">Petróleo WTI (USD/barril)</div>
-      </div>
-      <div class="stat-box">
-        <div class="stat-num blue">37</div>
-        <div class="stat-label">Días de conflicto activo</div>
-      </div>
+  <h2 class="section-title" id="internacional">Análisis internacional</h2>
+
+  <div class="grid">
+    <div class="card">
+      <h3>Claves del conflicto</h3>
+      <p>• Ataques en Teherán y Beirut</p>
+      <p>• Misiles hacia Israel</p>
+      <p>• Crisis energética global</p>
     </div>
 
-    <div class="two-col">
-      <div>
-        <div class="timeline">
-
-          <div class="tl-item hot">
-            <div class="tl-time">7 abr 2026 · 01:43 hs</div>
-            <div class="tl-head">Arabia Saudí intercepta 7 misiles balísticos iraníes</div>
-            <p class="tl-body">El Ministerio de Defensa saudí anunció la destrucción de siete misiles balísticos lanzados hacia su región oriental. Los restos cayeron cerca de instalaciones energéticas. Se realizan trabajos de evaluación de daños. Arabia Saudí ha sido blanco de cientos de ataques con misiles y drones iraníes desde el inicio de la guerra.</p>
-          </div>
-
-          <div class="tl-item hot">
-            <div class="tl-time">7 abr 2026 · Madrugada</div>
-            <div class="tl-head">Media Luna Roja iraní responde en zonas residenciales bombardeadas de Teherán</div>
-            <p class="tl-body">La organización humanitaria publicó video de equipos de rescate llegando a una zona residencial atacada en las primeras horas del martes.</p>
-          </div>
-
-          <div class="tl-item hot">
-            <div class="tl-time">6 abr 2026 · Mañana</div>
-            <div class="tl-head">Israel mata al jefe de Inteligencia de la Guardia Revolucionaria iraní</div>
-            <p class="tl-body">El mayor general Majid Khademi, jefe de Inteligencia del CGRI (Cuerpo de la Guardia Revolucionaria Islámica), murió en un ataque aéreo. Lo confirman tanto el CGRI como el ministro de Defensa israelí Israel Katz. Netanyahu reivindicó la operación.</p>
-          </div>
-
-          <div class="tl-item hot">
-            <div class="tl-time">6 abr 2026 · 13:35 hs</div>
-            <div class="tl-head">Israel ataca planta petroquímica de Pars Sur, junto al mayor yacimiento de gas de Irán</div>
-            <p class="tl-body">Israel confirmó haber atacado la planta petroquímica de Pars Sur, próxima al mayor yacimiento de gas natural del mundo. EE.UU. e Israel también atacaron otra planta petroquímica iraní, según la agencia Fars. El conflicto golpea con fuerza la industria petroquímica: el impacto se extiende a fertilizantes, helio, nafta y propano.</p>
-          </div>
-
-          <div class="tl-item hot">
-            <div class="tl-time">6 abr 2026 · 13:21 hs</div>
-            <div class="tl-head">Al menos 5 muertos y 50 heridos en el peor bombardeo israelí sobre Beirut</div>
-            <p class="tl-body">Israel lleva desde principios de marzo atacando a militantes de Hezbollah en el sur del Líbano. Cinco personas murieron en el barrio de Jnah; otras tres en Ain Saade. Un matrimonio también falleció en un ataque cerca de Toul, dejando heridos a sus dos hijos menores.</p>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-time">6 abr 2026 · 12:46 hs</div>
-            <div class="tl-head">Cuatro muertos en Haifa tras misil iraní en edificio residencial de 6 pisos</div>
-            <p class="tl-body">Equipos israelíes de búsqueda y rescate recuperaron cuatro cuerpos bajo los escombros. Una víctima filipina fue identificada como Lucille-Jean, hallada junto a su familia. La Embajada de Filipinas brinda asistencia para la repatriación de los restos.</p>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-time">6 abr 2026 · Mañana</div>
-            <div class="tl-head">Irán rechaza propuesta de alto el fuego temporal de EE.UU.</div>
-            <p class="tl-body">Teherán rechazó la propuesta estadounidense de un cese del fuego temporal. Las condiciones de Irán incluyen el fin total de la guerra, libre tránsito por el Estrecho de Ormuz, reconstrucción del país y levantamiento de sanciones económicas. Se trata de diez cláusulas que rechazan acuerdos parciales.</p>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-time">6 abr 2026 · Lunes</div>
-            <div class="tl-head">Kuwait activa defensas aéreas ante nuevas amenazas de misiles y drones</div>
-            <p class="tl-body">Kuwait informó que sus defensas aéreas respondieron a amenazas de misiles y drones en medio de la escalada regional. Caída de escombros de ataque interceptado dejó incendios en instalaciones de gas de Habshan en Abu Dhabi y al menos un muerto.</p>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-time">5 abr 2026 · 19:26 hs</div>
-            <div class="tl-head">Trump extiende ultimátum sobre centrales eléctricas hasta el martes</div>
-            <p class="tl-body">El presidente de EE.UU. advirtió: "Les damos hasta mañana las 8, hora de la costa este. Y después de eso no van a tener puentes. No van a tener centrales eléctricas." El CGRI calificó las amenazas de "infundadas" y prometió represalias a "mucho mayor escala" si continúan los ataques civiles.</p>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-time">5 abr 2026 · 09:43 hs</div>
-            <div class="tl-head">Pakistán presenta propuesta de alto el fuego inmediato</div>
-            <p class="tl-body">Pakistán propuso un cese del fuego inmediato entre EE.UU. e Irán y un acuerdo global posterior. Omán también se reunió con Irán para discutir la apertura del Estrecho de Ormuz. Irán rechazó la iniciativa paquistaní exigiendo un fin total del conflicto.</p>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-time">5 abr 2026</div>
-            <div class="tl-head">Irán advierte a ONU y OIEA sobre "grave riesgo radiológico"</div>
-            <p class="tl-body">Teherán alertó a organismos internacionales sobre el peligro radiológico generado por los ataques de Israel y EE.UU. contra instalaciones nucleares iraníes. Al menos 190 centros sanitarios han sido alcanzados desde el inicio de la guerra, según el viceministro de Salud de Irán.</p>
-          </div>
-
-          <div class="tl-item">
-            <div class="tl-time">Contexto económico</div>
-            <div class="tl-head">FMI advierte sobre impacto global: inflación y menor crecimiento</div>
-            <p class="tl-body">El Fondo Monetario Internacional advirtió que la guerra en Medio Oriente acelerará la inflación y ralentizará el crecimiento mundial. Con el Estrecho de Ormuz cerrado, el 20% del flujo global de petróleo y gas está interrumpido. El tránsito de buques cayó un 95%. El WTI cotiza por encima de USD 113 el barril. Los mercados asiáticos (Nikkei, Kospi, Hang Seng) acumulan caídas de entre 5% y 14% desde el inicio del conflicto.</p>
-          </div>
-
-        </div><!-- /timeline -->
-      </div>
-
-      <!-- SIDEBAR Irán -->
-      <aside>
-        <div class="sidebar-module">
-          <div class="sidebar-title">Actores del conflicto</div>
-          <div class="sidebar-item">🇺🇸 <strong>EE.UU.</strong> — Operaciones aéreas contra Irán desde el 28 feb. Rescató piloto del F-15 derribado.</div>
-          <div class="sidebar-item">🇮🇱 <strong>Israel</strong> — Ataques sobre Teherán, Líbano e instalaciones nucleares iraníes.</div>
-          <div class="sidebar-item">🇮🇷 <strong>Irán</strong> — Misiles contra Israel, Arabia Saudí, Kuwait. Bloquea el Estrecho de Ormuz.</div>
-          <div class="sidebar-item">🇱🇧 <strong>Líbano / Hezbollah</strong> — Bajo ataques israelíes desde 2 de marzo.</div>
-          <div class="sidebar-item">🇵🇰 <strong>Pakistán</strong> — Media propuesta de cese del fuego. Diplomacia activa.</div>
-          <div class="sidebar-item">🇴🇲 <strong>Omán</strong> — Mediación sobre reapertura del Estrecho.</div>
-        </div>
-        <div class="sidebar-module">
-          <div class="sidebar-title">Posiciones internacionales</div>
-          <div class="sidebar-item">🇮🇹 Italia (Meloni): "No estamos de acuerdo" con la postura de Trump sobre la guerra.</div>
-          <div class="sidebar-item">🇪🇸 España: No autoriza bases ni espacio aéreo para operaciones contra Irán.</div>
-          <div class="sidebar-item">🇳🇱 OTAN (Rutte): Se reúne con Trump ante presión por falta de apoyo aliado.</div>
-          <div class="sidebar-item">🇸🇦 Arabia Saudí: Baja el Puente King Fahd (a Baréin) por ataques iraníes.</div>
-          <div class="sidebar-item">🌍 OPEP+: Aumentará producción 206.000 barriles/día desde mayo ante crisis energética.</div>
-        </div>
-        <div class="sidebar-module">
-          <div class="sidebar-title">Diplomacia · Cese del fuego</div>
-          <div class="sidebar-item">Trump declaró: "El único que va a declarar un alto el fuego soy yo."</div>
-          <div class="sidebar-item">Más de 40 países se reunieron para debatir reapertura del Estrecho de Ormuz.</div>
-          <div class="sidebar-item">Países elaboran propuesta de cese del fuego de 45 días, según fuentes de CNN.</div>
-        </div>
-      </aside>
+    <div class="card">
+      <h3>Impacto directo</h3>
+      <p>Petróleo alto. Costos suben. Presión económica global.</p>
     </div>
-  </section>
+  </div>
 
-  <!-- ═══════════════ PARAGUAY ═══════════════ -->
-  <section class="section" id="paraguay">
-    <div class="section-head">
-      <h2>Paraguay</h2>
-      <span class="section-kicker">Nacional · Asunción · 7 abril 2026</span>
-    </div>
-    <div class="two-col">
-      <div>
-        <div style="background:var(--white);border:1px solid var(--rule);padding:2rem;margin-bottom:1.5rem;">
-          <span class="badge amber">Economía</span>
-          <h2 class="headline lg" style="margin-top:.5rem;">Inflación de marzo cerró en 0,8% — BCP</h2>
-          <p class="dek">El Banco Central del Paraguay informó que marzo cerró con una inflación del 0,8%, con aumentos en rubros como el combustible, las frutas, hortalizas y huevo, entre otros sectores.</p>
-          <div class="byline">7 abr 2026 · BCP / Diario HOY</div>
-        </div>
-        <div style="background:var(--white);border:1px solid var(--rule);padding:2rem;margin-bottom:1.5rem;">
-          <span class="badge blue">Política</span>
-          <h2 class="headline lg" style="margin-top:.5rem;">Nueva senadora anuncia agenda contra narcotráfico y crimen organizado</h2>
-          <p class="dek">La nueva legisladora afirmó que asume la banca con responsabilidad y priorizará la lucha contra el narcotráfico, el fortalecimiento de las instituciones y la defensa de los derechos de las mujeres.</p>
-          <div class="byline">16 mar 2026 · Última Hora</div>
-        </div>
-        <div style="background:var(--white);border:1px solid var(--rule);padding:2rem;margin-bottom:1.5rem;">
-          <span class="badge red">Seguridad</span>
-          <h2 class="headline lg" style="margin-top:.5rem;">Capturan a Dalia López: comisario recibió el aviso "personalmente"</h2>
-          <p class="dek">El comisario Luis Benítez, que encabezó la captura de Dalia López, aseguró que recibió personalmente la información sobre su paradero. Se trata del mismo jefe policial que autorizó el certificado de antecedentes del exjugador brasileño Ronaldinho para la emisión de su cédula paraguaya.</p>
-          <div class="byline">6 abr 2026 · Última Hora</div>
-        </div>
-        <div style="background:var(--white);border:1px solid var(--rule);padding:2rem;margin-bottom:1.5rem;">
-          <span class="badge red">Justicia</span>
-          <h2 class="headline lg" style="margin-top:.5rem;">Mafia de pagarés: jueza de Paz irá a juicio oral</h2>
-          <p class="dek">La suspendida jueza de Paz de La Encarnación, Carmen Analía Cibils, irá a juicio oral y público por el caso de la mafia de los pagarés. Ya se dictó la primera condena en procedimiento abreviado contra la ex actuaria Martina Rivela: 2 años de cárcel con suspensión de ejecución.</p>
-          <div class="byline">6 abr 2026 · Última Hora</div>
-        </div>
-      </div>
-      <aside>
-        <div class="sidebar-module">
-          <div class="sidebar-title">Cotizaciones · 7 abr 2026</div>
-          <div class="sidebar-item">💵 Dólar: G 6.420 (compra) / G 6.490 (venta)</div>
-          <div class="sidebar-item">🇧🇷 Real: G 1.220 (compra) / G 1.290 (venta)</div>
-        </div>
-        <div class="sidebar-module">
-          <div class="sidebar-title">Breves nacionales</div>
-          <div class="sidebar-item">🎻 Orquesta Sinfónica de Asunción (OSCA) ofrecerá concierto gratuito bajo la dirección de Luis Szarán.</div>
-          <div class="sidebar-item">🎮 Paraguay participará en la Global Game Jam 2026 con sedes en Asunción y Ciudad del Este.</div>
-          <div class="sidebar-item">🏦 Solar Banco inicia obras de su nueva casa matriz en Av. San Martín, Asunción.</div>
-          <div class="sidebar-item">⚽ Paraguay vs Marruecos — Amistoso fecha FIFA — EN VIVO.</div>
-        </div>
-      </aside>
-    </div>
-  </section>
+  <h2 class="section-title" id="contacto">Contacto</h2>
 
-</main>
+  <div class="card">
+    <p>Email: contacto@tusitio.com</p>
+    <p>Instagram: @notilea</p>
+    <p>WhatsApp: +595 XXX XXX</p>
+  </div>
 
-<!-- FOOTER -->
+</div>
+
 <footer>
-  <div style="margin-bottom:.5rem;font-size:14px;font-family:'Playfair Display',serif;color:rgba(255,255,255,.8);">Notilea</div>
-  <div>Nueva Asunción · Presidente Hayes · Paraguay · Mundo</div>
-  <div style="margin-top:.5rem;">Actualizado: Martes 7 de abril de 2026 · Fuentes: ABC Color, Última Hora, CNN en Español, El Español, El Diario, Infobae, Diario HOY, MOPC</div>
-  <div style="margin-top:.75rem;font-size:9px;color:rgba(255,255,255,.25);">notilea25-cloud · notilea.github.io — Todos los derechos reservados</div>
+  © 2026 Noticias Nueva Asunción
 </footer>
 
-<script>
-  function showSection(id) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('visible'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    document.getElementById(id).classList.add('visible');
-    const idx = ['home','local','clima','iran','paraguay'].indexOf(id);
-    document.querySelectorAll('.nav-btn')[idx].classList.add('active');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
-
-  // Live clock
-  function updateFecha() {
-    const now = new Date();
-    const dias = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
-    const meses = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
-    const h = String(now.getHours()).padStart(2,'0');
-    const m = String(now.getMinutes()).padStart(2,'0');
-    document.getElementById('fecha-hoy').textContent =
-      `${dias[now.getDay()]}, ${now.getDate()} de ${meses[now.getMonth()]} de ${now.getFullYear()} — ${h}:${m}`;
-  }
-  updateFecha();
-  setInterval(updateFecha, 30000);
-</script>
 </body>
 </html>
