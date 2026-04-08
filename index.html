@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Notilea | Noticias de Nueva Asunción, Paraguay y el Mundo</title>
+    <!-- Font Awesome 6 (Free) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Google Fonts: Inter + Merriweather para contraste editorial -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&family=Merriweather:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        /* contenedor principal */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* header superior */
+        .top-bar {
+            background-color: #0f172a;
+            color: white;
+            padding: 10px 0;
+            font-size: 0.85rem;
+        }
+
+        .top-bar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .date-clima {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .date-clima i {
+            margin-right: 6px;
+            color: #94a3b8;
+        }
+
+        .clima i {
+            color: #facc15;
+        }
+
+        .social-mini a {
+            color: #cbd5e1;
+            margin-left: 15px;
+            transition: color 0.2s;
+        }
+
+        .social-mini a:hover {
+            color: white;
+        }
+
+        /* header principal */
+        .main-header {
+            background: white;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            border-bottom: 1px solid #e2e8f0;
+            padding: 20px 0;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #0f2b3d, #1e5a7a);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .logo p {
+            font-size: 0.8rem;
+            color: #475569;
+            border-left: 3px solid #dc2626;
+            padding-left: 10px;
+            margin-top: 4px;
+        }
+
+        .contact-rapido {
+            background: #f1f5f9;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.9rem;
+        }
+
+        .contact-rapido a {
+            text-decoration: none;
+            color: #075e54;
+            font-weight: 600;
+            margin: 0 8px;
+        }
+
+        .contact-rapido i {
+            margin-right: 6px;
+        }
+
+        /* navegación */
+        .nav-menu {
+            background: white;
+            border-bottom: 1px solid #e2e8f0;
+            margin-top: 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            padding: 12px 0;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .nav-links li a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #1e293b;
+            transition: 0.2s;
+        }
+
+        .nav-links li a:hover {
+            color: #dc2626;
+        }
+
+        /* grid noticias */
+        .grid-home {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+            margin: 40px 0;
+        }
+
+        .main-news {
+            grid-column: span 2;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            transition: all 0.2s ease;
+            border: 1px solid #eef2f6;
+            margin-bottom: 28px;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 30px -12px rgba(0,0,0,0.1);
+        }
+
+        .card-img {
+            height: 200px;
+            background: #cbd5e1;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .badge {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            background: #dc2626;
+            color: white;
+            font-size: 0.7rem;
+            font-weight: bold;
+            padding: 4px 12px;
+            border-radius: 30px;
+        }
+
+        .card-content {
+            padding: 20px 24px 24px;
+        }
+
+        .card-category {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #dc2626;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .card-title a {
+            text-decoration: none;
+            color: #0f172a;
+        }
+
+        .card-summary {
+            color: #334155;
+            margin-bottom: 16px;
+        }
+
+        .meta {
+            font-size: 0.75rem;
+            color: #64748b;
+            display: flex;
+            gap: 15px;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 28px;
+            border: 1px solid #eef2f6;
+        }
+
+        .sidebar-title {
+            font-weight: 800;
+            font-size: 1.2rem;
+            border-left: 4px solid #dc2626;
+            padding-left: 12px;
+            margin-bottom: 18px;
+        }
+
+        .list-news {
+            list-style: none;
+        }
+
+        .list-news li {
+            padding: 12px 0;
+            border-bottom: 1px solid #edf2f7;
+        }
+
+        .list-news li a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #1e293b;
+            transition: 0.1s;
+        }
+
+        .list-news li a:hover {
+            color: #dc2626;
+        }
+
+        .clima-widget {
+            background: #eef2ff;
+            border-radius: 20px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 16px;
+        }
+
+        .temperatura {
+            font-size: 2rem;
+            font-weight: 800;
+        }
+
+        .redes-movil {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .btn-wa {
+            background: #25D366;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            margin: 8px;
+        }
+
+        .btn-tiktok {
+            background: #000000;
+            color: white;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 24px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 40px 0 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 900px) {
+            .grid-home {
+                grid-template-columns: 1fr;
+            }
+            .main-news {
+                grid-column: span 1;
+            }
+            .logo-area {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="top-bar">
+    <div class="container">
+        <div class="date-clima">
+            <span><i class="far fa-calendar-alt"></i> Miércoles, 8 de abril de 2026</span>
+            <span class="clima"><i class="fas fa-sun"></i> Nueva Asunción: 34°C / Sensación térmica 37°C</span>
+        </div>
+        <div class="social-mini">
+            <span>Síguenos:</span>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+        </div>
+    </div>
+</div>
+<div class="main-header">
+    <div class="container logo-area">
+        <div class="logo">
+            <h1>NOTILEA</h1>
+            <p>Información desde Nueva Asunción, Presidente Hayes · Corazón del Chaco paraguayo</p>
+        </div>
+        <div class="contact-rapido">
+            <i class="fab fa-whatsapp"></i> Contacto:
+            <a href="https://wa.me/59597570592" target="_blank">0975 705 592</a>
+            <i class="fab fa-tiktok" style="margin-left: 12px;"></i>
+            <a href="https://www.tiktok.com/@Notilea" target="_blank">@Notilea</a>
+        </div>
+    </div>
+</div>
+<div class="nav-menu">
+    <div class="container">
+        <ul class="nav-links">
+            <li><a href="#">Portada</a></li>
+            <li><a href="#">Nueva Asunción</a></li>
+            <li><a href="#">Paraguay</a></li>
+            <li><a href="#">Mundo</a></li>
+            <li><a href="#">Análisis Internacional</a></li>
+            <li><a href="#">Clima</a></li>
+            <li><a href="#">Política</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <div class="grid-home">
+        <!-- Columna principal: noticias destacadas -->
+        <div class="main-news">
+            <!-- Noticia 1: Intendente Vera (controversial) -->
+            <div class="card">
+                <div class="card-img" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.4), rgba(0,0,0,0.2)), url('https://placehold.co/800x450/e2e8f0/334155?text=Nueva+Asunci%C3%B3n'); background-size: cover;">
+                    <div class="badge">EXCLUSIVA</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-category"><i class="fas fa-gavel"></i> POLÍTICA · NUEVA ASUNCIÓN</div>
+                    <h2 class="card-title"><a href="#">Denuncian al intendente Juan Miguel Vera por venta ilegal de tierras fiscales en Jakaré Pito</a></h2>
+                    <div class="card-summary">La abogada Solange Alfonso presentó una denuncia pública: el jefe comunal habría comercializado 40 hectáreas por G. 4.100 millones, afectando a familias ribereñas que ocupaban el terreno hace años. Los vecinos aseguran que el propio intendente ofreció dinero para desalojar la zona, mientras maquinarias ya ingresaron al lugar. “Prácticamente nos dejaron en el río”, denunciaron.</div>
+                    <div class="meta"><span><i class="far fa-clock"></i> Hace 4 horas</span><span><i class="fas fa-eye"></i> 10.234 lecturas</span></div>
+                </div>
+            </div>
+            <!-- Noticia 2: Conflicto en Irán / Análisis Internacional -->
+            <div class="card">
+                <div class="card-img" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('https://placehold.co/800x450/1e293b/facc15?text=Estrecho+de+Ormuz'); background-size: cover;">
+                    <div class="badge">ANÁLISIS</div>
+                </div>
+                <div class="card-content">
+                    <div class="card-category"><i class="fas fa-globe-americas"></i> GUERRA EN IRÁN · THE NEW YORK TIMES</div>
+                    <h2 class="card-title"><a href="#">"La guerra está convirtiendo a Irán en una potencia mundial": el control del estrecho de Ormuz que desafía a EE.UU.</a></h2>
+                    <div class="card-summary">El analista Robert A. Pape sostiene que Irán se erige como cuarto centro de poder global no por su economía, sino por su dominio de facto del estrecho de Ormuz. Ataques esporádicos a petroleros lograron reducir el tráfico en un 90% y las aseguradoras retiraron coberturas. Macron admite que “es poco realista” abrir el paso por la fuerza. Consecuencias: inflación global, realineamiento de Asia y un nuevo orden energético.</div>
+                    <div class="meta"><span><i class="far fa-newspaper"></i> The New York Times (06/04/2026)</span><span><i class="fas fa-chart-line"></i> Tendencia mundial</span></div>
+                </div>
+            </div>
+
+            <!-- Otra noticia local relevante (Paraguay) -->
+            <div class="card">
+                <div class="card-img" style="background-image: url('https://placehold.co/800x450/d1d5db/1e293b?text=Senado+Paraguay'); background-size: cover;">
+                </div>
+                <div class="card-content">
+                    <div class="card-category">POLÍTICA NACIONAL</div>
+                    <h2 class="card-title"><a href="#">Senador Javier "Chaqueñito" Vera enfrenta pedido de pérdida de investidura por vivienda social</a></h2>
+                    <div class="card-summary">Aunque sin relación con el intendente de Nueva Asunción, el caso del legislador sacude el Congreso. Se le acusa de adjudicación irregular pese a percibir más de G. 37 millones. La Cámara analiza el informe.</div>
+                    <div class="meta"><span><i class="far fa-clock"></i> Hace 2 horas</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar derecha: más vistas, clima, contacto -->
+        <div class="sidebar">
+            <div class="sidebar-card">
+                <div class="sidebar-title"><i class="fas fa-fire-flame"></i> Lo más visto hoy</div>
+                <ul class="list-news">
+                    <li><a href="#">🔴 Intendente Vera: comunidades de Jakaré Pito piden intervención de la Junta Municipal</a></li>
+                    <li><a href="#">🌍 Guerra en Irán: petróleo sube 18% y Paraguay teme impacto en combustibles</a></li>
+                    <li><a href="#">⚽ Copa Paraguay: club de Presidente Hayes da la sorpresa</a></li>
+                    <li><a href="#">💰 Aumento del salario mínimo en Paraguay: qué se sabe hasta ahora</a></li>
+                    <li><a href="#">🌧️ Clima extremo: tormentas previstas para el Cono Sur</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-title"><i class="fas fa-cloud-sun"></i> Clima en Nueva Asunción</div>
+                <div class="clima-widget">
+                    <div><i class="fas fa-sun" style="font-size: 2rem; color:#eab308;"></i> <strong>Mayormente soleado</strong><br>Humedad: 42% · Viento: 14 km/h</div>
+                    <div class="temperatura">34°C</div>
+                </div>
+                <div style="margin-top: 15px; font-size:0.85rem">
+                    <i class="fas fa-calendar-week"></i> Próximos días: máx. 36°C, mín. 23°C. Probabilidad de lluvias aisladas para el sábado.
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <div class="sidebar-title"><i class="fas fa-chart-simple"></i> Análisis Internacional</div>
+                <p style="margin-bottom: 12px;"><strong>🌐 El nuevo orden energético:</strong> Irán controla el 20% del petróleo mundial mediante la presión en el estrecho de Ormuz. Expertos advierten un mundo de estanflación como en los años 70.</p>
+                <p style="font-size: 0.85rem; color:#334155;">"Estados Unidos debe negociar o enfrentar una guerra de desgaste", escribe Robert Pape. Asia (Japón, India, China) ya resiente el alza de fletes y seguros.</p>
+                <div style="margin-top: 12px;"><a href="#" style="color:#dc2626; font-weight:600;">Leer análisis completo →</a></div>
+            </div>
+
+            <div class="sidebar-card" style="background: linear-gradient(145deg, #eef2ff, white);">
+                <div class="sidebar-title">📲 Conectá con Notilea</div>
+                <div class="redes-movil">
+                    <a href="https://wa.me/59597570592" target="_blank" class="btn-wa"><i class="fab fa-whatsapp fa-lg"></i> WhatsApp 0975 705 592</a>
+                    <a href="https://www.tiktok.com/@Notilea" target="_blank" class="btn-tiktok"><i class="fab fa-tiktok"></i> @Notilea</a>
+                </div>
+                <p style="margin-top: 15px; text-align: center; font-size: 0.75rem;">Seguinos para noticias al instante y cobertura en vivo desde Nueva Asunción.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sección extra: guerra en Irán + resumen profundo basado en el artículo original -->
+    <div style="background: #ffffff; border-radius: 28px; margin: 20px 0 40px; border: 1px solid #eef2f6; padding: 28px 30px;">
+        <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 20px;">
+            <span style="background: #dc2626; width: 8px; height: 32px; border-radius: 4px;"></span>
+            <h2 style="font-size: 1.6rem; font-weight: 800;">🔍 Análisis completo: La guerra que reconfigura el orden mundial</h2>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 25px;">
+            <div style="flex:2; min-width: 240px;">
+                <h3 style="font-weight: 700; margin-bottom: 12px;">El estrecho de Ormuz, la nueva arma geopolítica</h3>
+                <p style="margin-bottom: 12px;">El artículo del <em>The New York Times</em> (6 de abril de 2026) sostiene que la campaña militar conjunta de EE.UU. e Israel contra Irán tuvo el efecto contrario: Teherán aprendió a controlar el 20% del suministro energético mundial sin cerrar totalmente el paso. Basta con ataques esporádicos para que el seguro marítimo se vuelva prohibitivo. Actualmente el tráfico cayó más del 90%.</p>
+                <p style="margin-bottom: 12px;">"Los gobiernos asiáticos priorizarán el acceso a la energía por encima de alianzas tradicionales", advierte Pape. Países del Golfo (Arabia Saudita, Emiratos) se verán forzados a negociar con Irán, modificando el tablero de Medio Oriente. Para Paraguay, esto implica eventuales subas de combustibles y presión inflacionaria global.</p>
+                <p><strong>Conclusión del ensayo:</strong> EE.UU. afronta un dilema histórico: aceptar a Irán como cuarto polo de poder o embarcarse en una guerra larga e incierta. Mientras tanto, China y Rusia se benefician del caos energético. El mundo se encamina a un escenario de estanflación similar a la crisis del petróleo de los años 70.</p>
+            </div>
+            <div style="flex:1; background: #f8fafc; border-radius: 20px; padding: 18px;">
+                <i class="fas fa-oil-can" style="font-size: 2rem; color:#0f172a;"></i>
+                <h4 style="margin: 10px 0;">Impacto en América del Sur</h4>
+                <p>Si bien el Cono Sur no depende directamente del Golfo, el alza del barril afecta a Brasil y Argentina, y por arrastre a Paraguay. Expertos locales monitorean la evolución del crudo.</p>
+                <hr style="margin: 12px 0;">
+                <div><i class="fab fa-twitter"></i> Tendencia mundial #EstrechoDeOrmuz</div>
+            </div>
+        </div>
+        <div style="margin-top: 24px; border-top: 1px solid #e2e8f0; padding-top: 16px; font-size: 0.8rem; color: #475569;">
+            Fuente: Robert A. Pape, Universidad de Chicago. "La guerra está convirtiendo a Irán en una potencia mundial", The New York Times (06/04/2026). Resumen adaptado por Notilea.
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="container">
+        <div style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
+            <div>
+                <h3 style="color:white; margin-bottom: 12px;">NOTILEA</h3>
+                <p>Periodismo independiente desde Nueva Asunción, Presidente Hayes, Chaco paraguayo. Información con responsabilidad y mirada local.</p>
+                <div style="margin-top: 16px;">
+                    <a href="https://wa.me/59597570592" style="color:#25D366; margin-right: 20px;"><i class="fab fa-whatsapp"></i> 0975 705 592</a>
+                    <a href="https://www.tiktok.com/@Notilea" style="color:white;"><i class="fab fa-tiktok"></i> TikTok @Notilea</a>
+                </div>
+            </div>
+            <div>
+                <h4>Enlaces rápidos</h4>
+                <ul style="list-style: none; margin-top: 8px;">
+                    <li><a href="#" style="color:#94a3b8;">Política de privacidad</a></li>
+                    <li><a href="#" style="color:#94a3b8;">Contacto</a></li>
+                    <li><a href="#" style="color:#94a3b8;">Anunciar en Notilea</a></li>
+                </ul>
+            </div>
+            <div>
+                <p><i class="far fa-copyright"></i> 2026 Notilea - Desde Nueva Asunción para todo Paraguay.<br>Fundado en el corazón del Chaco.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+</body>
+  </html>
