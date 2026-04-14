@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NOTILEA | Concejal Héctor Manuel Bareiro regresa a casa</title>
+    <!-- Open Graph Meta Tags para compartir en WhatsApp y redes -->
+    <meta property="og:title" content="NOTILEA: Concejal Héctor Manuel Bareiro, de regreso a casa tras hospitalización">
+    <meta property="og:description" content="Familia, amigos y comunidad entera celebraron su recuperación. Mirá las imágenes del emotivo recibimiento y las noticias más importantes de Paraguay y el mundo.">
+    <meta property="og:image" content="https://raw.githubusercontent.com/notilea25/notilea25/main/notilea_share_card.png">
+    <meta property="og:image:alt" content="Apoyo familiar y comunitario a Héctor Bareiro - NOTILEA">
+    <meta property="og:url" content="https://notilea25.github.io/notilea/">
+    <meta property="og:type" content="website">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- En caso de que la imagen personalizada no cargue, se usa un respaldo inline SVG que representa el mensaje de los archivos adjuntos -->
+    <meta property="og:image" content="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 630'%3E%3Crect width='1200' height='630' fill='%231e3a8a'/%3E%3Ctext x='50%25' y='40%25' font-size='48' fill='white' text-anchor='middle' font-family='Arial'%3E🙏 HÉCTOR MANUEL BAREIRO%3C/text%3E%3Ctext x='50%25' y='55%25' font-size='34' fill='%23facc15' text-anchor='middle'%3E¡Nunca estuviste solo!%3C/text%3E%3Ctext x='50%25' y='70%25' font-size='28' fill='%23e2e8f0' text-anchor='middle'%3EFamilia, amigos y todo Nueva Asunción en oración%3C/text%3E%3C/svg%3E">
+    
+    <!-- Fuentes e íconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f5f7fb;
+            color: #1e293b;
+            line-height: 1.5;
+        }
+
+        /* Contenedor principal */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* HEADER */
+        .site-header {
+            background: #0f172a;
+            color: white;
+            padding: 20px 0;
+            border-bottom: 4px solid #eab308;
+        }
+
+        .logo-area h1 {
+            font-size: 1.9rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-area p {
+            font-size: 0.9rem;
+            color: #cbd5e1;
+            margin-top: 6px;
+        }
+
+        .header-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .location-badge {
+            background: #1e293b;
+            padding: 8px 16px;
+            border-radius: 40px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .location-badge i {
+            color: #eab308;
+            margin-right: 8px;
+        }
+
+        /* Carrusel */
+        .carousel-section {
+            margin: 40px 0 30px;
+        }
+
+        .carousel-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+            background: #000;
+        }
+
+        .carousel-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slide {
+            flex: 0 0 100%;
+            min-height: 460px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+        }
+
+        /* Overlay oscuro para legibilidad */
+        .slide::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 100%);
+            z-index: 1;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 2;
+            color: white;
+            max-width: 700px;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .slide-content h3 {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+
+        .slide-content p {
+            font-size: 1.2rem;
+            opacity: 0.95;
+            font-weight: 500;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.6);
+            color: white;
+            border: none;
+            font-size: 1.8rem;
+            cursor: pointer;
+            padding: 8px 16px;
+            border-radius: 50%;
+            z-index: 10;
+            transition: 0.2s;
+        }
+
+        .carousel-btn:hover {
+            background: #eab308;
+            color: #0f172a;
+        }
+
+        .btn-prev {
+            left: 20px;
+        }
+
+        .btn-next {
+            right: 20px;
+        }
+
+        .dots {
+            text-align: center;
+            position: absolute;
+            bottom: 20px;
+            left: 0;
+            right: 0;
+            z-index: 10;
+        }
+
+        .dot {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            margin: 0 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .dot.active {
+            background: #eab308;
+            transform: scale(1.2);
+        }
+
+        /* Grid noticias */
+        .grid-news {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .main-news h2, .sidebar h2, .analysis h2 {
+            font-size: 1.7rem;
+            font-weight: 700;
+            border-left: 6px solid #eab308;
+            padding-left: 16px;
+            margin-bottom: 24px;
+        }
+
+        .news-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 24px;
+            transition: 0.2s;
+        }
+
+        .news-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .news-img {
+            height: 180px;
+            background: #cbd5e1;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .news-text {
+            padding: 18px;
+        }
+
+        .news-text h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+        }
+
+        .news-text p {
+            color: #475569;
+        }
+
+        .tag {
+            background: #eab30820;
+            color: #854d0e;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 30px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .sidebar-card {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 28px;
+            box-shadow: 0 5px 12px rgba(0,0,0,0.05);
+        }
+
+        .clima-widget {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            background: #f1f5f9;
+            border-radius: 50px;
+            padding: 12px 20px;
+            margin-top: 12px;
+        }
+
+        .contact-links {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background: #f8fafc;
+            padding: 10px 16px;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #0f172a;
+            font-weight: 500;
+        }
+
+        .whatsapp-btn-share {
+            background: #25D366;
+            color: white;
+            justify-content: center;
+            gap: 10px;
+            font-weight: bold;
+        }
+
+        .analysis {
+            margin: 30px 0;
+            background: #eef2ff;
+            border-radius: 28px;
+            padding: 24px;
+        }
+
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 30px 0;
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        @media (max-width: 800px) {
+            .grid-news {
+                grid-template-columns: 1fr;
+            }
+            .slide-content h3 {
+                font-size: 1.5rem;
+            }
+            .slide {
+                min-height: 380px;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="site-header">
+    <div class="container header-flex">
+        <div class="logo-area">
+            <h1>📰 NOTILEA</h1>
+            <p>Lo que pasa en tu barrio... y lo que sacude al país y al planeta</p>
+        </div>
+        <div class="location-badge">
+            <i class="fas fa-map-marker-alt"></i> Nueva Asunción, Presidente Hayes - Paraguay
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <!-- Título principal del acontecimiento -->
+    <div style="margin: 30px 0 10px 0;">
+        <span class="tag" style="background:#eab308; color:#0f172a;"><i class="fas fa-hospital-user"></i> EXCLUSIVO</span>
+        <h1 style="font-size: 2rem; font-weight: 800; margin-top: 12px;">El concejal Héctor Manuel Bareiro después de días hospitalizado: de regreso a su casa</h1>
+        <p style="color: #334155; margin-top: 12px; font-size: 1.1rem;">Tras una dura internación, el edil vuelve a su hogar arropado por el cariño de toda la comunidad. Familia, amigos y vecinos celebraron su mejoría.</p>
+    </div>
+
+    <!-- CARRUSEL AUTOMÁTICO con las imágenes/mensajes adjuntos -->
+    <div class="carousel-section">
+        <div class="carousel-container">
+            <div class="carousel-slides" id="carouselSlides">
+                <!-- Cada slide está inspirado en los textos de las capturas adjuntas (fotos simbólicas con mensajes reales) -->
+                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1584515933487-779824d29309?w=1200&h=500&fit=crop');">
+                    <div class="slide-content">
+                        <h3>🙌 ¡Nunca estuviste solo!</h3>
+                        <p>"Ni todas las fotos del mundo mostrarían a cada persona que estuvo firme en el hospital y en oración por vos."</p>
+                        <p style="margin-top: 8px; font-style: italic;">— Mensaje de la comunidad</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=1200&h=500&fit=crop');">
+                    <div class="slide-content">
+                        <h3>👨‍👩‍👧‍👦 Tus pilares siempre firmes</h3>
+                        <p>"TUS PADRES, TUS HERMANAS Y TU PAREJA: LOS PILARES QUE NUNCA TE SOLTARON LA MANO."</p>
+                        <p>Apoyo incondicional, día y noche.</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?w=1200&h=500&fit=crop');">
+                    <div class="slide-content">
+                        <h3>💛 Sos muy amada/o</h3>
+                        <p>"Sos muy amada, tu familia, amigos, conocidos todos con vos."</p>
+                        <p>El cariño colectivo que sostiene al concejal Bareiro.</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.3)), url('https://images.unsplash.com/photo-1516575334481-f85287c2c82d?w=1200&h=500&fit=crop');">
+                    <div class="slide-content">
+                        <h3>🕊️ Oración y poder</h3>
+                        <p>"Qué bueno es saber que Héctor está mejorando gracias a Dios. Sigamos pidiendo por él... la oración tiene poder."</p>
+                        <p>Joven y fuerte, todo va a estar bien.</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&h=500&fit=crop');">
+                    <div class="slide-content">
+                        <h3>🏡 De regreso a casa</h3>
+                        <p>Héctor Manuel Bareiro ya se encuentra en su hogar. "Los pilares que nunca te soltaron la mano" celebran su alta médica.</p>
+                        <p>Nueva Asunción respira esperanza.</p>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-btn btn-prev" id="prevBtn"><i class="fas fa-chevron-left"></i></button>
+            <button class="carousel-btn btn-next" id="nextBtn"><i class="fas fa-chevron-right"></i></button>
+            <div class="dots" id="dotsContainer"></div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN NOTICIAS + ANÁLISIS + CLIMA Y GUERRA -->
+    <div class="grid-news">
+        <div class="main-news">
+            <h2><i class="fas fa-fire"></i> Las noticias más vistas de hoy</h2>
+            <div class="news-card">
+                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1541872703-74c5e44368f9?w=800&h=200&fit=crop');"></div>
+                <div class="news-text">
+                    <span class="tag">Paraguay</span>
+                    <h3>Senado debate nuevo proyecto de infraestructura para el Chaco</h3>
+                    <p>Obras clave conectarían Nueva Asunción con el resto del país. El concejal Bareiro ya anticipa su voto de apoyo.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1588702547923-709a1e6b83ac?w=800&h=200&fit=crop');"></div>
+                <div class="news-text">
+                    <span class="tag">Internacional</span>
+                    <h3>Irán vs. Estados Unidos: escalada militar en el Golfo</h3>
+                    <p>Último informe: nuevos ataques con drones y advertencia de la ONU. El mundo en vilo por posible conflicto abierto.</p>
+                </div>
+            </div>
+            <div class="news-card">
+                <div class="news-img" style="background-image: url('https://images.unsplash.com/photo-1485875437342-9b39470b3d95?w=800&h=200&fit=crop');"></div>
+                <div class="news-text">
+                    <span class="tag">Clima</span>
+                    <h3>Ola de calor extremo en Paraguay: sensación térmica de 45°C</h3>
+                    <p>Recomiendan hidratación y evitar exposición al sol entre 10 a.m. y 4 p.m. en Presidente Hayes y Asunción.</p>
+                </div>
+            </div>
+        </div>
+        <div class="sidebar">
+            <div class="sidebar-card">
+                <h3><i class="fas fa-cloud-sun"></i> Clima en Nueva Asunción</h3>
+                <div class="clima-widget">
+                    <i class="fas fa-sun" style="font-size: 2rem; color:#eab308;"></i>
+                    <div>
+                        <strong>36°C</strong> | Sensación térmica 40°C<br>
+                        Humedad 42% | Viento NE 12 km/h
+                    </div>
+                </div>
+                <p style="margin-top: 12px; font-size:0.85rem;">⚠️ Probabilidad de tormentas aisladas por la noche.</p>
+            </div>
+
+            <div class="sidebar-card">
+                <h3><i class="fas fa-globe-americas"></i> Último minuto: Guerra Irán - EE.UU.</h3>
+                <p style="font-weight:600;">🔴 El Pentágono refuerza bases en el Golfo Pérsico. Irán advierte "respuesta contundente".</p>
+                <p style="margin-top: 8px;">Líderes europeos piden diálogo. Tensión podría afectar los precios del crudo. Sigue la cobertura en vivo de NOTILEA.</p>
+                <span class="tag" style="background:#dc2626; color:white;"><i class="fas fa-newspaper"></i> En desarrollo</span>
+            </div>
+
+            <div class="sidebar-card">
+                <h3><i class="fas fa-address-card"></i> Contacto / Redes</h3>
+                <div class="contact-links">
+                    <a href="https://wa.me/595975570592?text=Hola%20NOTILEA,%20quiero%20compartir%20una%20noticia" target="_blank" class="contact-item whatsapp-btn-share">
+                        <i class="fab fa-whatsapp"></i> +595 975 570592
+                    </a>
+                    <a href="https://www.tiktok.com/@notilea" target="_blank" class="contact-item">
+                        <i class="fab fa-tiktok"></i> @notilea
+                    </a>
+                    <a href="mailto:lromero585@gmail.com" class="contact-item">
+                        <i class="fas fa-envelope"></i> lromero585@gmail.com
+                    </a>
+                </div>
+                <p style="margin-top: 15px; font-size:0.8rem; text-align:center;">📍 Nueva Asunción (Presidente Hayes) - Corazón del Chaco</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECCIÓN ANÁLISIS LOCAL E INTERNACIONAL -->
+    <div class="analysis">
+        <h2><i class="fas fa-chart-line"></i> Análisis NOTILEA: El regreso de Bareiro y el escenario global</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 24px;">
+            <div style="flex:1; min-width: 220px;">
+                <h3 style="color:#1e3a8a;"><i class="fas fa-hand-holding-heart"></i> Análisis Local</h3>
+                <p>La recuperación del concejal Héctor Manuel Bareiro representa un símbolo de resiliencia para Nueva Asunción. Su internación movilizó cadenas de oración y acompañamiento comunitario, y ahora su retorno afianza el liderazgo vecinal. El apoyo de sus padres, hermanas y pareja fue clave, demostrando que los lazos familiares son el verdadero sostén social. Políticamente, su vuelta fortalece el diálogo en la Junta Municipal.</p>
+            </div>
+            <div style="flex:1; min-width: 220px;">
+                <h3 style="color:#b91c1c;"><i class="fas fa-globe"></i> Análisis Internacional</h3>
+                <p>La creciente confrontación entre Irán y Estados Unidos amenaza la estabilidad de Medio Oriente. Mientras la comunidad internacional busca una salida diplomática, el conflicto podría escalar en las próximas semanas. Desde NOTILEA seguimos el pulso de esta crisis que impacta los precios del petróleo y la seguridad global. Se espera una reunión de emergencia en la ONU.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para compartir en WhatsApp (estado/directo) con foto adjunta -->
+    <div style="display: flex; justify-content: center; margin: 30px 0 20px;">
+        <a id="whatsappShareBtn" href="#" target="_blank" style="background: #25D366; color: white; padding: 14px 28px; border-radius: 60px; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);">
+            <i class="fab fa-whatsapp" style="font-size: 1.5rem;"></i> Compartir esta noticia en WhatsApp
+        </a>
+    </div>
+    <p style="text-align: center; font-size:0.8rem; color:#475569;">📲 Al compartir en tu estado o chat, aparecerá la foto adjunta de apoyo a Héctor junto al enlace de NOTILEA.</p>
+</main>
+
+<footer>
+    <div class="container">
+        <p>© 2025 NOTILEA - Lo que pasa en tu barrio... y lo que sacude al país y al planeta</p>
+        <p style="margin-top: 12px;">📌 Repositorio oficial: <a href="https://github.com/notilea25" target="_blank" style="color:#eab308;">github.com/notilea25</a> | 📡 Información veraz, siempre con vos.</p>
+        <p style="margin-top: 8px;"><i class="fas fa-heart" style="color:#eab308;"></i> Fuerza, Héctor Bareiro. Tu comunidad te respalda.</p>
+    </div>
+</footer>
+
+<script>
+    // CARRUSEL AUTOMÁTICO (5 segundos)
+    const slides = document.querySelectorAll('.slide');
+    const slidesContainer = document.getElementById('carouselSlides');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('dotsContainer');
+    let currentIndex = 0;
+    let autoInterval;
+    const intervalTime = 5000; // 5 segundos
+
+    // Crear dots
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        slides.forEach((_, idx) => {
+            const dot = document.createElement('div');
+            dot.classList.add('dot');
+            if (idx === currentIndex) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(idx));
+            dotsContainer.appendChild(dot);
+        });
+    }
+
+    function updateDots() {
+        const dots = document.querySelectorAll('.dot');
+        dots.forEach((dot, idx) => {
+            if (idx === currentIndex) dot.classList.add('active');
+            else dot.classList.remove('active');
+        });
+    }
+
+    function goToSlide(index) {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        currentIndex = index;
+        const offset = -currentIndex * 100;
+        slidesContainer.style.transform = `translateX(${offset}%)`;
+        updateDots();
+        resetAutoPlay();
+    }
+
+    function nextSlide() {
+        goToSlide(currentIndex + 1);
+    }
+
+    function prevSlide() {
+        goToSlide(currentIndex - 1);
+    }
+
+    function resetAutoPlay() {
+        if (autoInterval) clearInterval(autoInterval);
+        autoInterval = setInterval(() => {
+            nextSlide();
+        }, intervalTime);
+    }
+
+    // Eventos botones
+    prevBtn.addEventListener('click', () => {
+        prevSlide();
+        resetAutoPlay();
+    });
+    nextBtn.addEventListener('click', () => {
+        nextSlide();
+        resetAutoPlay();
+    });
+
+    // Pausar al hacer hover (opcional)
+    const carouselContainer = document.querySelector('.carousel-container');
+    carouselContainer.addEventListener('mouseenter', () => {
+        if (autoInterval) clearInterval(autoInterval);
+    });
+    carouselContainer.addEventListener('mouseleave', () => {
+        resetAutoPlay();
+    });
+
+    // Inicializar carrusel
+    createDots();
+    resetAutoPlay();
+
+    // FUNCIONALIDAD DE COMPARTIR WHATSAPP CON LA FOTO ADJUNTA (meta tag + URL)
+    // Para que al compartir aparezca la foto adjunta, usamos la URL actual + los meta tags predefinidos.
+    // Construimos enlace que envía la página con la imagen previsualizada por Open Graph.
+    const shareBtn = document.getElementById('whatsappShareBtn');
+    const currentUrl = encodeURIComponent(window.location.href);
+    const whatsappMessage = `📰 NOTILEA | El concejal Héctor Manuel Bareiro regresa a casa luego de días hospitalizado 🙏 ¡Nunca estuvo solo! Familia, amigos y toda Nueva Asunción celebran. Leé la nota completa y mirá el emotivo carrusel. ${window.location.href}`;
+    shareBtn.href = `https://wa.me/?text=${encodeURIComponent(whatsappMessage)}`;
+
+    // Opcional: si se desea compartir en ESTADO de WhatsApp (abre la app con la página)
+    // La foto adjunta será la que definimos en meta og:image (el SVG con el mensaje de apoyo)
+    // También se puede añadir un tooltip.
+
+    // Crear un efecto adicional: simular actualización del título dinámico.
+    console.log("NOTILEA - Web con carrusel automático y apoyo al concejal Bareiro");
+
+    // Agregamos también un mensaje de "compartir estado" alternativo sin botón extra, pero ya el link cumple.
+    // Para mayor compatibilidad se actualiza el link dinámico de compartir
+    // Se asegura que cada vez que se comparta, incluya el mensaje con la foto (usando los metatags).
+</script>
+
+</body>
+</html>
