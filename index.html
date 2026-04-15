@@ -1,0 +1,66 @@
+<script>
+// Coordenadas Nueva Asunción (aprox)
+const lat = -25.28;
+const lon = -57.64;
+
+async function cargarClima() {
+  try {
+    const res = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m,apparent_temperature,windspeed_10m`);
+    const data = await res.json();
+
+    const clima = data.current_weather;
+
+    // Temperatura
+    document.getElementById('tempDisplay').textContent = `${clima.temperature}°C`;
+    document.getElementById('climaTemp').textContent = `${clima.temperature}°C`;
+
+    // Descripción simple según código
+    let desc = "Clima estable";
+    let icon = "☀️";
+
+    if (clima.weathercode >= 0 && clima.weathercode <= 3) {
+      desc = "Despejado";
+      icon = "☀️";
+    } else if (clima.weathercode <= 48) {
+      desc = "Nublado";
+      icon = "☁️";
+    } else if (clima.weathercode <= 67) {
+      desc = "Lluvias";
+      icon = "🌧️";
+    } else if (clima.weathercode <= 77) {
+      desc = "Tormentas";
+      icon = "⛈️";
+    }
+
+    document.getElementById('weatherDesc').textContent = desc;
+    document.getElementById('climaDescMain').textContent = desc;
+    document.getElementById('climaIcon').textContent = icon;
+
+    // Viento
+    document.getElementById('climaViento').textContent = `${clima.windspeed} km/h`;
+
+    // Sensación térmica (aprox desde hourly)
+    if (data.hourly?.apparent_temperature) {
+      document.getElementById('climaSens').textContent = `${data.hourly.apparent_temperature[0]}°C`;
+    }
+
+    // Humedad
+    if (data.hourly?.relativehumidity_2m) {
+      document.getElementById('climaHum').textContent = `${data.hourly.relativehumidity_2m[0]}%`;
+    }
+
+    // Texto dinámico (para tu estilo NOTILEA)
+    document.getElementById('climaText').textContent =
+      `Condición actual: ${desc}. Temperatura de ${clima.temperature}°C en Nueva Asunción. Vientos de ${clima.windspeed} km/h. Posibles cambios en las próximas horas.`;
+
+  } catch (error) {
+    console.error("Error cargando clima:", error);
+  }
+}
+
+// Ejecutar
+cargarClima();
+
+// Actualizar cada 10 minutos
+setInterval(cargarClima, 600000);
+</script>
