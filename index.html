@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta property="og:title" content="Notilea – Nueva Asunción | Presidente Hayes">
+<meta property="og:description" content="Lo que pasa en tu barrio y lo que sacude al país y al planeta">
+<meta property="og:image" content="https://notilea25-cloud.github.io/og-cover.jpg">
+<meta property="og:url" content="https://notilea25-cloud.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<title>Notilea – Nueva Asunción | Presidente Hayes</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Source+Serif+4:ital,wght@0,300;0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rojo: #C0001A;
+    --rojo-oscuro: #8a0012;
+    --negro: #0d0d0d;
+    --blanco: #f8f6f1;
+    --gris: #3a3a3a;
+    --gris-claro: #e8e4dc;
+    --acento: #e8c84a;
+    --fuente-titulo: 'Bebas Neue', sans-serif;
+    --fuente-cuerpo: 'Source Serif 4', serif;
+    --fuente-ui: 'IBM Plex Sans', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--blanco);
+    color: var(--negro);
+    font-family: var(--fuente-cuerpo);
+    max-width: 430px;
+    margin: 0 auto;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── HEADER ─────────────────────────────── */
+  header {
+    background: var(--negro);
+    padding: 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,.5);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 14px 6px;
+    border-bottom: 3px solid var(--rojo);
+  }
+
+  .logo-wrap { display:flex; flex-direction:column; }
+  .logo-name {
+    font-family: var(--fuente-titulo);
+    font-size: 32px;
+    color: var(--blanco);
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+  .logo-sub {
+    font-family: var(--fuente-ui);
+    font-size: 9px;
+    color: var(--acento);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-top: 2px;
+  }
+
+  .header-meta {
+    text-align: right;
+    font-family: var(--fuente-ui);
+    font-size: 9px;
+    color: #aaa;
+    line-height: 1.5;
+  }
+  .header-meta strong { color: var(--acento); display: block; font-size: 11px; }
+
+  /* ── TICKER ──────────────────────────────── */
+  .ticker-bar {
+    background: var(--rojo);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    height: 28px;
+  }
+  .ticker-label {
+    background: var(--acento);
+    color: var(--negro);
+    font-family: var(--fuente-titulo);
+    font-size: 13px;
+    padding: 0 10px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+    flex-shrink: 0;
+    letter-spacing: 1px;
+  }
+  .ticker-content {
+    display: flex;
+    animation: scroll-ticker 40s linear infinite;
+    white-space: nowrap;
+    color: #fff;
+    font-family: var(--fuente-ui);
+    font-size: 11px;
+    padding-left: 20px;
+    align-items: center;
+    height: 100%;
+  }
+  .ticker-content span { margin-right: 60px; }
+  @keyframes scroll-ticker {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ── NAV TABS ────────────────────────────── */
+  nav {
+    background: #1a1a1a;
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    border-bottom: 1px solid #333;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  nav button {
+    background: none;
+    border: none;
+    color: #999;
+    font-family: var(--fuente-ui);
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 10px 14px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all .2s;
+    border-bottom: 3px solid transparent;
+    flex-shrink: 0;
+  }
+  nav button.active, nav button:hover {
+    color: var(--acento);
+    border-bottom-color: var(--acento);
+  }
+
+  /* ── SECCIONES ───────────────────────────── */
+  .section { display: none; animation: fadeIn .3s ease; }
+  .section.active { display: block; }
+  @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform: translateY(0); } }
+
+  /* ── PORTADA ─────────────────────────────── */
+
+  /* Noticia principal / héroe */
+  .hero {
+    position: relative;
+    background: var(--negro);
+    overflow: hidden;
+    min-height: 380px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #8a0012 0%, #1a0005 60%, #0d0d0d 100%);
+    opacity: .9;
+  }
+  .hero-chart {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: .15;
+    font-size: 120px;
+  }
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 16px 16px 20px;
+  }
+  .hero-tag {
+    display: inline-block;
+    background: var(--rojo);
+    color: #fff;
+    font-family: var(--fuente-titulo);
+    font-size: 12px;
+    letter-spacing: 2px;
+    padding: 3px 10px;
+    margin-bottom: 10px;
+  }
+  .hero-title {
+    font-family: var(--fuente-titulo);
+    font-size: 30px;
+    color: #fff;
+    line-height: 1.05;
+    letter-spacing: .5px;
+    margin-bottom: 10px;
+  }
+  .hero-title em { color: var(--acento); font-style: normal; }
+  .hero-lead {
+    font-size: 13px;
+    color: #ddd;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    font-weight: 300;
+  }
+
+  /* Visualización encuesta */
+  .encuesta-visual {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 14px;
+    backdrop-filter: blur(4px);
+  }
+  .enc-titulo {
+    font-family: var(--fuente-ui);
+    font-size: 10px;
+    color: var(--acento);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+  }
+  .enc-candidatos { display: flex; gap: 8px; }
+  .enc-cand {
+    flex: 1;
+    text-align: center;
+  }
+  .enc-cand-nombre {
+    font-family: var(--fuente-titulo);
+    font-size: 14px;
+    color: #fff;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .enc-porcentaje {
+    font-family: var(--fuente-titulo);
+    font-size: 38px;
+    line-height: 1;
+    margin-bottom: 2px;
+  }
+  .enc-porcentaje.winner { color: var(--acento); }
+  .enc-porcentaje.loser { color: #bbb; }
+  .enc-votos {
+    font-family: var(--fuente-ui);
+    font-size: 10px;
+    color: #aaa;
+  }
+  .enc-barra-wrap {
+    margin-top: 10px;
+    background: rgba(255,255,255,.1);
+    border-radius: 4px;
+    height: 8px;
+    overflow: hidden;
+    position: relative;
+  }
+  .enc-barra-fill {
+    height: 100%;
+    border-radius: 4px;
+    background: linear-gradient(90deg, var(--acento), var(--rojo));
+    width: 48%;
+    animation: growBar 1s ease .5s both;
+  }
+  @keyframes growBar { from { width: 0; } }
+  .enc-blanco {
+    text-align: center;
+    font-family: var(--fuente-ui);
+    font-size: 10px;
+    color: #888;
+    margin-top: 6px;
+  }
+  .enc-total {
+    text-align: center;
+    margin-top: 8px;
+    font-family: var(--fuente-ui);
+    font-size: 11px;
+    color: #ccc;
+  }
+  .enc-ganador-badge {
+    display: inline-block;
+    background: var(--acento);
+    color: var(--negro);
+    font-family: var(--fuente-titulo);
+    font-size: 12px;
+    padding: 2px 8px;
+    letter-spacing: 1px;
+    margin-top: 6px;
+    border-radius: 3px;
+  }
+
+  .btn-leer {
+    display: inline-block;
+    background: var(--rojo);
+    color: #fff;
+    font-family: var(--fuente-ui);
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 9px 18px;
+    border: none;
+    cursor: pointer;
+    letter-spacing: .5px;
+    transition: background .2s;
+  }
+  .btn-leer:hover { background: var(--rojo-oscuro); }
+
+  /* ── GRID NOTICIAS ───────────────────────── */
+  .noticias-grid { padding: 14px; display: flex; flex-direction: column; gap: 14px; }
+
+  .noticia-card {
+    background: #fff;
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    display: flex;
+    cursor: pointer;
+    transition: box-shadow .2s;
+    border-left: 4px solid transparent;
+  }
+  .noticia-card:hover { box-shadow: 0 3px 10px rgba(0,0,0,.15); }
+  .noticia-card.destacada {
+    flex-direction: column;
+    border-left: none;
+    border-top: 4px solid var(--rojo);
+  }
+  .noticia-card.local { border-left-color: var(--rojo); }
+  .noticia-card.mundial { border-left-color: #2a6fdb; }
+  .noticia-card.politica { border-left-color: #8B2FC9; }
+  .noticia-card.deporte { border-left-color: #1a9e38; }
+
+  .card-img-wrap {
+    width: 100px;
+    flex-shrink: 0;
+    overflow: hidden;
+  }
+  .noticia-card.destacada .card-img-wrap {
+    width: 100%;
+    height: 160px;
+  }
+  .card-img-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    background: var(--gris-claro);
+  }
+  .card-body {
+    padding: 10px 12px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .card-etiqueta {
+    font-family: var(--fuente-ui);
+    font-size: 9px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--rojo);
+  }
+  .noticia-card.mundial .card-etiqueta { color: #2a6fdb; }
+  .noticia-card.politica .card-etiqueta { color: #8B2FC9; }
+  .noticia-card.deporte .card-etiqueta { color: #1a9e38; }
+
+  .card-titulo {
+    font-family: var(--fuente-cuerpo);
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--negro);
+  }
+  .card-resumen {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .card-fecha {
+    font-family: var(--fuente-ui);
+    font-size: 10px;
+    color: #999;
+    margin-top: auto;
+  }
+
+  /* ── DIVIDER SECCIÓN ─────────────────────── */
+  .seccion-label {
+    font-family: var(--fuente-titulo);
+    font-size: 18px;
+    letter-spacing: 2px;
+    padding: 10px 14px 2px;
+    border-bottom: 2px solid var(--rojo);
+    margin: 4px 14px 0;
+    color: var(--negro);
+  }
+
+  /* ── CLIMA ───────────────────────────────── */
+  .clima-section { padding: 14px; }
+  .clima-header {
+    background: linear-gradient(135deg, #1a3a5c, #0d1f33);
+    border-radius: 10px;
+    padding: 18px;
+    color: #fff;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .clima-header::before {
+    content: '☁';
+    position: absolute;
+    right: 10px; top: -10px;
+    font-size: 80px;
+    opacity: .08;
+  }
+  .clima-lugar {
+    font-family: var(--fuente-ui);
+    font-size: 11px;
+    color: #7ec8f0;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .clima-temp-hoy {
+    font-family: var(--fuente-titulo);
+    font-size: 52px;
+    line-height: 1;
+    color: #fff;
+  }
+  .clima-temp-hoy span { font-size: 22px; color: #aaa; }
+  .clima-desc {
+    font-size: 14px;
+    color: #cce4f5;
+    margin: 6px 0 10px;
+  }
+  .clima-datos {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .clima-dato {
+    font-family: var(--fuente-ui);
+    font-size: 11px;
+    color: #aaa;
+  }
+  .clima-dato strong { color: #fff; display: block; font-size: 13px; }
+
+  .pronostico-semana { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 6px; }
+  .pronostico-semana::-webkit-scrollbar { height: 3px; }
+  .pronostico-semana::-webkit-scrollbar-thumb { background: var(--rojo); }
+  .dia-card {
+    background: #fff;
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-align: center;
+    min-width: 72px;
+    flex-shrink: 0;
+    box-shadow: 0 1px 4px rgba(0,0,0,.1);
+  }
+  .dia-nombre {
+    font-family: var(--fuente-ui);
+    font-size: 10px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  .dia-icono { font-size: 22px; margin-bottom: 4px; }
+  .dia-max {
+    font-family: var(--fuente-titulo);
+    font-size: 18px;
+    color: var(--rojo);
+  }
+  .dia-min {
+    font-family: var(--fuente-ui);
+    font-size: 11px;
+    color: #aaa;
+  }
+  .alerta-clima {
+    background: #fff3cd;
+    border-left: 4px solid #e8a000;
+    padding: 10px 12px;
+    border-radius: 0 6px 6px 0;
+    margin-top: 10px;
+    font-size: 12px;
+    color: #7a4500;
+    line-height: 1.5;
+  }
+  .alerta-clima strong { display: block; font-family: var(--fuente-ui); font-size: 11px; text-transform: uppercase; letter-spacing: 1px; }
+
+  /* ── ANÁLISIS / EDITORIAL ────────────────── */
+  .editorial-section { padding: 14px; }
+  .editorial-card {
+    background: var(--negro);
+    border-radius: 8px;
+    padding: 20px;
+    color: #fff;
+    margin-bottom: 14px;
+    position: relative;
+    overflow: hidden;
+  }
+  .editorial-card::before {
+    content: '"';
+    position: absolute;
+    top: -10px; left: 10px;
+    font-size: 120px;
+    color: var(--rojo);
+    opacity: .15;
+    font-family: Georgia, serif;
+    line-height: 1;
+  }
+  .editorial-tag {
+    font-family: var(--fuente-titulo);
+    font-size: 12px;
+    letter-spacing: 3px;
+    color: var(--acento);
+    margin-bottom: 8px;
+    display: block;
+  }
+  .editorial-titulo {
+    font-family: var(--fuente-titulo);
+    font-size: 22px;
+    line-height: 1.1;
+    color: #fff;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .editorial-texto {
+    font-size: 13px;
+    color: #ccc;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+  .editorial-texto p { margin-bottom: 10px; }
+  .editorial-firma {
+    margin-top: 14px;
+    padding-top: 10px;
+    border-top: 1px solid #333;
+    font-family: var(--fuente-ui);
+    font-size: 11px;
+    color: var(--acento);
+    font-style: italic;
+  }
+
+  .analisis-card {
+    background: #fff;
+    border-radius: 6px;
+    padding: 16px;
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    margin-bottom: 12px;
+    border-top: 3px solid var(--rojo);
+  }
+  .analisis-titulo {
+    font-family: var(--fuente-titulo);
+    font-size: 18px;
+    letter-spacing: .5px;
+    color: var(--negro);
+    margin-bottom: 8px;
+  }
+  .analisis-texto {
+    font-size: 13px;
+    color: #444;
+    line-height: 1.65;
+  }
+  .analisis-texto p { margin-bottom: 8px; }
+
+  /* ── ARTÍCULO EXPANDIDO ──────────────────── */
+  .articulo-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: var(--blanco);
+    z-index: 200;
+    overflow-y: auto;
+    max-width: 430px;
+    margin: 0 auto;
+    animation: slideUp .3s ease;
+  }
+  .articulo-overlay.open { display: block; }
+  @keyframes slideUp { from { transform: translateY(30px); opacity:0; } to { transform: translateY(0); opacity:1; } }
+
+  .art-header {
+    background: var(--negro);
+    padding: 14px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .art-back {
+    background: none;
+    border: none;
+    color: var(--acento);
+    font-size: 22px;
+    cursor: pointer;
+    line-height: 1;
+  }
+  .art-titulo-nav {
+    font-family: var(--fuente-ui);
+    font-size: 12px;
+    color: #fff;
+    font-weight: 600;
+    flex: 1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .art-body { padding: 20px 16px 40px; }
+  .art-etiqueta {
+    font-family: var(--fuente-ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--rojo);
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+  }
+  .art-titulo-full {
+    font-family: var(--fuente-titulo);
+    font-size: 28px;
+    line-height: 1.05;
+    letter-spacing: .5px;
+    color: var(--negro);
+    margin-bottom: 10px;
+  }
+  .art-fecha {
+    font-family: var(--fuente-ui);
+    font-size: 11px;
+    color: #999;
+    margin-bottom: 16px;
+    display: block;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--gris-claro);
+  }
+  .art-contenido {
+    font-size: 15px;
+    line-height: 1.75;
+    color: var(--gris);
+  }
+  .art-contenido p { margin-bottom: 14px; }
+  .art-contenido h3 {
+    font-family: var(--fuente-titulo);
+    font-size: 20px;
+    color: var(--negro);
+    margin: 18px 0 8px;
+    letter-spacing: .5px;
+  }
+  .art-img {
+    width: 100%;
+    border-radius: 6px;
+    margin: 14px 0;
+    overflow: hidden;
+  }
+  .art-img-placeholder {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, var(--rojo-oscuro), var(--negro));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 60px;
+    border-radius: 6px;
+  }
+  .enc-result-full {
+    background: var(--negro);
+    border-radius: 8px;
+    padding: 16px;
+    margin: 14px 0;
+    color: #fff;
+  }
+
+  /* ── FOOTER ──────────────────────────────── */
+  footer {
+    background: var(--negro);
+    color: #555;
+    font-family: var(--fuente-ui);
+    font-size: 11px;
+    text-align: center;
+    padding: 20px 14px;
+    border-top: 3px solid var(--rojo);
+    margin-top: 20px;
+  }
+  footer strong { color: var(--acento); font-family: var(--fuente-titulo); font-size: 16px; display:block; margin-bottom: 4px; }
+  footer a { color: #777; text-decoration: none; }
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div class="logo-wrap">
+      <span class="logo-name">NOTILEA</span>
+      <span class="logo-sub">Nueva Asunción · Presidente Hayes</span>
+    </div>
+    <div class="header-meta">
+      <strong id="fecha-hoy">Cargando…</strong>
+      <span id="hora-hoy">--:--</span>
+    </div>
+  </div>
+  <!-- TICKER -->
+  <div class="ticker-bar">
+    <div class="ticker-label">🔴 AHORA</div>
+    <div class="ticker-content">
+      <span>📊 Encuesta municipal: Manu Cristaldo 48% vs Juan Manuel Vera 47% — diferencia mínima en Presidente Hayes</span>
+      <span>🌤 Clima hoy en Chaco'i: 32°C, ambiente cálido e inestable con posibles tormentas</span>
+      <span>🇵🇾 Paraguay gana plata y bronce en Juegos Suramericanos de la Juventud en Panamá</span>
+      <span>⚽ Superclásico: Olimpia vs Cerro Porteño este fin de semana con operativo policial</span>
+      <span>🌍 Trump advierte: sin acuerdo con Irán antes del miércoles, no habrá prórroga del alto el fuego</span>
+      <span>📊 Encuesta municipal: Manu Cristaldo 48% vs Juan Manuel Vera 47% — diferencia mínima en Presidente Hayes</span>
+      <span>🌤 Clima hoy en Chaco'i: 32°C, ambiente cálido e inestable con posibles tormentas</span>
+      <span>🇵🇾 Paraguay gana plata y bronce en Juegos Suramericanos de la Juventud en Panamá</span>
+      <span>⚽ Superclásico: Olimpia vs Cerro Porteño este fin de semana con operativo policial</span>
+      <span>🌍 Trump advierte: sin acuerdo con Irán antes del miércoles, no habrá prórroga del alto el fuego</span>
+    </div>
+  </div>
+</header>
+
+<!-- NAV -->
+<nav>
+  <button class="active" onclick="mostrarSeccion('portada', this)">🏠 Portada</button>
+  <button onclick="mostrarSeccion('local', this)">📍 Local</button>
+  <button onclick="mostrarSeccion('pais', this)">🇵🇾 País</button>
+  <button onclick="mostrarSeccion('mundo', this)">🌍 Mundo</button>
+  <button onclick="mostrarSeccion('clima', this)">🌤 Clima</button>
+  <button onclick="mostrarSeccion('editorial', this)">✍ Editorial</button>
+</nav>
+
+<!-- ═══════════════ PORTADA ═══════════════ -->
+<div id="portada" class="section active">
+
+  <!-- HÉROE: Encuesta Municipal -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-chart">📊</div>
+    <div class="hero-content">
+      <div class="hero-tag">🔥 PORTADA PRINCIPAL</div>
+      <h1 class="hero-title">ENCUESTA MUNICIPAL 2026:<br><em>RESULTADO AJUSTADO</em> EN PRESIDENTE HAYES</h1>
+      <p class="hero-lead">Con 783 votos emitidos, Manu Cristaldo se impone por solo 8 votos sobre Juan Manuel Vera en la encuesta de intención de voto para las elecciones municipales 2026.</p>
+
+      <!-- Visualización encuesta -->
+      <div class="encuesta-visual">
+        <div class="enc-titulo">📊 Encuesta · Intención de Voto Municipal 2026</div>
+        <div class="enc-candidatos">
+          <div class="enc-cand">
+            <div class="enc-cand-nombre">MANU<br>CRISTALDO</div>
+            <div class="enc-porcentaje winner">48%</div>
+            <div class="enc-votos">380 votos</div>
+            <div class="enc-ganador-badge">✓ GANADOR</div>
+          </div>
+          <div style="width:1px; background:rgba(255,255,255,.2);"></div>
+          <div class="enc-cand">
+            <div class="enc-cand-nombre">JUAN MANUEL<br>VERA</div>
+            <div class="enc-porcentaje loser">47%</div>
+            <div class="enc-votos">372 votos</div>
+          </div>
+        </div>
+        <div class="enc-barra-wrap">
+          <div class="enc-barra-fill"></div>
+        </div>
+        <div class="enc-blanco">Voto en blanco: 3% · 31 votos</div>
+        <div class="enc-total">Total: 783 votos</div>
+      </div>
+
+      <button class="btn-leer" onclick="abrirArticulo('encuesta')">Leer análisis completo →</button>
+    </div>
+  </div>
+
+  <!-- NOTICIAS DE HOY -->
+  <div class="seccion-label">ÚLTIMAS NOTICIAS</div>
+  <div class="noticias-grid">
+
+    <div class="noticia-card local" onclick="abrirArticulo('py12')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">🛣</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">📍 Local</div>
+        <div class="card-titulo">Avances en la ruta PY-12: obras que transformarán el Chaco</div>
+        <div class="card-resumen">El proyecto vial que conectará Nueva Asunción con el corredor central del Chaco entra en etapa de ejecución.</div>
+        <div class="card-fecha">Sáb 18 Abr 2026</div>
+      </div>
+    </div>
+
+    <div class="noticia-card politica" onclick="abrirArticulo('rivas')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">⚖️</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🇵🇾 Política</div>
+        <div class="card-titulo">Caso Rivas: Senado evalúa permiso en medio de escándalo por título falso</div>
+        <div class="card-resumen">El senador Hernán Rivas solicitó permiso ante el JEM mientras la oposición denuncia posible uso de documento público falso.</div>
+        <div class="card-fecha">Sáb 18 Abr 2026 · 09:31</div>
+      </div>
+    </div>
+
+    <div class="noticia-card deporte" onclick="abrirArticulo('juegos')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">🥈</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🏅 Deportes</div>
+        <div class="card-titulo">¡Doble medalla! Paraguay celebra plata y bronce en futsal en Juegos Suramericanos</div>
+        <div class="card-resumen">La selección femenina de futsal ganó la plata y la masculina el bronce en los IV Juegos Suramericanos de la Juventud en Panamá.</div>
+        <div class="card-fecha">Sáb 18 Abr 2026</div>
+      </div>
+    </div>
+
+    <div class="noticia-card mundial" onclick="abrirArticulo('iran')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">🌍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🌍 Mundo</div>
+        <div class="card-titulo">Trump: sin acuerdo con Irán antes del miércoles, no habrá prórroga del alto el fuego</div>
+        <div class="card-resumen">El presidente de EE.UU. advirtió que Irán no tiene la capacidad de presionar con el cierre del estrecho de Ormuz.</div>
+        <div class="card-fecha">Sáb 18 Abr 2026</div>
+      </div>
+    </div>
+
+    <div class="noticia-card politica" onclick="abrirArticulo('ips')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">🏥</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🇵🇾 País</div>
+        <div class="card-titulo">Asegurados del IPS protestan en CDE exigiendo mejor atención médica</div>
+        <div class="card-resumen">Docentes y otros sectores se sumaron a la manifestación para denunciar deficiencias persistentes en el servicio del IPS en Ciudad del Este.</div>
+        <div class="card-fecha">Sáb 18 Abr 2026</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ LOCAL ═══════════════ -->
+<div id="local" class="section">
+  <div class="seccion-label">LOCAL · PRESIDENTE HAYES</div>
+  <div class="noticias-grid">
+
+    <div class="noticia-card destacada local" onclick="abrirArticulo('encuesta')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder" style="height:160px; background: linear-gradient(135deg,#8a0012,#1a0005); font-size:60px;">📊</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">📍 Elecciones 2026</div>
+        <div class="card-titulo">Encuesta municipal: Cristaldo 48% vs Vera 47% — resultado al límite</div>
+        <div class="card-resumen">La diferencia de solo 8 votos sobre 783 encuestados refleja una disputa muy reñida por la intendencia de Presidente Hayes.</div>
+        <div class="card-fecha">18 Abr 2026</div>
+      </div>
+    </div>
+
+    <div class="noticia-card local" onclick="abrirArticulo('py12')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">🛣</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">📍 Infraestructura</div>
+        <div class="card-titulo">Ruta PY-12: el corredor que cambiará el Chaco boliviano</div>
+        <div class="card-resumen">Las obras de la PY-12 avanzan hacia Nueva Asunción conectando comunidades del Chaco'i con el país.</div>
+        <div class="card-fecha">17 Abr 2026</div>
+      </div>
+    </div>
+
+    <div class="noticia-card local" onclick="abrirArticulo('clima-local')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">⛈</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🌤 Clima Local</div>
+        <div class="card-titulo">DMH prevé ambiente inestable en Presidente Hayes con tormentas eléctricas</div>
+        <div class="card-resumen">Las máximas rondarán 32–35°C en el Chaco y se esperan ráfagas de viento de hasta 100 km/h en algunas jornadas.</div>
+        <div class="card-fecha">18 Abr 2026</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ PAÍS ═══════════════ -->
+<div id="pais" class="section">
+  <div class="seccion-label">PARAGUAY</div>
+  <div class="noticias-grid">
+
+    <div class="noticia-card politica" onclick="abrirArticulo('rivas')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">⚖️</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🇵🇾 Política</div>
+        <div class="card-titulo">Escándalo Rivas: Senado concede permiso pese a denuncia por título falso</div>
+        <div class="card-resumen">La oposición denuncia un "pacto de silencio" y tilda de estafa la maniobra de Honor Colorado para proteger al senador.</div>
+        <div class="card-fecha">Sáb 18 Abr 2026</div>
+      </div>
+    </div>
+
+    <div class="noticia-card deporte" onclick="abrirArticulo('juegos')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">🥈</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🏅 Deportes</div>
+        <div class="card-titulo">Juegos Suramericanos: Paraguay ya suma sus primeras medallas</div>
+        <div class="card-resumen">El futsal dio las dos primeras preseas en Panamá para el equipo nacional en los IV Juegos Suramericanos de la Juventud.</div>
+        <div class="card-fecha">Sáb 18 Abr 2026</div>
+      </div>
+    </div>
+
+    <div class="noticia-card politica" onclick="abrirArticulo('ips')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">🏥</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🇵🇾 Salud</div>
+        <div class="card-titulo">IPS bajo presión: protesta masiva en Ciudad del Este exige mejoras urgentes</div>
+        <div class="card-resumen">Asegurados de varios sectores marcharon este sábado para reclamar mejoras en la atención médica y administrativa del IPS.</div>
+        <div class="card-fecha">Sáb 18 Abr 2026</div>
+      </div>
+    </div>
+
+    <div class="noticia-card deporte" onclick="abrirArticulo('clasico')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">⚽</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">⚽ Fútbol</div>
+        <div class="card-titulo">Superclásico: Olimpia vs Cerro Porteño con máximo operativo policial</div>
+        <div class="card-resumen">El encuentro más esperado del fútbol paraguayo se prepara con despliegue de seguridad. Olimpia viene de empatar en la Copa Sudamericana.</div>
+        <div class="card-fecha">Sáb 18 Abr 2026</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ MUNDO ═══════════════ -->
+<div id="mundo" class="section">
+  <div class="seccion-label">MUNDO</div>
+  <div class="noticias-grid">
+
+    <div class="noticia-card destacada mundial" onclick="abrirArticulo('iran')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder" style="height:160px; background: linear-gradient(135deg,#0d2a4a,#0a0a0a); font-size:60px;">🌍</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🌍 Irán · EE.UU.</div>
+        <div class="card-titulo">Trump fija ultimátum: Irán tiene hasta el miércoles para un acuerdo de paz</div>
+        <div class="card-resumen">El presidente de EE.UU. señaló que Irán no puede presionar con el cierre del estrecho de Ormuz, y destacó las conversaciones positivas en curso.</div>
+        <div class="card-fecha">Sáb 18 Abr 2026</div>
+      </div>
+    </div>
+
+    <div class="noticia-card mundial" onclick="abrirArticulo('ormuz')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">⚓</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🌍 Geopolítica</div>
+        <div class="card-titulo">El estrecho de Ormuz: la amenaza de Irán y su impacto en el precio del petróleo</div>
+        <div class="card-resumen">Una eventual escalada afectaría directamente el mercado energético global y los precios del combustible en Paraguay.</div>
+        <div class="card-fecha">18 Abr 2026</div>
+      </div>
+    </div>
+
+    <div class="noticia-card mundial" onclick="abrirArticulo('colombia')">
+      <div class="card-img-wrap">
+        <div class="card-img-placeholder">🌺</div>
+      </div>
+      <div class="card-body">
+        <div class="card-etiqueta">🌍 América</div>
+        <div class="card-titulo">Colombia: legisladoras buscan prohibir mutilación genital femenina, única práctica que persiste en Latinoamérica</div>
+        <div class="card-resumen">Líderes embera y legisladoras impulsan proyecto de ley para erradicar esta práctica que afecta a comunidades indígenas.</div>
+        <div class="card-fecha">18 Abr 2026</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ CLIMA ═══════════════ -->
+<div id="clima" class="section">
+  <div class="clima-section">
+
+    <div class="clima-header">
+      <div class="clima-lugar">📍 Chaco'i — Nueva Asunción · Presidente Hayes</div>
+      <div class="clima-temp-hoy">32°C <span>/ 21°C mín</span></div>
+      <div class="clima-desc">⛅ Parcialmente nublado · Ambiente cálido e inestable</div>
+      <div class="clima-datos">
+        <div class="clima-dato"><strong>89%</strong>Humedad</div>
+        <div class="clima-dato"><strong>NE</strong>Viento</div>
+        <div class="clima-dato"><strong>Alta</strong>Prob. lluvia</div>
+      </div>
+    </div>
+
+    <div class="seccion-label" style="margin:0 0 10px;">PRONÓSTICO SEMANAL</div>
+    <div class="pronostico-semana">
+      <div class="dia-card">
+        <div class="dia-nombre">HOY</div>
+        <div class="dia-icono">⛅</div>
+        <div class="dia-max">32°</div>
+        <div class="dia-min">21° mín</div>
+      </div>
+      <div class="dia-card">
+        <div class="dia-nombre">DOM</div>
+        <div class="dia-icono">⛈</div>
+        <div class="dia-max">30°</div>
+        <div class="dia-min">20° mín</div>
+      </div>
+      <div class="dia-card">
+        <div class="dia-nombre">LUN</div>
+        <div class="dia-icono">🌧</div>
+        <div class="dia-max">28°</div>
+        <div class="dia-min">19° mín</div>
+      </div>
+      <div class="dia-card">
+        <div class="dia-nombre">MAR</div>
+        <div class="dia-icono">⛈</div>
+        <div class="dia-max">29°</div>
+        <div class="dia-min">20° mín</div>
+      </div>
+      <div class="dia-card">
+        <div class="dia-nombre">MIÉ</div>
+        <div class="dia-icono">🌧</div>
+        <div class="dia-max">27°</div>
+        <div class="dia-min">18° mín</div>
+      </div>
+      <div class="dia-card">
+        <div class="dia-nombre">JUE</div>
+        <div class="dia-icono">⛅</div>
+        <div class="dia-max">31°</div>
+        <div class="dia-min">20° mín</div>
+      </div>
+      <div class="dia-card">
+        <div class="dia-nombre">VIE</div>
+        <div class="dia-icono">🌤</div>
+        <div class="dia-max">33°</div>
+        <div class="dia-min">21° mín</div>
+      </div>
+    </div>
+
+    <div class="alerta-clima">
+      <strong>⚠ ALERTA DMH / DINAC</strong>
+      Departamento Presidente Hayes bajo alerta por posibles fenómenos de tiempo severo esta semana: lluvias intensas con tormentas moderadas a fuertes. Se estiman ráfagas de hasta <strong>100 km/h</strong> y acumulados de <strong>70–120 mm</strong>. Consulte siempre el boletín oficial en meteorologia.gov.py.
+    </div>
+
+    <div style="margin-top:14px; background:#fff; border-radius:6px; padding:14px; box-shadow:0 1px 4px rgba(0,0,0,.08);">
+      <div style="font-family:var(--fuente-ui); font-size:11px; color:#888; text-transform:uppercase; letter-spacing:1.5px; margin-bottom:8px;">Fuentes oficiales</div>
+      <p style="font-size:13px; color:#555; line-height:1.5;">📡 DMH DINAC · <a href="https://www.meteorologia.gov.py" style="color:var(--rojo);">meteorologia.gov.py</a></p>
+      <p style="font-size:13px; color:#555; line-height:1.5; margin-top:4px;">Los datos del pronóstico se actualizan diariamente basados en boletines oficiales de la Dirección de Meteorología e Hidrología del Paraguay.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ EDITORIAL ═══════════════ -->
+<div id="editorial" class="section">
+  <div class="editorial-section">
+
+    <!-- EDITORIAL PRINCIPAL -->
+    <div class="editorial-card">
+      <span class="editorial-tag">✍ EDITORIAL NOTILEA · 18 ABR 2026</span>
+      <h2 class="editorial-titulo">LA ENCUESTA QUE LO DICE TODO: PRESIDENTE HAYES ELIGE EN EL FILO</h2>
+      <div class="editorial-texto">
+        <p>Los números no mienten, pero tampoco dan certeza absoluta. Una encuesta de intención de voto con 783 participantes arrojó un resultado que ningún candidato puede celebrar con tranquilidad: Manu Cristaldo al 48%, Juan Manuel Vera al 47%, y apenas 8 votos de diferencia.</p>
+        <p>Esa distancia microscópica habla de una comunidad dividida casi por igual, donde cada vecino, cada barrio, cada familia puede inclinar la balanza en las elecciones municipales de 2026. Para los ciudadanos de Presidente Hayes, esto es una señal poderosa: su voto importa. Literalmente.</p>
+        <p>Lo que esta encuesta también revela es una democracia local viva. Dos candidatos con propuestas distintas, una ciudadanía que se toma el tiempo de participar, y un resultado que obliga a ambas fuerzas a llegar al electorado con argumentos reales, no solo con promesas. El 3% que votó en blanco también dice algo: hay quienes aún no están convencidos por ninguno.</p>
+        <p>Desde Notilea instamos a los candidatos a debatir en público, a presentar sus planes para el Chaco, para las rutas, para el agua, para la salud. Y a los ciudadanos: infórmense, pregunten, exijan. Las elecciones de 2026 en Presidente Hayes serán decididas por el vecino que se levante y vote.</p>
+      </div>
+      <div class="editorial-firma">— Redacción Notilea · Nueva Asunción, Presidente Hayes</div>
+    </div>
+
+    <!-- ANÁLISIS 1 -->
+    <div class="analisis-card">
+      <div class="analisis-titulo">ANÁLISIS: ¿QUÉ SIGNIFICA ESTE EMPATE TÉCNICO?</div>
+      <div class="analisis-texto">
+        <p>En ciencia política, una diferencia menor al 3% entre candidatos dentro de una encuesta se denomina "empate técnico": el margen de error estadístico hace que ningún resultado sea conclusivo. En esta encuesta, la diferencia es del 1%, lo que coloca a ambos aspirantes a la intendencia en idéntica posición de incertidumbre.</p>
+        <p>El dato más relevante para los estrategas de campaña es el 3% del voto en blanco: 31 personas que participaron pero no definieron candidato. Ese bloque podría ser el factor decisivo si alguno de los dos candidatos logra captar esa porción antes del día de la elección.</p>
+        <p>La alta participación en la encuesta también sugiere que el interés cívico en Presidente Hayes es notable para un municipio del interior del Chaco, lo que augura buena afluencia en las urnas reales.</p>
+      </div>
+    </div>
+
+    <!-- ANÁLISIS 2 -->
+    <div class="analisis-card" style="border-top-color: #2a6fdb;">
+      <div class="analisis-titulo" style="color:#2a6fdb;">ANÁLISIS: IRÁN Y EL CHACO — ¿QUÉ TIENE QUE VER EL ESTRECHO DE ORMUZ CON PARAGUAY?</div>
+      <div class="analisis-texto">
+        <p>La tensión entre Estados Unidos e Irán que se aproxima a un punto de quiebre esta semana tiene consecuencias directas para Paraguay, aunque parezca lejana. El estrecho de Ormuz es la arteria por donde transita cerca del 20% del petróleo mundial. Cualquier interrupción —o incluso la amenaza de una— dispara el precio del crudo en los mercados globales.</p>
+        <p>Paraguay, un país sin producción propia de petróleo, importa todos sus combustibles. Un aumento en el precio internacional se traslada directamente a la bomba de gasolina, al transporte de soja, al gas doméstico. El Chaco —con su economía agroganadera que depende del transporte y la maquinaria— es especialmente sensible a estas fluctuaciones.</p>
+        <p>Desde Notilea seguimos de cerca esta negociación que Trump fijó con fecha límite el miércoles próximo. Si fracasa, los mercados reaccionarán y Paraguay lo sentirá en el bolsillo.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══════════════ OVERLAY ARTÍCULOS ═══════════════ -->
+<div id="articulo-overlay" class="articulo-overlay">
+  <div class="art-header">
+    <button class="art-back" onclick="cerrarArticulo()">←</button>
+    <div class="art-titulo-nav" id="art-titulo-nav">Notilea</div>
+  </div>
+  <div class="art-body" id="art-body"><!-- contenido dinámico --></div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <strong>NOTILEA</strong>
+  Lo que pasa en tu barrio y lo que sacude al país y al planeta<br>
+  <span style="margin-top:6px; display:block;">Nueva Asunción · Presidente Hayes · Paraguay</span>
+  <a href="https://notilea25-cloud.github.io">notilea25-cloud.github.io</a> · 
+  <a href="https://tiktok.com/@notilea">TikTok @notilea</a>
+  <div style="margin-top:10px; color:#444; font-size:10px;">© 2026 Notilea. Todos los derechos reservados.</div>
+</footer>
+
+<script>
+// ── FECHA Y HORA ──────────────────────────
+function actualizarReloj() {
+  const ahora = new Date();
+  const diasSem = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+  const meses = ['ene','feb','mar','abr','may','jun','jul','ago','sep','oct','nov','dic'];
+  const dia = diasSem[ahora.getDay()];
+  const fecha = `${dia.charAt(0).toUpperCase()+dia.slice(1)}, ${ahora.getDate()} ${meses[ahora.getMonth()]} ${ahora.getFullYear()}`;
+  const hora = ahora.toLocaleTimeString('es-PY', {hour:'2-digit', minute:'2-digit'});
+  document.getElementById('fecha-hoy').textContent = fecha;
+  document.getElementById('hora-hoy').textContent = hora;
+}
+actualizarReloj();
+setInterval(actualizarReloj, 30000);
+
+// ── NAVEGACIÓN SECCIONES ──────────────────
+function mostrarSeccion(id, btn) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b => b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+// ── ARTÍCULOS COMPLETOS ───────────────────
+const articulos = {
+  encuesta: {
+    etiqueta: '📊 Elecciones Municipales 2026',
+    titulo: 'Encuesta en Presidente Hayes: Cristaldo 48% vs Vera 47% — resultado al filo',
+    fecha: 'Sábado 18 de abril de 2026 · Notilea',
+    cuerpo: `
+      <div class="enc-result-full">
+        <div style="font-family:var(--fuente-ui);font-size:10px;color:var(--acento);letter-spacing:2px;margin-bottom:12px;">📊 RESULTADOS DE LA ENCUESTA</div>
+        <div style="display:flex;justify-content:space-around;text-align:center;">
+          <div>
+            <div style="font-family:var(--fuente-titulo);font-size:13px;color:#ccc;">MANU CRISTALDO</div>
+            <div style="font-family:var(--fuente-titulo);font-size:48px;color:var(--acento);">48%</div>
+            <div style="font-size:12px;color:#aaa;">380 votos · <span style="color:var(--acento);font-weight:700;">GANADOR</span></div>
+          </div>
+          <div>
+            <div style="font-family:var(--fuente-titulo);font-size:13px;color:#ccc;">JUAN MANUEL VERA</div>
+            <div style="font-family:var(--fuente-titulo);font-size:48px;color:#bbb;">47%</div>
+            <div style="font-size:12px;color:#aaa;">372 votos</div>
+          </div>
+        </div>
+        <div style="text-align:center;font-size:11px;color:#777;margin-top:10px;">Voto en blanco: 3% · 31 votos · Total: 783</div>
+      </div>
+      <p>Una encuesta de intención de voto para las elecciones municipales 2026 en el departamento de Presidente Hayes arrojó un resultado extraordinariamente ajustado: <strong>Manu Cristaldo</strong> obtuvo el 48% (380 votos) frente al 47% (372 votos) de <strong>Juan Manuel Vera</strong>, con solo 8 votos de diferencia sobre un total de 783 participantes.</p>
+      <h3>Un empate técnico con consecuencias reales</h3>
+      <p>En términos estadísticos, una diferencia del 1% entre candidatos se sitúa dentro del margen de error de cualquier encuesta, lo que convierte este resultado en un empate técnico. Ninguno de los dos puede afirmar con certeza que lidera la intención de voto.</p>
+      <p>El 3% que votó en blanco, representado por 31 personas, podría ser decisivo. Si cualquiera de los dos candidatos logra captar esa porción del electorado indeciso, puede romper el empate y construir una ventaja real.</p>
+      <h3>¿Qué se juega en estas elecciones?</h3>
+      <p>La intendencia de Presidente Hayes tiene competencia directa sobre la administración del municipio, obras públicas locales, servicios de limpieza y salud municipal. En una región como el Chaco, donde la conectividad vial y el acceso al agua son desafíos diarios, el liderazgo municipal tiene impacto concreto en la vida cotidiana.</p>
+      <p>Las elecciones municipales de 2026 serán el primer gran test electoral del año para los partidos en esta zona del Chaco.</p>
+    `
+  },
+  py12: {
+    etiqueta: '📍 Local · Infraestructura',
+    titulo: 'Ruta PY-12: las obras que conectarán Nueva Asunción con el corazón del Chaco',
+    fecha: 'Viernes 17 de abril de 2026 · Notilea',
+    cuerpo: `
+      <div class="art-img"><div class="art-img-placeholder">🛣</div></div>
+      <p>El proyecto vial de la ruta PY-12 representa una de las obras de infraestructura más esperadas para las comunidades del Chaco central, especialmente para los habitantes de <strong>Nueva Asunción, Chaco'i y Nanawa</strong>.</p>
+      <h3>¿Qué es la PY-12?</h3>
+      <p>La ruta PY-12 forma parte del plan de conectividad vial del Ministerio de Obras Públicas y Comunicaciones (MOPC) para el Chaco paraguayo. Su trazado busca reducir el aislamiento de comunidades que dependen de caminos de tierra que se vuelven intransitables en la época de lluvias.</p>
+      <h3>Impacto en la región</h3>
+      <p>Para los ganaderos y agricultores del Chaco'i, una ruta asfaltada significa menores costos de transporte, acceso más rápido a los centros de salud y una mejora sustancial en la calidad de vida. Los comerciantes locales también anticipan un aumento en la actividad económica una vez que la vía esté habilitada.</p>
+      <p>Desde Notilea continuaremos informando sobre el avance de esta obra que es prioridad para nuestra región.</p>
+    `
+  },
+  rivas: {
+    etiqueta: '🇵🇾 Política Nacional',
+    titulo: 'Caso Hernán Rivas: Senado evalúa permiso pese a escándalo por título universitario falso',
+    fecha: 'Sábado 18 de abril de 2026 · 09:31 hs',
+    cuerpo: `
+      <div class="art-img"><div class="art-img-placeholder">⚖️</div></div>
+      <p>El senador <strong>Hernán Rivas</strong> se encuentra en el centro de una polémica que sacude al Congreso paraguayo: senadores de la oposición lo denunciaron por el presunto uso de un documento público de contenido falso, vinculado a su título de abogado.</p>
+      <h3>El escándalo en el JEM</h3>
+      <p>Según denuncias de legisladores opositores, el paso de Rivas ante el Jurado de Enjuiciamiento de Magistrados (JEM) fue posible gracias a una maniobra de Honor Colorado que puso en duda la veracidad de su título profesional. La senadora Rocío Vallejo afirmó que Rivas "mintió por todos lados".</p>
+      <h3>El permiso que genera controversia</h3>
+      <p>A pesar de las denuncias, el Senado analiza conceder un permiso al legislador para que pueda comparecer con testigos y respaldar su título. El senador Nano Galaverna confirmó que se le permitirá presentar pruebas. La oposición habla de un "pacto de silencio" para proteger al parlamentario.</p>
+      <p>El caso podría derivar en la pérdida de investidura de Rivas si se confirma la falsedad del documento.</p>
+    `
+  },
+  juegos: {
+    etiqueta: '🏅 Deportes · Juegos Suramericanos',
+    titulo: 'Paraguay logra plata y bronce en futsal en los Juegos Suramericanos de la Juventud',
+    fecha: 'Sábado 18 de abril de 2026',
+    cuerpo: `
+      <div class="art-img"><div class="art-img-placeholder">🥈🥉</div></div>
+      <p>Paraguay celebró este sábado sus <strong>dos primeras medallas</strong> en los IV Juegos Suramericanos de la Juventud que se realizan en Panamá. La disciplina que abrió el medallero para el equipo nacional fue el futsal.</p>
+      <h3>Los resultados</h3>
+      <p>La selección femenina de futsal conquistó la <strong>medalla de plata</strong>, mientras que la rama masculina se quedó con el <strong>bronce</strong>. Ambas actuaciones generaron euforia en la delegación paraguaya y en los hinchas que seguían el evento desde el país.</p>
+      <p>El Team Paraguay continúa su participación en los Juegos con la expectativa de sumar más preseas en otras disciplinas a lo largo del torneo.</p>
+    `
+  },
+  iran: {
+    etiqueta: '🌍 Geopolítica · Irán – EE.UU.',
+    titulo: 'Trump fija ultimátum: Irán tiene hasta el miércoles para acordar la paz o se acaba el alto el fuego',
+    fecha: 'Sábado 18 de abril de 2026',
+    cuerpo: `
+      <div class="art-img"><div class="art-img-placeholder">🌍</div></div>
+      <p>El presidente de los Estados Unidos, <strong>Donald Trump</strong>, lanzó este sábado una advertencia directa a Irán: si antes del miércoles no se alcanza un acuerdo de paz, no prorrogará el alto el fuego que lleva ocho semanas en vigencia.</p>
+      <h3>El estrecho de Ormuz como amenaza</h3>
+      <p>Irán ha amenazado en reiteradas ocasiones con cerrar el estrecho de Ormuz —por donde circula cerca del 20% del petróleo mundial— en caso de una escalada militar. Sin embargo, Trump descartó que Teherán tenga la capacidad real de presionar a Washington con esa amenaza, al mismo tiempo que calificó las conversaciones entre ambas partes como "positivas".</p>
+      <h3>¿Qué pasa si fracasan las negociaciones?</h3>
+      <p>Un rompimiento del alto el fuego desencadenaría una nueva escalada en el conflicto, que ya acumula ocho semanas de tensión. Los mercados de petróleo ya muestran volatilidad y un posible cierre del estrecho catapultaría el precio del crudo a niveles no vistos en años, con consecuencias directas en los combustibles de Paraguay y toda América Latina.</p>
+      <p>Notilea sigue de cerca esta negociación y sus potenciales efectos en la economía regional.</p>
+    `
+  },
+  ips: {
+    etiqueta: '🇵🇾 Salud · Paraguay',
+    titulo: 'Protesta masiva en Ciudad del Este: asegurados del IPS exigen atención médica digna',
+    fecha: 'Sábado 18 de abril de 2026',
+    cuerpo: `
+      <div class="art-img"><div class="art-img-placeholder">🏥</div></div>
+      <p>Cientos de asegurados del <strong>Instituto de Previsión Social (IPS)</strong> se movilizaron este sábado en Ciudad del Este para exigir mejoras urgentes en la atención médica y administrativa. La protesta, iniciada por el sector docente, se extendió a otros gremios.</p>
+      <p>Los manifestantes denunciaron tiempos de espera excesivos, falta de insumos médicos, turnos imposibles de obtener y deficiencias administrativas que afectan a cientos de miles de asegurados en el país.</p>
+      <h3>Una crisis sostenida</h3>
+      <p>El IPS es la principal caja de seguridad social del Paraguay y cubre a los trabajadores del sector privado formal. Las deficiencias en su sistema de salud son un problema histórico que ninguna administración ha resuelto de fondo, generando malestar creciente entre los beneficiarios.</p>
+    `
+  },
+  clasico: {
+    etiqueta: '⚽ Fútbol Paraguayo',
+    titulo: 'Superclásico Olimpia vs Cerro Porteño: máximo operativo policial para el partido del año',
+    fecha: 'Sábado 18 de abril de 2026',
+    cuerpo: `
+      <div class="art-img"><div class="art-img-placeholder">⚽</div></div>
+      <p>El fútbol paraguayo se prepara para el encuentro más esperado del año: el <strong>superclásico entre Olimpia y Cerro Porteño</strong>. La Policía Nacional anunció un despliegue especial de seguridad para garantizar el orden en el estadio y las inmediaciones.</p>
+      <p>Olimpia llega al partido en buena forma, tras empatar sin goles ante Barracas Central en la Copa Sudamericana, resultado que le permite mantenerse como líder del Grupo G en el torneo continental.</p>
+      <p>El clásico del fútbol paraguayo promete una jornada de alta emoción para los miles de hinchas de ambas instituciones.</p>
+    `
+  },
+  ormuz: {
+    etiqueta: '🌍 Geopolítica',
+    titulo: 'El estrecho de Ormuz y su impacto en Paraguay: por qué una guerra lejana golpea el Chaco',
+    fecha: 'Sábado 18 de abril de 2026 · Análisis Notilea',
+    cuerpo: `
+      <div class="art-img"><div class="art-img-placeholder">⚓</div></div>
+      <p>El <strong>estrecho de Ormuz</strong> es un canal de apenas 54 kilómetros de ancho ubicado entre Irán y Omán. Por allí transita aproximadamente el 20% del petróleo mundial y alrededor del 25% del gas natural licuado que consume el planeta. Su posible cierre, ante una escalada del conflicto Irán-EE.UU., sería un terremoto para la economía global.</p>
+      <h3>La cadena que llega a Paraguay</h3>
+      <p>Paraguay no produce petróleo ni gas propios. Todo el combustible que usa el país —desde la gasolina del auto hasta el gas de cocina— se importa. Cuando el precio del petróleo sube en los mercados internacionales, el impacto llega a la bomba de gasolina paraguaya en cuestión de semanas.</p>
+      <p>En el Chaco, donde la economía ganadera y agrícola depende intensamente del transporte en camión y del uso de maquinaria, cada aumento en el precio del combustible reduce directamente la rentabilidad de los productores.</p>
+      <h3>¿Qué puede pasar esta semana?</h3>
+      <p>Trump dio plazo hasta el miércoles para un acuerdo. Si las negociaciones fracasan y el conflicto escala, los mercados energéticos reaccionarán de inmediato. Desde Notilea recomendamos seguir esta negociación como lo que es: un asunto de impacto directo en el bolsillo del chaqueño.</p>
+    `
+  },
+  colombia: {
+    etiqueta: '🌍 América Latina',
+    titulo: 'Colombia busca prohibir la mutilación genital femenina: el último país de Latinoamérica donde persiste',
+    fecha: 'Sábado 18 de abril de 2026',
+    cuerpo: `
+      <div class="art-img"><div class="art-img-placeholder">🌺</div></div>
+      <p>Líderes indígenas embera y legisladoras colombianas impulsan un proyecto de ley para prohibir definitivamente la mutilación genital femenina en Colombia, el único país de América Latina donde esta práctica todavía persiste en algunas comunidades.</p>
+      <p>La iniciativa busca combinar la acción legislativa con el respeto a los derechos culturales de las comunidades indígenas, proponiendo programas de educación y acompañamiento en lugar de solo sanciones penales.</p>
+      <p>El debate en Colombia es seguido por organizaciones de derechos humanos de toda la región.</p>
+    `
+  },
+  'clima-local': {
+    etiqueta: '🌤 Clima · Presidente Hayes',
+    titulo: 'DMH alerta por tormentas severas en Presidente Hayes: ráfagas de hasta 100 km/h',
+    fecha: 'Sábado 18 de abril de 2026',
+    cuerpo: `
+      <div class="art-img"><div class="art-img-placeholder">⛈</div></div>
+      <p>La <strong>Dirección de Meteorología e Hidrología (DMH)</strong> emitió una alerta para el departamento de Presidente Hayes ante la probabilidad de fenómenos de tiempo severo durante los próximos días.</p>
+      <h3>¿Qué se espera?</h3>
+      <p>El pronóstico indica lluvias intensas con tormentas moderadas a fuertes. Se estiman acumulados de precipitación de entre 70 y 120 mm, con ráfagas de viento de hasta 100 km/h de manera puntual y posible caída de granizo.</p>
+      <p>Las temperaturas máximas en el Chaco rondarán los 32–35°C, mientras que el ambiente se mantendrá cálido, húmedo e inestable durante la mayor parte de la semana.</p>
+      <h3>Recomendaciones</h3>
+      <p>La DMH recomienda evitar actividades al aire libre durante tormentas, asegurar techos y estructuras, y mantenerse alejado de árboles y postes durante ráfagas intensas. Consulte siempre el boletín oficial en <strong>meteorologia.gov.py</strong>.</p>
+    `
+  }
+};
+
+function abrirArticulo(id) {
+  const art = articulos[id];
+  if (!art) return;
+  document.getElementById('art-titulo-nav').textContent = art.titulo;
+  document.getElementById('art-body').innerHTML = `
+    <span class="art-etiqueta">${art.etiqueta}</span>
+    <h1 class="art-titulo-full">${art.titulo}</h1>
+    <span class="art-fecha">📅 ${art.fecha}</span>
+    <div class="art-contenido">${art.cuerpo}</div>
+  `;
+  const overlay = document.getElementById('articulo-overlay');
+  overlay.classList.add('open');
+  overlay.scrollTop = 0;
+}
+
+function cerrarArticulo() {
+  document.getElementById('articulo-overlay').classList.remove('open');
+}
+
+// Cerrar con botón atrás del navegador / swipe
+window.addEventListener('popstate', cerrarArticulo);
+</script>
+</body>
+</html>
