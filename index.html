@@ -1,0 +1,448 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Source+Sans+3:wght@400;600&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Source Sans 3',sans-serif;background:var(--color-background-tertiary)}
+.top-bar{background:#c0392b;color:#fff;padding:6px 12px;display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:600;letter-spacing:.5px}
+.header{background:#b71c1c;padding:10px 12px 8px;text-align:center}
+.brand{font-family:'Playfair Display',serif;font-size:26px;font-weight:900;color:#fff;letter-spacing:-0.5px;line-height:1}
+.tagline{font-size:9px;color:rgba(255,255,255,0.75);letter-spacing:1.5px;text-transform:uppercase;margin-top:2px}
+.weather-strip{background:#922b21;padding:8px 12px;display:flex;justify-content:space-between;align-items:center}
+.weather-left{display:flex;align-items:center;gap:8px}
+.weather-temp{font-size:22px;font-weight:600;color:#fff}
+.weather-detail{font-size:10px;color:rgba(255,255,255,0.8);line-height:1.4}
+.weather-right{text-align:right;font-size:10px;color:rgba(255,255,255,0.85);line-height:1.6}
+.nav-tabs{display:flex;overflow-x:auto;background:#fff;border-bottom:2px solid #b71c1c;gap:0}
+.nav-tabs::-webkit-scrollbar{display:none}
+.tab{padding:8px 14px;font-size:11px;font-weight:600;color:#666;cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;margin-bottom:-2px;transition:all .2s}
+.tab.active{color:#b71c1c;border-bottom-color:#b71c1c}
+.content{padding:0}
+.section{display:none}
+.section.active{display:block}
+.featured-card{position:relative;cursor:pointer;overflow:hidden}
+.featured-img{width:100%;height:180px;background:linear-gradient(135deg,#b71c1c,#4a0000);display:flex;align-items:center;justify-content:center;position:relative}
+.featured-img img{width:100%;height:100%;object-fit:cover;opacity:0.7}
+.featured-overlay{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(0,0,0,0.85));padding:30px 12px 12px}
+.featured-cat{font-size:9px;background:#c0392b;color:#fff;padding:2px 7px;border-radius:2px;font-weight:700;letter-spacing:1px;text-transform:uppercase;display:inline-block;margin-bottom:4px}
+.featured-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;line-height:1.3}
+.featured-sub{font-size:11px;color:rgba(255,255,255,0.7);margin-top:3px}
+.card-grid{padding:10px 10px;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.news-card{background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);overflow:hidden;cursor:pointer;transition:transform .15s}
+.news-card:active{transform:scale(0.98)}
+.card-img{width:100%;height:72px;background:#eee;object-fit:cover}
+.card-img-placeholder{width:100%;height:72px;display:flex;align-items:center;justify-content:center;font-size:22px}
+.card-body{padding:7px 8px 8px}
+.card-cat{font-size:8px;color:#b71c1c;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.card-title{font-size:12px;font-weight:600;color:var(--color-text-primary);line-height:1.35;margin-top:2px}
+.card-time{font-size:10px;color:var(--color-text-secondary);margin-top:4px}
+.section-title{font-size:10px;font-weight:700;color:#b71c1c;letter-spacing:1.5px;text-transform:uppercase;padding:10px 12px 4px;border-top:3px solid #b71c1c;background:var(--color-background-secondary)}
+.encuesta-block{margin:0 10px 10px;background:var(--color-background-primary);border-radius:8px;border:0.5px solid var(--color-border-tertiary);overflow:hidden;cursor:pointer}
+.encuesta-header{background:#c0392b;padding:8px 12px}
+.encuesta-header p{color:#fff;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.encuesta-header h3{color:#fff;font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-top:1px}
+.encuesta-body{padding:10px 12px}
+.cand-row{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.cand-avatar{width:36px;height:36px;border-radius:50%;background:#ddd;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:#fff;flex-shrink:0}
+.cand-name{font-size:12px;font-weight:600;color:var(--color-text-primary);line-height:1.2}
+.cand-pct{font-size:18px;font-weight:700;color:#b71c1c;margin-left:auto}
+.bar-wrap{width:100%;height:6px;background:var(--color-background-secondary);border-radius:3px;margin-top:3px}
+.bar-fill{height:100%;border-radius:3px;transition:width .6s ease}
+.winner-badge{display:inline-block;font-size:8px;background:#27ae60;color:#fff;padding:1px 5px;border-radius:2px;font-weight:700;margin-left:4px;vertical-align:middle}
+.blank-row{display:flex;justify-content:center;gap:16px;font-size:11px;color:var(--color-text-secondary);padding:6px 0;border-top:0.5px solid var(--color-border-tertiary);margin-top:4px}
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:100;overflow-y:auto}
+.modal-overlay.open{display:block}
+.modal{background:var(--color-background-primary);min-height:100vh;max-width:420px;margin:0 auto}
+.modal-top{background:#b71c1c;padding:12px;display:flex;align-items:center;gap:10px}
+.modal-back{color:#fff;font-size:20px;cursor:pointer;font-weight:700;line-height:1}
+.modal-brand{font-family:'Playfair Display',serif;font-size:16px;color:#fff;font-weight:700}
+.modal-hero{width:100%;height:200px;object-fit:cover;background:#333}
+.modal-hero-placeholder{width:100%;height:200px;background:linear-gradient(135deg,#922b21,#1a0000);display:flex;align-items:center;justify-content:center;font-size:48px}
+.modal-body{padding:14px 14px 32px}
+.modal-cat{font-size:9px;color:#b71c1c;font-weight:700;letter-spacing:1px;text-transform:uppercase}
+.modal-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--color-text-primary);margin:4px 0 8px;line-height:1.3}
+.modal-meta{font-size:11px;color:var(--color-text-secondary);margin-bottom:12px}
+.modal-text{font-size:14px;color:var(--color-text-primary);line-height:1.7}
+.modal-text p{margin-bottom:10px}
+.modal-encuesta-img{width:100%;border-radius:8px;margin:10px 0}
+.ticker{background:#1a1a1a;padding:5px 12px;display:flex;gap:8px;overflow:hidden;white-space:nowrap}
+.ticker span{font-size:10px;color:#eee;animation:scroll 25s linear infinite}
+@keyframes scroll{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+.ticker-label{font-size:9px;background:#c0392b;color:#fff;padding:1px 6px;border-radius:2px;font-weight:700;flex-shrink:0;align-self:center}
+.forecast{display:flex;gap:0;overflow-x:auto;padding:8px 12px;background:var(--color-background-primary);border-top:0.5px solid var(--color-border-tertiary)}
+.forecast::-webkit-scrollbar{display:none}
+.fc-day{text-align:center;min-width:56px;font-size:10px;color:var(--color-text-secondary);padding:0 4px}
+.fc-day strong{display:block;font-size:12px;color:var(--color-text-primary);font-weight:600}
+.fc-day .icon{font-size:16px;margin:2px 0}
+.full-news-card{display:flex;gap:10px;padding:8px 10px;border-bottom:0.5px solid var(--color-border-tertiary);cursor:pointer;background:var(--color-background-primary)}
+.full-news-card:active{background:var(--color-background-secondary)}
+.full-news-thumb{width:70px;height:56px;border-radius:6px;background:var(--color-background-secondary);flex-shrink:0;overflow:hidden;display:flex;align-items:center;justify-content:center;font-size:20px}
+.full-news-info{flex:1}
+.full-news-cat{font-size:9px;color:#b71c1c;font-weight:700;letter-spacing:.8px;text-transform:uppercase}
+.full-news-title{font-size:13px;font-weight:600;color:var(--color-text-primary);line-height:1.35;margin-top:1px}
+.full-news-time{font-size:10px;color:var(--color-text-secondary);margin-top:3px}
+</style>
+
+<div class="top-bar">
+  <span id="clock">Cargando...</span>
+  <span>Sáb. 18 Abr 2026</span>
+  <span>🌡 30°C ☀️ Nueva Asunción</span>
+</div>
+
+<div class="header">
+  <div class="brand">Notilea</div>
+  <div class="tagline">Lo que pasa en tu barrio y lo que sacude al país y al planeta</div>
+</div>
+
+<div class="weather-strip">
+  <div class="weather-left">
+    <div>
+      <div class="weather-temp">30°C ☀️</div>
+      <div class="weather-detail">Nueva Asunción · Pdte. Hayes<br>Despejado · Soleado</div>
+    </div>
+  </div>
+  <div class="weather-right">
+    Dom: 32°C ⛅<br>Lun: 31°C 🌧 70%<br>Mar: 28°C 🌧 65%<br>Mié: 29°C 🌦 25%
+  </div>
+</div>
+
+<div class="ticker">
+  <span class="ticker-label">AHORA</span>
+  <span>⚡ Clásico Olimpia vs Cerro Porteño hoy 17:30 · Trump: Irán no tiene para presionar al estrecho · Senado debate caso Hernán Rivas · Paraguay: medallas en Juegos Suramericanos de Juventud · Caso Rivas: oposición pide pérdida de investidura · Dólar: G 6.380 venta</span>
+</div>
+
+<div class="nav-tabs">
+  <div class="tab active" onclick="showTab('inicio')">INICIO</div>
+  <div class="tab" onclick="showTab('paraguay')">PARAGUAY</div>
+  <div class="tab" onclick="showTab('chaco')">CHACO</div>
+  <div class="tab" onclick="showTab('mundo')">MUNDO</div>
+  <div class="tab" onclick="showTab('deportes')">DEPORTES</div>
+</div>
+
+<div id="inicio" class="section active">
+  <div class="featured-card" onclick="openModal('featured')">
+    <div class="featured-img" style="background:#1a0000">
+      <div class="featured-overlay">
+        <span class="featured-cat">🔥 Portada</span>
+        <div class="featured-title">Senado: caso Hernán Rivas sacude al Colorado y la oposición exige pérdida de investidura</div>
+        <div class="featured-sub">Hoy · Última Hora / ABC Color</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="news-card" onclick="openModal('encuestamodal')">
+      <div class="card-img-placeholder" style="background:#c0392b">📊</div>
+      <div class="card-body">
+        <div class="card-cat">Encuesta</div>
+        <div class="card-title">Manu Cristaldo lidera encuesta con 48% ante Juan Manuel Vera</div>
+        <div class="card-time">Hoy</div>
+      </div>
+    </div>
+    <div class="news-card" onclick="openModal('iran')">
+      <div class="card-img-placeholder" style="background:#2c3e50">🌍</div>
+      <div class="card-body">
+        <div class="card-cat">Mundo</div>
+        <div class="card-title">Trump: Irán no tiene para cerrar el estrecho de Ormuz</div>
+        <div class="card-time">Hace 2h</div>
+      </div>
+    </div>
+    <div class="news-card" onclick="openModal('clasico')">
+      <div class="card-img-placeholder" style="background:#154360">⚽</div>
+      <div class="card-body">
+        <div class="card-cat">Deportes</div>
+        <div class="card-title">Superclásico: Olimpia vs Cerro Porteño, hoy 17:30 en Sajonia</div>
+        <div class="card-time">Hoy</div>
+      </div>
+    </div>
+    <div class="news-card" onclick="openModal('juegos')">
+      <div class="card-img-placeholder" style="background:#1e8449">🏅</div>
+      <div class="card-body">
+        <div class="card-cat">Paraguay</div>
+        <div class="card-title">Paraguay: plata y bronce en futsal en Juegos Suramericanos</div>
+        <div class="card-time">Hace 3h</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">📋 ENCUESTA DEL DÍA</div>
+  <div class="encuesta-block" onclick="openModal('encuestamodal')">
+    <div class="encuesta-header">
+      <p>Intención de Voto</p>
+      <h3>Resultados de la Encuesta — 783 votos totales</h3>
+    </div>
+    <div class="encuesta-body">
+      <div class="cand-row">
+        <div class="cand-avatar" style="background:#c0392b">MC</div>
+        <div style="flex:1">
+          <div class="cand-name">Manu Cristaldo <span class="winner-badge">GANADOR</span></div>
+          <div class="bar-wrap"><div class="bar-fill" style="width:48%;background:#c0392b"></div></div>
+        </div>
+        <div class="cand-pct">48%</div>
+      </div>
+      <div class="cand-row">
+        <div class="cand-avatar" style="background:#7f8c8d">JV</div>
+        <div style="flex:1">
+          <div class="cand-name">Juan Manuel Vera</div>
+          <div class="bar-wrap"><div class="bar-fill" style="width:47%;background:#7f8c8d"></div></div>
+        </div>
+        <div class="cand-pct" style="color:#7f8c8d">47%</div>
+      </div>
+      <div class="blank-row">
+        <span>Voto en blanco: 3% · 31 votos</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-title">🗞 MÁS NOTICIAS</div>
+  <div class="full-news-card" onclick="openModal('moto')">
+    <div class="full-news-thumb">🏍</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Policiales</div>
+      <div class="full-news-title">Motociclista muere atropellado en av. Madame Lynch; conductor se da a la fuga</div>
+      <div class="full-news-time">Hoy, 09:31</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('itapiru')">
+    <div class="full-news-thumb">⚔️</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Historia</div>
+      <div class="full-news-title">18 de abril: 161 años de la caída del Fuerte de Itapirú ante la Triple Alianza</div>
+      <div class="full-news-time">Hoy, 10:19</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('dnit')">
+    <div class="full-news-thumb">🚛</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Economía</div>
+      <div class="full-news-title">DNIT incauta 53 toneladas de hortalizas en operativo anticontrabando en Fernando de la Mora</div>
+      <div class="full-news-time">Hoy, 11:00</div>
+    </div>
+  </div>
+</div>
+
+<div id="paraguay" class="section">
+  <div class="section-title">🇵🇾 PARAGUAY HOY</div>
+  <div class="full-news-card" onclick="openModal('rivas')">
+    <div class="full-news-thumb">⚖️</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Política</div>
+      <div class="full-news-title">Hernán Rivas pide permiso al Senado; oposición lo acusa de usar título falso</div>
+      <div class="full-news-time">Hoy, 11:08</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('payo')">
+    <div class="full-news-thumb">🎙️</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Política</div>
+      <div class="full-news-title">Payo Cubas despide a senadora Yolanda Paredes: "Está floreciendo en la política"</div>
+      <div class="full-news-time">Hoy, 11:33</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('ligas')">
+    <div class="full-news-thumb">✝️</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Memoria</div>
+      <div class="full-news-title">50 años de la Pascua Dolorosa: el capítulo más brutal de la dictadura de Stroessner</div>
+      <div class="full-news-time">Hoy, 09:31</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('narco')">
+    <div class="full-news-thumb">🚨</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Judicial</div>
+      <div class="full-news-title">Intendente de Mayor Martínez niega vínculos con narco tras allanamientos</div>
+      <div class="full-news-time">Ayer, 10:43</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('juliette')">
+    <div class="full-news-thumb">👧</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Justicia</div>
+      <div class="full-news-title">6 años sin Juliette: familia reclama justicia; 60 niños siguen desaparecidos en Paraguay</div>
+      <div class="full-news-time">Ayer</div>
+    </div>
+  </div>
+</div>
+
+<div id="chaco" class="section">
+  <div class="section-title">🌵 CHACO / REGIÓN OCCIDENTAL</div>
+  <div class="featured-card" onclick="openModal('encuestamodal')">
+    <div class="featured-img" style="background:#922b21;min-height:120px;display:flex;align-items:flex-end">
+      <div class="featured-overlay" style="position:relative;background:none;padding:12px">
+        <span class="featured-cat">📊 Encuesta Local</span>
+        <div class="featured-title">Disputa reñida: Cristaldo 48% vs Vera 47% en intención de voto</div>
+        <div class="featured-sub">783 votos · Resultado oficial</div>
+      </div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('clima_chaco')">
+    <div class="full-news-thumb">☀️</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Clima</div>
+      <div class="full-news-title">Calor extremo en el Chaco: 30°C hoy, lluvias probables desde el lunes 70%</div>
+      <div class="full-news-time">Hoy · DMH/DINAC</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('chacomet')">
+    <div class="full-news-thumb">🌧</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Meteorología</div>
+      <div class="full-news-title">DMH: posibles lluvias dispersas en el extremo norte de la Región Occidental este sábado</div>
+      <div class="full-news-time">Hoy, 08:45</div>
+    </div>
+  </div>
+</div>
+
+<div id="mundo" class="section">
+  <div class="section-title">🌐 MUNDO</div>
+  <div class="full-news-card" onclick="openModal('iran')">
+    <div class="full-news-thumb">🇺🇸</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Geopolítica</div>
+      <div class="full-news-title">Trump advierte: si no hay acuerdo con Irán antes del miércoles, no renueva el cese al fuego</div>
+      <div class="full-news-time">Hoy</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('iran2')">
+    <div class="full-news-thumb">🇮🇷</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Irán / EE.UU.</div>
+      <div class="full-news-title">"Conversaciones positivas" sobre Ormuz: Trump resalta avances pero mantiene presión</div>
+      <div class="full-news-time">Hoy</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('brasil')">
+    <div class="full-news-thumb">🇧🇷</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Brasil</div>
+      <div class="full-news-title">A 6 meses de las presidenciales en Brasil, chatbots ya emiten rankings sobre Lula y Bolsonaro</div>
+      <div class="full-news-time">Ayer</div>
+    </div>
+  </div>
+</div>
+
+<div id="deportes" class="section">
+  <div class="section-title">⚽ DEPORTES</div>
+  <div class="featured-card" onclick="openModal('clasico')">
+    <div class="featured-img" style="background:#154360;min-height:130px;display:flex;align-items:flex-end">
+      <div class="featured-overlay" style="position:relative;background:none;padding:12px">
+        <span class="featured-cat">⚽ Superclásico</span>
+        <div class="featured-title">Olimpia vs Cerro Porteño — hoy 17:30 en Defensores del Chaco</div>
+        <div class="featured-sub">Gran despliegue policial · Entradas Olimpia casi agotadas</div>
+      </div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('juegos')">
+    <div class="full-news-thumb">🏅</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Selección</div>
+      <div class="full-news-title">Futsal: Paraguay gana plata femenino y bronce masculino en Juegos Suramericanos de Juventud</div>
+      <div class="full-news-time">Hoy</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('fifa')">
+    <div class="full-news-thumb">🏆</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">APF</div>
+      <div class="full-news-title">FIFA premia a la APF con oro en Forward Awards 2026 por su Centro de Alto Rendimiento</div>
+      <div class="full-news-time">Ayer</div>
+    </div>
+  </div>
+  <div class="full-news-card" onclick="openModal('enciso')">
+    <div class="full-news-thumb">⭐</div>
+    <div class="full-news-info">
+      <div class="full-news-cat">Transferencias</div>
+      <div class="full-news-title">Julio Enciso cambia de representante: Pedro Aldave anuncia que deja de manejar al talento del Brighton</div>
+      <div class="full-news-time">Ayer</div>
+    </div>
+  </div>
+</div>
+
+<div id="modal" class="modal-overlay">
+  <div class="modal">
+    <div class="modal-top">
+      <span class="modal-back" onclick="closeModal()">←</span>
+      <span class="modal-brand">Notilea</span>
+    </div>
+    <div id="modal-content"></div>
+  </div>
+</div>
+
+<script>
+function showTab(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+}
+function closeModal(){
+  document.getElementById('modal').classList.remove('open');
+}
+function openModal(id){
+  const stories={
+    featured:{cat:'Portada',title:'Senado: caso Hernán Rivas sacude al Colorado y la oposición exige pérdida de investidura',meta:'Sábado 18 abr 2026 · ABC Color / Última Hora',icon:'⚖️',text:'<p>El Senado de la República se convirtió este sábado en el epicentro político del país. La oposición presentó denuncia contra el legislador Hernán Rivas por presunto uso de documento público de contenido falso, acusándolo de haber ejercido como abogado con un título cuya autenticidad está bajo investigación.</p><p>El caso, que involucra al JEM y una maniobra del movimiento Honor Colorado, puso en duda las resoluciones institucionales. La senadora Rocío Vallejo fue contundente: "Mintió por todos lados y le darán permiso inconstitucional."</p><p>El senador Nano Galaverna anunció que Rivas presentará testigos para respaldar su título. La oposición, en tanto, analiza nuevas acciones penales.</p>'},
+    encuestamodal:{cat:'Encuesta',title:'Manu Cristaldo lidera con 48% en encuesta de intención de voto frente a Juan Manuel Vera',meta:'18 abr 2026 · Encuesta publicada en redes · 783 votos totales',icon:'📊',text:'<p>Una encuesta de intención de voto publicada hoy muestra a <strong>Manu Cristaldo con el 48%</strong> (380 votos) como ganador frente a Juan Manuel Vera que obtuvo el 47% (372 votos). El voto en blanco alcanzó el 3% con 31 votos.</p><p>La diferencia es de apenas 8 votos entre ambos candidatos, lo que refleja una disputa sumamente reñida en la localidad.</p>',encuesta:true},
+    iran:{cat:'Mundo',title:'Trump advierte: si no hay acuerdo con Irán antes del miércoles, no renueva el cese al fuego',meta:'Sábado 18 abr 2026 · ABC Color',icon:'🌍',text:'<p>El presidente de Estados Unidos, Donald Trump, advirtió este viernes que podría no prorrogar el alto el fuego con Irán si antes del miércoles no se alcanza un acuerdo de paz para poner fin al conflicto, que entra en su octava semana.</p><p>Trump dijo que Irán no tiene lo necesario para presionar al gobierno estadounidense con la amenaza de cerrar el estrecho de Ormuz, pero al mismo tiempo destacó las "conversaciones positivas" que se mantienen en los canales diplomáticos.</p><p>El mundo observa con tensión el curso de las negociaciones que podrían redefinir el orden energético global.</p>'},
+    iran2:{cat:'Geopolítica',title:'"Conversaciones positivas" sobre Ormuz: Trump mantiene presión pero dice haber avances',meta:'Hoy · Última Hora',icon:'🇮🇷',text:'<p>Mientras el plazo se acorta, Trump insistió en que las charlas con la delegación iraní avanzan en sentido positivo. Sin embargo, la advertencia de no renovar el cese al fuego si no hay acuerdo antes del miércoles mantiene la presión máxima sobre Teherán.</p><p>Analistas internacionales señalan que el estrecho de Ormuz sigue siendo la carta de mayor presión de Irán, aunque Trump minimizó esa amenaza públicamente.</p>'},
+    clasico:{cat:'Deportes',title:'Superclásico Olimpia vs Cerro Porteño: hoy 17:30 en Defensores del Chaco',meta:'Hoy · Paraguay.com / NPY',icon:'⚽',text:'<p>El Defensores del Chaco prepara sus mejores galas para recibir una edición más del clásico del fútbol paraguayo. Olimpia llega como líder del Grupo G en la Copa Sudamericana; Cerro Porteño, con Pablo Vegetti al frente, entiende que "será una de las últimas balas" para seguir en la lucha por el título.</p><p>Las entradas del sector de Olimpia están casi agotadas mientras que Cerro aún dispone de miles de lugares. La Policía Nacional tiene previsto un amplio despliegue de seguridad alrededor del estadio.</p>'},
+    juegos:{cat:'Paraguay',title:'Paraguay: plata y bronce en futsal en los IV Juegos Suramericanos de la Juventud en Panamá',meta:'Hoy · ABC Color',icon:'🏅',text:'<p>El equipo de Paraguay celebró sus primeras medallas en los IV Juegos Suramericanos de la Juventud en Panamá. La selección femenina de futsal obtuvo la medalla de plata, mientras que el equipo masculino se quedó con el bronce.</p><p>Los resultados marcan un importante hito para el deporte juvenil paraguayo en el contexto suramericano.</p>'},
+    moto:{cat:'Policiales',title:'Motociclista fallece atropellado en av. Madame Lynch; conductor se da a la fuga',meta:'Hoy, 09:31 · Última Hora',icon:'🏍',text:'<p>Un motociclista falleció luego de ser atropellado por un vehículo cuyo conductor se dio a la fuga. El hecho sucedió este sábado sobre la avenida Madame Lynch de Asunción.</p><p>Las autoridades trabajan en la identificación del vehículo responsable mediante cámaras de seguridad y testimonios de testigos presentes en la escena.</p>'},
+    itapiru:{cat:'Historia',title:'18 de abril: 161 años de la caída del Fuerte de Itapirú ante la Triple Alianza',meta:'Hoy, 10:19 · Última Hora',icon:'⚔️',text:'<p>El 18 de abril es una fecha grabada en la historia militar paraguaya por la pérdida de la estratégica posición de Itapirú ante la Triple Alianza. Para entender la importancia de su caída, es necesario retroceder a 1847, cuando Carlos Antonio López ordenó su construcción como baluarte defensivo.</p><p>La posición, clave para el control del río Paraguay, fue tomada en 1865 iniciando una de las guerras más devastadoras de la historia latinoamericana.</p>'},
+    dnit:{cat:'Economía',title:'DNIT incauta 53 toneladas de hortalizas en operativo anticontrabando en Fernando de la Mora',meta:'Hoy · ABC Color',icon:'🚛',text:'<p>La Dirección Nacional de Ingresos Tributarios (DNIT) incautó 53 toneladas de hortalizas en un depósito de Fernando de la Mora durante un operativo anticontrabando realizado este sábado.</p><p>La mercadería habría ingresado al país de forma irregular, evadiendo controles aduaneros y fitosanitarios.</p>'},
+    rivas:{cat:'Política',title:'Hernán Rivas pide permiso al Senado; oposición acusa uso de título falso',meta:'Hoy · ABC / NPY',icon:'⚖️',text:'<p>El senador Hernán Rivas solicitó permiso al pleno del Senado mientras enfrenta una investigación sobre la autenticidad de su título de abogado. El caso, impulsado por una maniobra de Honor Colorado en el JEM, generó cuestionamientos sobre la validez de las resoluciones institucionales.</p><p>Senadores opositores como Rocío Vallejo denunciaron que el permiso sería inconstitucional, mientras que Nakayama habló de un "pacto de silencio".</p>'},
+    payo:{cat:'Política',title:'Payo Cubas despide a senadora Yolanda Paredes: "Está floreciendo en la política"',meta:'Hoy, 11:33 · Última Hora',icon:'🎙️',text:'<p>El líder de Cruzada Nacional, Paraguayo Cubas, escribió un mensaje en tono de despedida a la senadora Yolanda Paredes, destacando que la legisladora "está floreciendo en la política paraguaya".</p>'},
+    ligas:{cat:'Memoria histórica',title:'50 años de la Pascua Dolorosa: el capítulo más brutal de la dictadura de Stroessner',meta:'Hoy · Última Hora',icon:'✝️',text:'<p>Este año se conmemoran 50 años de uno de los capítulos más brutales de la dictadura de Alfredo Stroessner: la denominada Pascua Dolorosa de las Ligas Agrarias Cristianas, ocurrida en 1976.</p><p>Cientos de campesinos y militantes fueron detenidos, torturados y desaparecidos en lo que historiadores consideran uno de los crímenes más graves de la historia paraguaya reciente.</p>'},
+    narco:{cat:'Judicial',title:'Intendente de Mayor Martínez niega vínculos con narcotráfico tras allanamientos',meta:'Ayer · Paraguay.com / NPY',icon:'🚨',text:'<p>El intendente de Mayor Martínez, Ariel Arce, desmintió su detención y negó vínculos con narcotráfico, tras los allanamientos del Ministerio Público en varias ciudades. "Pensé que me querían estafar", declaró.</p><p>Operativos simultáneos en Asunción, Central y Ñeembucú investigan una presunta red con posibles filtraciones desde el sistema judicial, según datos originados en Argentina.</p>'},
+    juliette:{cat:'Justicia',title:'6 años sin Juliette: familia exige respuestas mientras 60 niños siguen desaparecidos',meta:'Ayer · Última Hora',icon:'👧',text:'<p>Hoy se cumplen seis años de la desaparición de la pequeña Juliette Le Droumaguet en Emboscada, Departamento de Cordillera. La niña tenía apenas 5 años cuando desapareció el 15 de abril de 2020, en plena pandemia.</p><p>Según el Registro Nacional de Personas Desaparecidas, 60 niños, niñas y adolescentes continúan sin ser ubicados en Paraguay.</p>'},
+    clima_chaco:{cat:'Clima',title:'Calor extremo en el Chaco: 30°C hoy, lluvias desde el lunes con 70% de probabilidad',meta:'Hoy · DMH/DINAC',icon:'☀️',text:'<p>Nueva Asunción y la Región Occidental registran hoy temperaturas de 30°C bajo cielo despejado. La Dirección de Meteorología e Hidrología (DMH/DINAC) pronostica calor caluroso para este sábado con posibles lluvias dispersas sobre el extremo norte.</p><p>A partir del lunes la probabilidad de precipitaciones sube al 70%, con máximas de 31°C. El martes mantiene 65% de probabilidad de lluvia y temperatura máxima de 28°C.</p>'},
+    chacomet:{cat:'Meteorología',title:'DMH: posibles lluvias dispersas en el norte de la Región Occidental este sábado',meta:'Hoy, 08:45 · Última Hora / DINAC',icon:'🌧',text:'<p>La Dirección de Meteorología anuncia un clima cálido a caluroso para la jornada de este sábado. Se podrían presentar lluvias dispersas sobre el extremo norte de la Región Occidental.</p><p>Para el resto de la semana se esperan lluvias más generalizadas principalmente desde el lunes.</p>'},
+    brasil:{cat:'Brasil',title:'Chatbots dan rankings electorales en Brasil a 6 meses de las presidenciales',meta:'Ayer · La Tribuna PY',icon:'🇧🇷',text:'<p>A seis meses de las elecciones presidenciales en Brasil, chatbots de inteligencia artificial están desafiando las normas del Tribunal Superior Electoral (TSE) al emitir rankings y opiniones sobre candidatos como Lula y Flávio Bolsonaro.</p><p>El fenómeno plantea nuevos desafíos regulatorios sobre el uso de IA en contextos electorales.</p>'},
+    fifa:{cat:'APF',title:'FIFA premia a Paraguay con oro en los Forward Awards 2026',meta:'Ayer · Paraguay.com',icon:'🏆',text:'<p>La FIFA distinguió a la Asociación Paraguaya de Fútbol (APF) con el premio Oro en los FIFA Forward Awards 2026 – Edición Américas, por el Centro de Alto Rendimiento de las Divisiones Formativas.</p><p>El reconocimiento destaca el trabajo de la APF en el desarrollo del fútbol juvenil paraguayo.</p>'},
+    enciso:{cat:'Transferencias',title:'Pedro Aldave anuncia que dejará de representar a Julio Enciso en junio',meta:'Ayer · Paraguay.com',icon:'⭐',text:'<p>El representante Pedro Aldave dio a conocer que dejará de representar a Julio Enciso, actual futbolista de Racing de Estrasburgo y la Selección Paraguaya. El jugador firmará a mediados de año con una importante agencia, poniendo fin a 20 años de trayectoria conjunta entre Aldave y el fútbol paraguayo de elite.</p>'},
+  };
+  const s=stories[id];
+  if(!s)return;
+  let html='';
+  if(s.encuesta){
+    html=`<div style="background:#c0392b;width:100%;height:200px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px">
+      <div style="font-size:40px">📊</div>
+      <div style="color:#fff;font-size:13px;font-weight:700;letter-spacing:1px">ENCUESTA INTENCIÓN DE VOTO</div>
+      <div style="color:rgba(255,255,255,0.8);font-size:11px">783 votos totales</div>
+    </div>`;
+  } else {
+    html=`<div style="background:#1a1a2e;width:100%;height:200px;display:flex;align-items:center;justify-content:center;font-size:56px">${s.icon}</div>`;
+  }
+  html+=`<div class="modal-body">
+    <div class="modal-cat">${s.cat}</div>
+    <h2 class="modal-title">${s.title}</h2>
+    <div class="modal-meta">📅 ${s.meta}</div>
+    <div class="modal-text">${s.text}</div>
+    ${s.encuesta?`<div style="background:var(--color-background-secondary);border-radius:8px;padding:12px;margin-top:12px">
+      <div style="font-size:11px;font-weight:700;color:#b71c1c;margin-bottom:8px;text-transform:uppercase;letter-spacing:.8px">Resultados detallados</div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;align-items:center">
+        <span style="font-size:13px;font-weight:600">Manu Cristaldo 🟥</span>
+        <span style="font-size:16px;font-weight:700;color:#c0392b">48% · 380 votos</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;align-items:center">
+        <span style="font-size:13px;font-weight:600">Juan Manuel Vera ⬜</span>
+        <span style="font-size:16px;font-weight:700;color:#7f8c8d">47% · 372 votos</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;align-items:center;border-top:0.5px solid var(--color-border-tertiary);padding-top:6px">
+        <span style="font-size:12px;color:var(--color-text-secondary)">Voto en blanco</span>
+        <span style="font-size:13px;font-weight:600;color:var(--color-text-secondary)">3% · 31 votos</span>
+      </div>
+    </div>`:''}
+  </div>`;
+  document.getElementById('modal-content').innerHTML=html;
+  document.getElementById('modal').classList.add('open');
+}
+function updateClock(){
+  const now=new Date();
+  const h=now.getHours().toString().padStart(2,'0');
+  const m=now.getMinutes().toString().padStart(2,'0');
+  const s=now.getSeconds().toString().padStart(2,'0');
+  document.getElementById('clock').textContent=h+':'+m+':'+s;
+}
+updateClock();
+setInterval(updateClock,1000);
+</script>
