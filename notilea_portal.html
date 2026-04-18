@@ -1,0 +1,641 @@
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Source+Serif+4:wght@300;400;600&family=DM+Sans:wght@300;400;500&display=swap');
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1a1208;
+  --paper: #faf7f2;
+  --cream: #f2ede3;
+  --rust: #c0392b;
+  --gold: #b8860b;
+  --muted: #7a7060;
+  --border: rgba(26,18,8,0.12);
+}
+
+body, #root { background: transparent; }
+
+.portal {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 600px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 0.5px solid var(--border);
+}
+
+.masthead {
+  background: var(--ink);
+  color: var(--paper);
+  padding: 14px 20px 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.brand-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  color: #fff;
+  line-height: 1;
+}
+
+.brand-tagline {
+  font-size: 9.5px;
+  color: rgba(255,255,255,0.55);
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  margin-top: 3px;
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 300;
+}
+
+.masthead-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.clock-box {
+  font-size: 22px;
+  font-weight: 500;
+  color: #fff;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: -0.5px;
+}
+
+.date-box {
+  font-size: 10px;
+  color: rgba(255,255,255,0.5);
+  text-align: right;
+  font-family: 'DM Sans', sans-serif;
+}
+
+.weather-bar {
+  background: var(--rust);
+  color: #fff;
+  padding: 7px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 12px;
+}
+
+.weather-place {
+  font-weight: 500;
+  letter-spacing: 0.3px;
+}
+
+.weather-temp {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.weather-desc {
+  font-size: 11px;
+  opacity: 0.85;
+}
+
+.weather-extra {
+  margin-left: auto;
+  display: flex;
+  gap: 12px;
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.section-bar {
+  background: var(--cream);
+  border-bottom: 1px solid var(--border);
+  padding: 0 20px;
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+}
+
+.section-tab {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  padding: 9px 14px;
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  color: var(--muted);
+  white-space: nowrap;
+  transition: all 0.15s;
+}
+
+.section-tab:hover { color: var(--ink); }
+.section-tab.active { color: var(--rust); border-bottom-color: var(--rust); }
+
+.content-area { padding: 16px 20px; }
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.hero-card {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  background: var(--cream);
+  border: 0.5px solid var(--border);
+  transition: transform 0.15s;
+}
+
+.hero-card:hover { transform: translateY(-2px); }
+
+.hero-card.featured {
+  grid-column: 1 / -1;
+}
+
+.card-img {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  display: block;
+  background: linear-gradient(135deg, #2c2418 0%, #4a3c2a 100%);
+}
+
+.hero-card.featured .card-img { height: 200px; }
+
+.card-img-placeholder {
+  width: 100%;
+  height: 160px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 36px;
+}
+
+.hero-card.featured .card-img-placeholder { height: 200px; }
+
+.card-body {
+  padding: 12px;
+}
+
+.card-cat {
+  font-size: 9.5px;
+  font-weight: 500;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--rust);
+  margin-bottom: 5px;
+}
+
+.card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+
+.hero-card.featured .card-title { font-size: 18px; }
+
+.card-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+  font-family: 'Source Serif 4', serif;
+  font-weight: 300;
+}
+
+.card-meta {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.divider-line {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 12px 0;
+}
+
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 2px solid var(--rust);
+  display: inline-block;
+}
+
+.list-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.list-card {
+  display: flex;
+  gap: 10px;
+  padding: 10px;
+  background: var(--cream);
+  border-radius: 8px;
+  border: 0.5px solid var(--border);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.list-card:hover { background: #e8e2d5; }
+
+.list-card-thumb {
+  width: 54px;
+  height: 54px;
+  border-radius: 6px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  background: rgba(26,18,8,0.07);
+}
+
+.list-card-info { flex: 1; min-width: 0; }
+
+.list-card-cat {
+  font-size: 9px;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  color: var(--rust);
+  font-weight: 500;
+  margin-bottom: 3px;
+}
+
+.list-card-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--ink);
+}
+
+.list-card-time {
+  font-size: 9.5px;
+  color: var(--muted);
+  margin-top: 4px;
+}
+
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(26,18,8,0.7);
+  display: none;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  z-index: 100;
+  overflow-y: auto;
+}
+
+.modal-overlay.open { display: flex; }
+
+.modal {
+  background: var(--paper);
+  border-radius: 10px;
+  width: 100%;
+  max-width: 520px;
+  overflow: hidden;
+  margin: auto;
+}
+
+.modal-header {
+  background: var(--ink);
+  color: #fff;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.7);
+  font-size: 18px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+
+.modal-body { padding: 16px; }
+
+.modal-cat {
+  font-size: 10px;
+  letter-spacing: 0.8px;
+  text-transform: uppercase;
+  color: var(--rust);
+  font-weight: 500;
+  margin-bottom: 8px;
+}
+
+.modal-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.25;
+  margin-bottom: 10px;
+}
+
+.modal-img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 60px;
+  background: var(--cream);
+}
+
+.modal-text {
+  font-family: 'Source Serif 4', serif;
+  font-size: 14px;
+  line-height: 1.75;
+  color: #3a3020;
+  font-weight: 300;
+}
+
+.modal-meta {
+  font-size: 10.5px;
+  color: var(--muted);
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.loading-msg {
+  text-align: center;
+  padding: 20px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.ticker {
+  background: var(--gold);
+  color: #fff;
+  font-size: 11px;
+  padding: 5px 20px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.ticker-inner {
+  display: inline-block;
+  animation: ticker 28s linear infinite;
+}
+
+@keyframes ticker {
+  from { transform: translateX(100%); }
+  to { transform: translateX(-100%); }
+}
+</style>
+
+<div class="portal" id="portal">
+  <div class="masthead">
+    <div>
+      <div class="brand-name">Notilea</div>
+      <div class="brand-tagline">Lo que pasa en tu barrio y lo que sacude al país y al planeta</div>
+    </div>
+    <div class="masthead-right">
+      <div class="clock-box" id="clock">--:--</div>
+      <div class="date-box" id="dateBox">--</div>
+    </div>
+  </div>
+
+  <div class="weather-bar" id="weatherBar">
+    <span>⛅</span>
+    <span class="weather-place">Nueva Asunción · Pte. Hayes</span>
+    <span class="weather-temp" id="wTemp">--°C</span>
+    <span class="weather-desc" id="wDesc">Cargando...</span>
+    <span class="weather-extra">
+      <span id="wHumidity">-- % hum.</span>
+      <span id="wWind">-- km/h</span>
+    </span>
+  </div>
+
+  <div class="ticker">
+    <span class="ticker-inner" id="tickerText">● Notilea · Noticias de Paraguay y el mundo en tiempo real ● Chaco · Nueva Asunción · Internacional ● Mantente informado con Notilea</span>
+  </div>
+
+  <div class="section-bar">
+    <div class="section-tab active" onclick="switchTab('inicio')">Inicio</div>
+    <div class="section-tab" onclick="switchTab('paraguay')">Paraguay</div>
+    <div class="section-tab" onclick="switchTab('chaco')">Chaco</div>
+    <div class="section-tab" onclick="switchTab('mundo')">Mundo</div>
+  </div>
+
+  <div class="content-area" id="contentArea">
+    <div class="loading-msg">Cargando noticias...</div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay" onclick="closeModal(event)">
+    <div class="modal" id="modal">
+      <div class="modal-header">
+        <span style="font-family:'Playfair Display',serif;font-size:14px;font-weight:700;">Notilea</span>
+        <button class="modal-close" onclick="closeModalBtn()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+const STORIES = {
+  inicio: [
+    {
+      id:1, featured:true, cat:'Paraguay', emoji:'🏛️',
+      title:'Gobierno presenta plan de infraestructura para el Chaco con inversión histórica',
+      desc:'El Ministerio de Obras Públicas anunció un paquete de proyectos viales que incluye la pavimentación de rutas clave en el Chaco paraguayo y mejoras en comunidades como Nueva Asunción.',
+      full:'El Ministerio de Obras Públicas y Comunicaciones (MOPC) presentó este jueves un ambicioso plan de infraestructura para la región del Chaco que incluye la pavimentación de tramos clave de la Ruta PY-12 y mejoras en los accesos a comunidades como Nueva Asunción y Nanawa.\n\nEl ministro confirmó una inversión superior a los 250 millones de dólares provenientes de fondos nacionales y créditos del BID. "Este es el mayor esfuerzo vial para el Chaco en décadas", declaró durante la presentación.\n\nLas obras contemplan también la construcción de puentes sobre arroyos y la mejora del sistema de drenaje en zonas inundables. Los trabajos comenzarían en el segundo semestre del año.',
+      time:'Hace 2 horas'
+    },
+    {
+      id:2, cat:'Economía', emoji:'📈',
+      title:'Inflación en Paraguay cierra primer trimestre por debajo del 4%',
+      desc:'El Banco Central del Paraguay informó que el índice de precios al consumidor se mantiene dentro de la meta establecida para 2026.',
+      full:'Según datos del Banco Central del Paraguay (BCP), la inflación acumulada al cierre del primer trimestre de 2026 se ubicó en 3.8%, manteniéndose dentro de la meta oficial de inflación fijada en un rango de 2% a 5%.\n\nEl reporte destaca la estabilidad del guaraní frente al dólar y la moderación en los precios de alimentos y combustibles como factores clave. Sin embargo, el costo de servicios básicos como electricidad y agua muestra un leve aumento interanual.',
+      time:'Hace 4 horas'
+    },
+    {
+      id:3, cat:'Mundo', emoji:'🌍',
+      title:'Cumbre del G20 debate nueva arquitectura financiera global',
+      desc:'Los líderes del grupo debaten en Johannesburgo reformas al sistema monetario internacional y acceso a financiamiento para países en desarrollo.',
+      full:'La cumbre del G20 celebrada en Johannesburgo concentra esta semana los esfuerzos de los líderes mundiales en rediseñar el sistema financiero internacional, con especial énfasis en ampliar el acceso al crédito para economías emergentes y pequeñas.\n\nEntre los temas centrales se encuentra la reforma del FMI, la creación de un mecanismo de deuda soberana y la regulación de las criptomonedas a nivel global. Para Paraguay y la región, las decisiones de esta cumbre tendrán impacto directo en las tasas de financiamiento externo.',
+      time:'Hace 5 horas'
+    },
+    {
+      id:4, cat:'Chaco', emoji:'🌾',
+      title:'Productores del Chaco exigen solución al problema de agua en la temporada seca',
+      desc:'Comunidades de Presidente Hayes enfrentan déficit hídrico crítico. Referentes productivos solicitan al gobierno la aceleración de obras de provisión de agua.',
+      full:'Productores agropecuarios y comunidades indígenas de la zona del Chaco Central y Bajo Chaco han elevado su reclamo ante el Ministerio de Ambiente por la situación crítica de abastecimiento de agua durante la temporada seca.\n\nEn el departamento de Presidente Hayes, especialmente en las cercanías de Nueva Asunción, el nivel de las aguadas naturales ha descendido a mínimos históricos. Referentes locales exigen la instalación de sistemas de perforación y tanques comunitarios antes del pico del verano chaqueno.\n\nEl SENASA indicó que están evaluando fondos de emergencia para las zonas más afectadas.',
+      time:'Hace 6 horas'
+    },
+    {
+      id:5, cat:'Sociedad', emoji:'⚖️',
+      title:'Fiscalía imputa a tres funcionarios por irregularidades en licitaciones públicas',
+      desc:'El Ministerio Público formalizó cargos contra funcionarios de dos instituciones estatales por supuesto direccionamiento de contratos en obras de infraestructura.',
+      full:'La Fiscalía General del Estado formalizó esta semana cargos de lesión de confianza y asociación criminal contra tres funcionarios de rango medio pertenecientes a instituciones vinculadas a obras públicas, en el marco de una investigación por supuesto direccionamiento de licitaciones.\n\nSegún la acusación, los imputados habrían favorecido a empresas vinculadas a sus círculos personales en contratos superiores a los 4.000 millones de guaraníes. La causa seguirá su curso ante el Tribunal de Sentencias.',
+      time:'Hace 8 horas'
+    },
+    {
+      id:6, cat:'Internacional', emoji:'🛢️',
+      title:'Precio del petróleo sube por tensiones en el Golfo Pérsico',
+      desc:'El barril de Brent superó los 85 dólares ante escalada de tensiones geopolíticas entre Irán y Estados Unidos en torno al estrecho de Ormuz.',
+      full:'Los mercados energéticos registraron una nueva jornada de volatilidad con el barril de crudo Brent superando los 85 dólares, impulsado por la escalada de tensiones en el Golfo Pérsico donde Irán anunció ejercicios militares en el estrecho de Ormuz.\n\nWashington respondió con el despliegue de unidades navales adicionales en la zona. Para Paraguay, que importa todos sus derivados del petróleo, el incremento en los precios internacionales se traduce directamente en mayor costo de combustibles, con posibles ajustes en las próximas semanas.',
+      time:'Hace 10 horas'
+    }
+  ]
+};
+
+STORIES.paraguay = STORIES.inicio.filter(s=>['Paraguay','Economía','Sociedad'].includes(s.cat));
+STORIES.chaco = STORIES.inicio.filter(s=>s.cat==='Chaco').concat(STORIES.inicio.filter(s=>s.cat==='Paraguay'));
+STORIES.mundo = STORIES.inicio.filter(s=>['Mundo','Internacional'].includes(s.cat));
+
+let currentTab = 'inicio';
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('.section-tab').forEach(t=>{
+    t.classList.toggle('active', t.textContent.toLowerCase()===tab || (tab==='inicio'&&t.textContent==='Inicio'));
+  });
+  renderContent();
+}
+
+function renderContent() {
+  const stories = STORIES[currentTab] || STORIES.inicio;
+  const featured = stories.find(s=>s.featured) || stories[0];
+  const rest = stories.filter(s=>s!==featured);
+
+  let html = '<div class="hero-grid">';
+  html += cardHTML(featured, true);
+  if(rest[0]) html += cardHTML(rest[0]);
+  if(rest[1]) html += cardHTML(rest[1]);
+  html += '</div>';
+
+  if(rest.length > 2) {
+    html += '<hr class="divider-line"><span class="section-title">Más noticias</span>';
+    html += '<div class="list-grid">';
+    rest.slice(2).forEach(s=>{ html += listCardHTML(s); });
+    html += '</div>';
+  }
+
+  document.getElementById('contentArea').innerHTML = html;
+}
+
+function cardHTML(s, featured=false) {
+  return `<div class="hero-card${featured?' featured':''}" onclick="openStory(${s.id})">
+    <div class="card-img-placeholder" style="background:rgba(26,18,8,0.05);height:${featured?200:160}px">${s.emoji}</div>
+    <div class="card-body">
+      <div class="card-cat">${s.cat}</div>
+      <div class="card-title">${s.title}</div>
+      <div class="card-desc">${s.desc}</div>
+      <div class="card-meta"><span>${s.time}</span></div>
+    </div>
+  </div>`;
+}
+
+function listCardHTML(s) {
+  return `<div class="list-card" onclick="openStory(${s.id})">
+    <div class="list-card-thumb">${s.emoji}</div>
+    <div class="list-card-info">
+      <div class="list-card-cat">${s.cat}</div>
+      <div class="list-card-title">${s.title}</div>
+      <div class="list-card-time">${s.time}</div>
+    </div>
+  </div>`;
+}
+
+function openStory(id) {
+  const all = Object.values(STORIES).flat();
+  const s = all.find(x=>x.id===id);
+  if(!s) return;
+  document.getElementById('modalBody').innerHTML = `
+    <div class="modal-cat">${s.cat}</div>
+    <div class="modal-title">${s.title}</div>
+    <div class="modal-img">${s.emoji}</div>
+    <div class="modal-text">${s.full.replace(/\n\n/g,'</p><p style="margin-top:10px">').replace(/^/,'<p>').replace(/$/,'</p>')}</div>
+    <div class="modal-meta">📍 Notilea · ${s.time} · notilea25-cloud.github.io</div>
+  `;
+  document.getElementById('modalOverlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if(e.target===document.getElementById('modalOverlay'))
+    document.getElementById('modalOverlay').classList.remove('open');
+}
+function closeModalBtn() {
+  document.getElementById('modalOverlay').classList.remove('open');
+}
+
+function updateClock() {
+  const now = new Date();
+  const h = String(now.getHours()).padStart(2,'0');
+  const m = String(now.getMinutes()).padStart(2,'0');
+  document.getElementById('clock').textContent = `${h}:${m}`;
+  const days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  document.getElementById('dateBox').textContent =
+    `${days[now.getDay()]}, ${now.getDate()} de ${months[now.getMonth()]} de ${now.getFullYear()}`;
+}
+
+async function fetchWeather() {
+  try {
+    const lat = -23.25, lon = -59.3;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m&current=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&timezone=America%2FAsuncion`;
+    const r = await fetch(url);
+    const d = await r.json();
+    const c = d.current;
+    const code = c.weather_code;
+    const descs = {0:'Despejado',1:'Mayormente despejado',2:'Parcialmente nublado',3:'Nublado',45:'Neblina',48:'Niebla',51:'Llovizna leve',53:'Llovizna',55:'Llovizna intensa',61:'Lluvia leve',63:'Lluvia',65:'Lluvia fuerte',80:'Chubascos',81:'Chubascos fuertes',95:'Tormenta',99:'Tormenta con granizo'};
+    const icons = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',48:'🌫️',51:'🌦️',53:'🌦️',55:'🌧️',61:'🌧️',63:'🌧️',65:'⛈️',80:'🌦️',81:'🌧️',95:'⛈️',99:'⛈️'};
+    const desc = descs[code]||'Variable';
+    const icon = icons[code]||'⛅';
+    document.getElementById('wTemp').textContent = `${Math.round(c.temperature_2m)}°C`;
+    document.getElementById('wDesc').textContent = desc;
+    document.getElementById('wHumidity').textContent = `${c.relative_humidity_2m}% hum.`;
+    document.getElementById('wWind').textContent = `${Math.round(c.wind_speed_10m)} km/h`;
+    document.querySelector('.weather-bar').innerHTML = `
+      <span>${icon}</span>
+      <span class="weather-place">Nueva Asunción · Pte. Hayes</span>
+      <span class="weather-temp">${Math.round(c.temperature_2m)}°C</span>
+      <span class="weather-desc">${desc}</span>
+      <span class="weather-extra">
+        <span>${c.relative_humidity_2m}% hum.</span>
+        <span>${Math.round(c.wind_speed_10m)} km/h viento</span>
+      </span>
+    `;
+  } catch(e) {
+    document.getElementById('wDesc').textContent = 'Sin datos';
+  }
+}
+
+updateClock();
+setInterval(updateClock, 30000);
+fetchWeather();
+renderContent();
+</script>
