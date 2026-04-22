@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <!-- Open Graph / Facebook -->
+  <meta property="og:title" content="Notilea – Paraguay recibirá 25 migrantes deportados por EE.UU.">
+  <meta property="og:description" content="Paraguay recibirá el jueves a un primer grupo de 25 migrantes de terceros países deportados de Estados Unidos. Acuerdo de cooperación migratoria firmado entre ambos países.">
+  <meta property="og:image" content="og-cover.jpg">
+  <meta property="og:url" content="https://notilea25-cloud.github.io/notilea.github.io/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <title>Notilea · Nueva Asunción | Presidente Hayes</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: system-ui, 'Segoe UI', 'Roboto', 'Helvetica Neue', sans-serif;
+      background: #f5f3ef;
+      color: #111;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    /* header */
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+      border-bottom: 3px solid #c0001a;
+      padding-bottom: 12px;
+    }
+    .header h1 {
+      font-size: 2.4rem;
+      letter-spacing: 2px;
+      color: #1a1a1a;
+      font-weight: 800;
+    }
+    .header p {
+      color: #5a5a5a;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* Hero con imagen OG */
+    .hero {
+      background: #1e1b16;
+      border-radius: 28px;
+      overflow: hidden;
+      margin-bottom: 32px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .hero-img {
+      width: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-caption {
+      padding: 16px 20px;
+      background: #2c2820;
+      color: #f0ede8;
+    }
+    .hero-caption h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .hero-caption p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    /* navegación de botones */
+    .nav-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 32px;
+      border-bottom: 1px solid #ddd;
+      padding-bottom: 12px;
+    }
+    .nav-btn {
+      background: transparent;
+      border: none;
+      padding: 8px 18px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-radius: 40px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      color: #2c3e2f;
+    }
+    .nav-btn:hover {
+      background: #e9e7e2;
+    }
+    .nav-btn.active {
+      background: #c0001a;
+      color: white;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* secciones */
+    .section {
+      display: none;
+      animation: fade 0.25s ease;
+    }
+    .section.active-section {
+      display: block;
+    }
+    @keyframes fade {
+      from { opacity: 0; transform: translateY(6px);}
+      to { opacity: 1; transform: translateY(0);}
+    }
+
+    /* grilla de tarjetas */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+      margin: 20px 0;
+    }
+    .card {
+      background: white;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.1);
+    }
+    .card-img {
+      height: 160px;
+      background: #d9d2c5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      background-size: cover;
+      background-position: center;
+    }
+    .card-content {
+      padding: 18px 16px 20px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .card-category {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      color: #c0001a;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .card-title {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .card-desc {
+      color: #3a3a3a;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      margin-bottom: 18px;
+      flex: 1;
+    }
+    .card-buttons {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      margin-top: 8px;
+    }
+    .btn-read {
+      background: #1e1e1e;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 30px;
+      color: white;
+      font-weight: 600;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .btn-read:hover {
+      background: #c0001a;
+    }
+    .btn-like {
+      background: #f0efec;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 30px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.8rem;
+    }
+    .btn-like:hover {
+      background: #ffe1e1;
+      color: #c0001a;
+    }
+    .like-count {
+      font-weight: 700;
+      margin-left: 4px;
+    }
+
+    /* modal / overlay */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.85);
+      backdrop-filter: blur(4px);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .modal.active-modal {
+      display: flex;
+    }
+    .modal-content {
+      background: #fffef7;
+      max-width: 550px;
+      width: 90%;
+      max-height: 85vh;
+      border-radius: 28px;
+      overflow-y: auto;
+      padding: 24px 22px;
+      position: relative;
+      box-shadow: 0 20px 35px rgba(0,0,0,0.3);
+      animation: modalPop 0.2s ease;
+    }
+    @keyframes modalPop {
+      from { opacity: 0; transform: scale(0.96);}
+      to { opacity: 1; transform: scale(1);}
+    }
+    .modal-close {
+      position: absolute;
+      top: 18px;
+      right: 20px;
+      background: #eee;
+      border: none;
+      font-size: 1.5rem;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background 0.2s;
+    }
+    .modal-close:hover {
+      background: #c0001a;
+      color: white;
+    }
+    .modal-title {
+      font-size: 1.8rem;
+      margin-bottom: 12px;
+      padding-right: 40px;
+    }
+    .modal-body {
+      font-size: 1rem;
+      line-height: 1.55;
+      color: #2c2c2c;
+      margin: 16px 0 20px;
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: flex-end;
+      border-top: 1px solid #ddd;
+      padding-top: 16px;
+      margin-top: 8px;
+    }
+    footer {
+      text-align: center;
+      margin-top: 50px;
+      font-size: 0.75rem;
+      color: #777;
+      border-top: 1px solid #ddd;
+      padding-top: 24px;
+    }
+    @media (max-width: 640px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .nav-btn { padding: 6px 14px; font-size: 0.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📰 NOTILEA</h1>
+  <p>Nueva Asunción · Presidente Hayes · Interactivo</p>
+</div>
+
+<!-- IMAGEN OG COVER agregada como banner principal -->
+<div class="hero">
+  <img class="hero-img" src="og-cover.jpg" alt="Paraguay recibirá migrantes deportados por EE.UU. - Acuerdo histórico">
+  <div class="hero-caption">
+    <h2>🇵🇾 Paraguay recibirá 25 migrantes deportados</h2>
+    <p>Jueves 22 de abril · Acuerdo de cooperación migratoria entre Paraguay y Estados Unidos. Llegan personas de terceros países.</p>
+  </div>
+</div>
+
+<!-- Botones interactivos de navegación -->
+<div class="nav-buttons" id="navButtonsContainer">
+  <button class="nav-btn active" data-section="portada">🏠 Portada</button>
+  <button class="nav-btn" data-section="policiales">🚨 Policiales</button>
+  <button class="nav-btn" data-section="pais">🇵🇾 País</button>
+  <button class="nav-btn" data-section="mundo">🌍 Mundo</button>
+  <button class="nav-btn" data-section="editorial">✍ Editorial</button>
+</div>
+
+<!-- Secciones -->
+<div id="portada" class="section active-section">
+  <div class="cards-grid" id="gridPortada"></div>
+</div>
+<div id="policiales" class="section">
+  <div class="cards-grid" id="gridPoliciales"></div>
+</div>
+<div id="pais" class="section">
+  <div class="cards-grid" id="gridPais"></div>
+</div>
+<div id="mundo" class="section">
+  <div class="cards-grid" id="gridMundo"></div>
+</div>
+<div id="editorial" class="section">
+  <div class="cards-grid" id="gridEditorial"></div>
+</div>
+
+<!-- Modal para artículo completo -->
+<div id="articleModal" class="modal">
+  <div class="modal-content">
+    <button class="modal-close" id="closeModalBtn">✕</button>
+    <h2 class="modal-title" id="modalTitle">Título</h2>
+    <div class="modal-body" id="modalBody">
+      <p>Contenido del artículo...</p>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-like" id="modalLikeBtn">❤️ Me gusta <span id="modalLikeCount" class="like-count">0</span></button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Notilea · Portal interactivo | Síguenos en Facebook: @notilea25</p>
+</footer>
+
+<script>
+  // ======================== DATOS DE NOTICIAS ========================
+  const noticiasData = {
+    portada: [
+      { id: 1, titulo: "Paraguay recibe 25 migrantes deportados por EE.UU.", resumen: "Acuerdo migratorio entre ambos países. Llegada confirmada para este jueves.", contenido: "El gobierno paraguayo confirmó la llegada de un primer grupo de 25 migrantes de terceros países deportados desde Estados Unidos. Funcionarios de Migraciones coordinarán la asistencia humanitaria. El acuerdo bilateral refuerza la cooperación en control migratorio. La Cancillería destacó el 'acuerdo histórico' firmado con el gobierno norteamericano.", categoria: "Portada", likes: 12, imgBg: "✈️" },
+      { id: 2, titulo: "Terremoto 7.5 en Japón: alerta de tsunami", resumen: "Un fuerte sismo sacudió la costa de Sanriku. Se emitió alerta por posible megaterremoto.", contenido: "El sismo de magnitud 7.5 se registró a las 8:23 hora local. Las autoridades japonesas activaron protocolos de evacuación. Se reportan olas de hasta 1 metro en algunas costas. Se recomienda precaución en las próximas horas.", categoria: "Mundo", likes: 34, imgBg: "🌊" },
+      { id: 3, titulo: "Barras del Ciclón vinculadas al Clan Rotela", resumen: "Investigan nexos entre la barra brava y organización criminal en el Superclásico.", contenido: "Documentos filtrados señalan vínculos entre los hinchas organizados del club Ciclón y el Clan Rotela. La policía allanó varias sedes y encontró pruebas de financiamiento ilícito. El fiscal del caso evalúa solicitar prisión preventiva.", categoria: "Policiales", likes: 45, imgBg: "⚽" }
+    ],
+    policiales: [
+      { id: 4, titulo: "Puente Pararã demolido: vecinos pagan 20.000 Gs para cruzar", resumen: "Tras la destrucción del puente, lancheros informales cobran tarifas abusivas.", contenido: "Habitantes de José Falcón denuncian que, tras la demolición del puente Pararã, deben pagar 20.000 guaraníes por día para cruzar el río en canoas. Las autoridades prometen una solución temporal pero aún no hay fecha.", categoria: "Policiales", likes: 18, imgBg: "🌉" },
+      { id: 5, titulo: "Capturan a líder narco en Nueva Asunción", resumen: "Operativo conjunto dejó un detenido y decomiso de 50 kilos de cocaína.", contenido: "Agentes especiales detuvieron a Carlos ‘Pocho’ Lezcano, señalado como cabecilla de una red de narcotráfico en la zona del Chaco. Se incautaron armas de grueso calibre y sustancias ilícitas.", categoria: "Policiales", likes: 27, imgBg: "🚔" }
+    ],
+    pais: [
+      { id: 6, titulo: "Gobierno anuncia nuevas obras en Presidente Hayes", resumen: "Inversión de 15 millones de dólares para asfaltado y conectividad.", contenido: "El Ministerio de Obras Públicas confirmó la licitación para pavimentar 45 km de rutas en el departamento. Además se construirá un nuevo puente sobre el río Paraguay.", categoria: "País", likes: 8, imgBg: "🏗️" },
+      { id: 7, titulo: "Agricultores del Chaco reclaman por sequía", resumen: "Productores piden ayuda al gobierno ante la pérdida de cultivos.", contenido: "Las intensas temperaturas y falta de lluvias afectaron miles de hectáreas de soja y maíz. Organizaciones rurales exigen un fondo de emergencia.", categoria: "País", likes: 14, imgBg: "🌾" }
+    ],
+    mundo: [
+      { id: 8, titulo: "EE.UU. pide a Cuba permitir Starlink", resumen: "Internet gratuito y rápido para toda la isla propuesto por gobierno norteamericano.", contenido: "En un giro diplomático, Estados Unidos ofreció desplegar la red satelital Starlink en Cuba sin costo para los ciudadanos, a cambio de apertura política. El régimen cubano aún no responde.", categoria: "Mundo", likes: 52, imgBg: "🛰️" },
+      { id: 9, titulo: "Tregua Irán-EE.UU. vence sin acuerdo", resumen: "Trump amenaza con bombardeos si no se firma pacto nuclear.", contenido: "El plazo para la tregua expiró ayer. El expresidente Donald Trump declaró que ‘no quedará otra opción que una acción militar’ si Irán no acepta las condiciones. La tensión crece en el Golfo Pérsico.", categoria: "Mundo", likes: 41, imgBg: "💥" }
+    ],
+    editorial: [
+      { id: 10, titulo: "El desafío del desarrollo en el Chaco", resumen: "Análisis sobre las oportunidades y riesgos de la inversión extranjera.", contenido: "La llegada de empresas internacionales al departamento de Presidente Hayes genera empleo pero también pone presión sobre recursos naturales. Expertos debaten sobre un modelo sostenible.", categoria: "Editorial", likes: 9, imgBg: "📝" }
+    ]
+  };
+
+  // Almacenar likes en memoria
+  let likesMap = new Map();
+  for (let seccion in noticiasData) {
+    noticiasData[seccion].forEach(noticia => {
+      likesMap.set(noticia.id, noticia.likes);
+    });
+  }
+
+  let currentModalNews = null;
+
+  // Renderizar cada sección
+  function renderSection(sectionKey, containerId) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    const noticias = noticiasData[sectionKey] || [];
+    if (noticias.length === 0) {
+      container.innerHTML = `<div style="text-align:center; padding:40px;">📭 No hay noticias en esta sección</div>`;
+      return;
+    }
+    container.innerHTML = noticias.map(noticia => `
+      <div class="card" data-id="${noticia.id}" data-seccion="${sectionKey}">
+        <div class="card-img" style="background: #e7e2d8;">${noticia.imgBg || '📰'}</div>
+        <div class="card-content">
+          <span class="card-category">${noticia.categoria}</span>
+          <h3 class="card-title">${noticia.titulo}</h3>
+          <p class="card-desc">${noticia.resumen}</p>
+          <div class="card-buttons">
+            <button class="btn-read" data-id="${noticia.id}">📖 Leer más</button>
+            <button class="btn-like" data-id="${noticia.id}">❤️ <span class="like-count" data-id="${noticia.id}">${likesMap.get(noticia.id) || 0}</span></button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function updateLikeDisplay(noticiaId) {
+    const spans = document.querySelectorAll(`.like-count[data-id="${noticiaId}"]`);
+    const newCount = likesMap.get(noticiaId) || 0;
+    spans.forEach(span => { span.textContent = newCount; });
+    if (currentModalNews && currentModalNews.id === noticiaId) {
+      document.getElementById('modalLikeCount').textContent = newCount;
+    }
+  }
+
+  function handleLike(noticiaId) {
+    let current = likesMap.get(noticiaId) || 0;
+    current++;
+    likesMap.set(noticiaId, current);
+    updateLikeDisplay(noticiaId);
+    const btn = document.querySelector(`.btn-like[data-id="${noticiaId}"]`);
+    if (btn) {
+      btn.style.transform = 'scale(1.05)';
+      setTimeout(() => { if(btn) btn.style.transform = ''; }, 200);
+    }
+  }
+
+  function openModal(noticiaId) {
+    let found = null;
+    for (let sec in noticiasData) {
+      found = noticiasData[sec].find(n => n.id === noticiaId);
+      if (found) break;
+    }
+    if (!found) return;
+    currentModalNews = found;
+    document.getElementById('modalTitle').innerText = found.titulo;
+    document.getElementById('modalBody').innerHTML = `<p>${found.contenido}</p><small style="color:#777">Categoría: ${found.categoria}</small>`;
+    document.getElementById('modalLikeCount').innerText = likesMap.get(found.id) || 0;
+    document.getElementById('articleModal').classList.add('active-modal');
+  }
+
+  function closeModal() {
+    document.getElementById('articleModal').classList.remove('active-modal');
+    currentModalNews = null;
+  }
+
+  function switchSection(sectionId) {
+    document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active-section'));
+    document.getElementById(sectionId).classList.add('active-section');
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      if (btn.getAttribute('data-section') === sectionId) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
+    });
+  }
+
+  function bindEvents() {
+    document.body.addEventListener('click', (e) => {
+      if (e.target.classList.contains('btn-read')) {
+        const card = e.target.closest('.card');
+        if (card && card.dataset.id) openModal(parseInt(card.dataset.id));
+      }
+      else if (e.target.classList.contains('btn-like') || e.target.closest('.btn-like')) {
+        let btn = e.target.closest('.btn-like');
+        if (btn && btn.dataset.id) handleLike(parseInt(btn.dataset.id));
+        else if (e.target.closest('#modalLikeBtn') && currentModalNews) handleLike(currentModalNews.id);
+      }
+      else if (e.target.id === 'closeModalBtn' || e.target.classList.contains('modal-close') || e.target === document.getElementById('articleModal')) {
+        closeModal();
+      }
+    });
+
+    document.querySelectorAll('.nav-btn').forEach(btn => {
+      btn.addEventListener('click', () => switchSection(btn.getAttribute('data-section')));
+    });
+  }
+
+  function init() {
+    renderSection('portada', 'gridPortada');
+    renderSection('policiales', 'gridPoliciales');
+    renderSection('pais', 'gridPais');
+    renderSection('mundo', 'gridMundo');
+    renderSection('editorial', 'gridEditorial');
+    bindEvents();
+  }
+
+  init();
+</script>
+</body>
+</html>
