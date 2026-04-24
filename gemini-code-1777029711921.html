@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notilea | Noticias de Alto Impacto</title>
+    
+    <meta property="og:title" content="Notilea - Información que importa">
+    <meta property="og:description" content="Análisis profundo sobre la actualidad nacional e internacional.">
+    <meta property="og:image" content="https://notilea25-cloud.github.io/notilea.github.io/og-cover.jpg">
+    <meta property="og:url" content="https://notilea25-cloud.github.io/notilea.github.io/">
+    <meta property="og:type" content="website">
+
+    <style>
+        :root {
+            --azul-notilea: #007bff;
+            --azul-neon: #00f2ff;
+            --rojo-urgente: #ff0000;
+            --fondo: #0a0a0c;
+            --texto: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fondo);
+            color: var(--texto);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #16161a, #000);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--azul-notilea);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .logo span { color: var(--azul-notilea); }
+
+        .widgets {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.9em;
+            color: var(--azul-neon);
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Sistema SPA: Ocultar/Mostrar secciones */
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Estilo de Portada */
+        .main-card {
+            background: #16161a;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #333;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .main-card:hover { transform: scale(1.01); }
+
+        .main-card img { width: 100%; height: auto; }
+
+        .content-padding { padding: 20px; }
+
+        .tag {
+            background: var(--rojo-urgente);
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 0.7em;
+            font-weight: bold;
+        }
+
+        /* Grid de noticias secundarias */
+        .news-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .card-small {
+            background: #16161a;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #222;
+        }
+
+        .card-small:hover { border-color: var(--azul-notilea); }
+
+        /* Botón Volver */
+        .btn-back {
+            background: var(--azul-notilea);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+
+        .editorial-box {
+            background: rgba(0, 123, 255, 0.1);
+            border-left: 4px solid var(--azul-notilea);
+            padding: 20px;
+            margin-top: 30px;
+            font-style: italic;
+        }
+
+        footer { text-align: center; padding: 40px; color: #555; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Noti<span>Lea</span></div>
+    <div class="widgets">
+        <div id="reloj">Cargando hora...</div>
+        <div>Asunción: <span id="clima">24°C Inestable</span></div>
+    </div>
+</header>
+
+<div class="container">
+    
+    <div id="home" class="section active">
+        <div class="main-card" onclick="showArticle('art-alliana')">
+            <div class="content-padding">
+                <span class="tag">LO MÁS LEÍDO</span>
+                <h2>El impacto de la renuncia de la hija de Pedro Alliana</h2>
+                <p>Análisis sobre la salida de "Montse" Alliana de la Cámara de Diputados y el debate nacional sobre el nepotismo.</p>
+            </div>
+        </div>
+
+        <div class="news-grid">
+            <div class="card-small" onclick="showArticle('art-iran')">
+                <span class="tag" style="background: #333;">MUNDO</span>
+                <h4>Crisis en el Estrecho de Ormuz: Tensión Irán - EE.UU.</h4>
+            </div>
+            <div class="card-small" onclick="showArticle('art-policial')">
+                <span class="tag" style="background: #333;">POLICIAL</span>
+                <h4>Aumentan casos de tuberculosis en cárcel de Concepción</h4>
+            </div>
+            <div class="card-small" onclick="showArticle('art-deporte')">
+                <span class="tag" style="background: #333;">DEPORTES</span>
+                <h4>Bareiro brilla en Argentina y es tendencia</h4>
+            </div>
+            <div class="card-small" onclick="showArticle('art-clima')">
+                <span class="tag" style="background: #333;">CLIMA</span>
+                <h4>Alerta: Fin de semana con tormentas severas</h4>
+            </div>
+        </div>
+
+        <div class="editorial-box">
+            <h3>Editorial: La Ética en el Poder</h3>
+            <p>"La renuncia en el círculo del Vicepresidente no es solo un movimiento político, es una respuesta necesaria a una ciudadanía que ya no tolera privilegios en la función pública..."</p>
+        </div>
+    </div>
+
+    <div id="art-alliana" class="section">
+        <button class="btn-back" onclick="showHome()">← VOLVER</button>
+        <h1>Renuncia de la hija de Pedro Alliana: ¿Un punto de quiebre?</h1>
+        <p>La noticia con mayor impacto en redes sociales hoy ha sido la renuncia de la hija del vicepresidente Pedro Alliana a su cargo en la Cámara de Diputados. Este evento ocurre tras meses de presión mediática y ciudadana.</p>
+        <p><b>Análisis:</b> Este movimiento busca mitigar el costo político para el gobierno actual, pero abre una brecha en la estructura de nombramientos directos que ha caracterizado al último periodo legislativo.</p>
+    </div>
+
+    <div id="art-iran" class="section">
+        <button class="btn-back" onclick="showHome()">← VOLVER</button>
+        <h1>Guerra y Tensión en Irán: El mundo en vilo</h1>
+        <p>Donald Trump ha anunciado la extensión de la tregua entre Israel y Líbano, pero la situación en el Estrecho de Ormuz sigue siendo crítica. El Pentágono advierte que las minas en la zona tardarán meses en ser despejadas.</p>
+        <p>El impacto económico ya se siente en el precio del petróleo, afectando los mercados globales de energía.</p>
+    </div>
+
+    <div id="art-policial" class="section">
+        <button class="btn-back" onclick="showHome()">← VOLVER</button>
+        <h1>Emergencia Sanitaria en Cárcel de Concepción</h1>
+        <p>Se reportan 56 casos confirmados de tuberculosis. Las autoridades sanitarias han activado un protocolo de aislamiento para evitar un brote masivo dentro del sistema penitenciario paraguayo.</p>
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2026 Notilea Media Group | Innovación en Noticias Digitales
+</footer>
+
+<script>
+    // Sistema de Navegación SPA
+    function showArticle(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById(id).classList.add('active');
+        window.scrollTo(0, 0);
+    }
+
+    function showHome() {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+        document.getElementById('home').classList.add('active');
+    }
+
+    // Reloj y Fecha Automática
+    function actualizarReloj() {
+        const ahora = new Date();
+        const opciones = { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+        document.getElementById('reloj').innerText = ahora.toLocaleDateString('es-PY', opciones);
+    }
+    
+    setInterval(actualizarReloj, 1000);
+    actualizarReloj();
+
+    // Simulación de Clima (En una app real usarías una API como OpenWeather)
+    setTimeout(() => {
+        document.getElementById('clima').innerText = "24°C - Humedad 85% (Tormentas probables)";
+    }, 2000);
+</script>
+
+</body>
+</html>
