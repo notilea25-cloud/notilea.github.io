@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notilea | Noticias de Alto Impacto</title>
+    
+    <meta property="og:title" content="Notilea | Renuncia de Montserrat Alliana">
+    <meta property="og:description" content="Análisis profundo sobre la renuncia que sacude el ámbito político nacional y la actualidad mundial.">
+    <meta property="og:image" content="https://notilea25-cloud.github.io/notilea.github.io/og-cover.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:url" content="https://notilea25-cloud.github.io/notilea.github.io/">
+    <meta property="og:type" content="article">
+
+    <style>
+        :root {
+            --azul-notilea: #007bff;
+            --azul-neon: #00f2ff;
+            --rojo-urgente: #ff0000;
+            --fondo: #0a0a0c;
+            --texto: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--fondo);
+            color: var(--texto);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #16161a, #000);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid var(--azul-notilea);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: white;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+        }
+
+        .logo span { color: var(--azul-notilea); }
+
+        .widgets {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 0.9em;
+            color: var(--azul-neon);
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 15px;
+        }
+
+        /* Sistema SPA */
+        .section { display: none; }
+        .section.active { display: block; animation: fadeIn 0.5s; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Portada con Imagen */
+        .main-card {
+            background: #16161a;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
+            margin-bottom: 30px;
+            cursor: pointer;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .main-card:hover { 
+            transform: translateY(-5px);
+            border-color: var(--azul-notilea);
+        }
+
+        .main-card img { 
+            width: 100%; 
+            height: auto; 
+            display: block;
+            border-bottom: 3px solid var(--azul-notilea);
+        }
+
+        .content-padding { padding: 25px; }
+
+        .tag {
+            background: var(--rojo-urgente);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        /* Grid de noticias */
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .card-small {
+            background: #16161a;
+            padding: 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 1px solid #222;
+            transition: 0.2s;
+        }
+
+        .card-small:hover { border-color: var(--azul-neon); background: #1c1c21; }
+
+        .btn-back {
+            background: var(--azul-notilea);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-bottom: 30px;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .editorial-box {
+            background: linear-gradient(to right, rgba(0, 123, 255, 0.15), transparent);
+            border-left: 5px solid var(--azul-notilea);
+            padding: 30px;
+            margin-top: 40px;
+            border-radius: 0 10px 10px 0;
+        }
+
+        h2, h4 { margin-top: 10px; color: #fff; }
+
+        footer { text-align: center; padding: 50px 20px; color: #666; border-top: 1px solid #222; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo">Noti<span>Lea</span></div>
+    <div class="widgets">
+        <div id="reloj">Cargando...</div>
+        <div>Paraguay: <span id="clima">24°C Inestable</span></div>
+    </div>
+</header>
+
+<div class="container">
+    
+    <div id="home" class="section active">
+        <div class="main-card" onclick="showArticle('art-alliana')">
+            <img src="og-cover.jpg" alt="Portada Notilea Alliana">
+            <div class="content-padding">
+                <span class="tag">POLÍTICA | EXCLUSIVO</span>
+                <h2>Renuncia de Montserrat Alliana: El fin de una era de privilegios</h2>
+                <p>Análisis profundo sobre la dimisión que marca la agenda política de hoy. ¿Presión real o estrategia electoral?</p>
+            </div>
+        </div>
+
+        <div class="news-grid">
+            <div class="card-small" onclick="showArticle('art-iran')">
+                <span class="tag" style="background: #444;">MUNDO</span>
+                <h4>Alerta en Irán: Bloqueo en el Estrecho de Ormuz y tensión nuclear.</h4>
+            </div>
+            <div class="card-small" onclick="showArticle('art-policial')">
+                <span class="tag" style="background: #444;">POLICIAL</span>
+                <h4>Crisis sanitaria: 56 casos de tuberculosis en la Penitenciaría de Concepción.</h4>
+            </div>
+            <div class="card-small" onclick="showArticle('art-deporte')">
+                <span class="tag" style="background: #444;">DEPORTES</span>
+                <h4>Adam Bareiro imparable: El paraguayo que conquista Argentina.</h4>
+            </div>
+            <div class="card-small" onclick="showArticle('art-clima')">
+                <span class="tag" style="background: #444;">CLIMA</span>
+                <h4>Tormentas severas: Aviso especial para el centro y sur del país.</h4>
+            </div>
+        </div>
+
+        <div class="editorial-box">
+            <h3>Editorial: Justicia tardía, pero necesaria</h3>
+            <p><i>"La renuncia de Montserrat Alliana no debe verse como un sacrificio, sino como el cumplimiento de una demanda ética. En Notilea analizamos cómo la presión ciudadana digital hoy tiene más peso que los acuerdos de pasillo..."</i></p>
+        </div>
+    </div>
+
+    <div id="art-alliana" class="section">
+        <button class="btn-back" onclick="showHome()">← VOLVER A LA PORTADA</button>
+        <img src="og-cover.jpg" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+        <h1>El costo político de la transparencia</h1>
+        <p>Hoy se formalizó la salida de la Cámara de Diputados de la hija del Vicepresidente. Con un salario de 18 millones de guaraníes, su permanencia se había vuelto insostenible para la imagen del Ejecutivo.</p>
+        <h3>Análisis de Notilea</h3>
+        <p>Este hecho demuestra que las estructuras tradicionales están bajo el escrutinio constante de la opinión pública digital. La transparencia ya no es opcional.</p>
+    </div>
+
+    <div id="art-iran" class="section">
+        <button class="btn-back" onclick="showHome()">← VOLVER</button>
+        <h1>Conflicto Global: El polvorín de Irán</h1>
+        <p>Las últimas 24 horas han sido decisivas. Irán mantiene su postura firme en el Estrecho de Ormuz mientras las potencias occidentales refuerzan sus flotas. El impacto en el precio del barril de crudo afecta directamente a la economía regional.</p>
+    </div>
+
+    <div id="art-policial" class="section">
+        <button class="btn-back" onclick="showHome()">← VOLVER</button>
+        <h1>Emergencia en Concepción</h1>
+        <p>La situación en la cárcel de Concepción es crítica. Los 56 casos reportados de tuberculosis ponen de manifiesto la falta de infraestructura sanitaria en los centros penitenciarios del país.</p>
+    </div>
+
+</div>
+
+<footer>
+    &copy; 2026 Notilea Digital | Asunción, Paraguay<br>
+    <small>Información verificada y análisis en tiempo real</small>
+</footer>
+
+<script>
+    // Navegación SPA
+    function showArticle(id) {
+        document.querySelectorAll('.section').forEach(s => s.classList.remove('
