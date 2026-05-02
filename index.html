@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Notilea | Lo que pasa en tu barrio y sacude al mundo</title>
+<meta name="description" content="¿Está EE.UU. repitiendo su peor error? Vietnam vs Irán. Noticias de Paraguay y el mundo.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Notilea">
+<meta property="og:url" content="https://notilea25-cloud.github.io/notilea.github.io/">
+<meta property="og:title" content="¿EE.UU. repite su peor error? Vietnam vs Irán — Notilea">
+<meta property="og:description" content="No hay selva. No hay tropas masivas. Hay misiles, drones… y una guerra que no se ve pero se siente en todo el mundo.">
+<meta property="og:image" content="https://notilea25-cloud.github.io/notilea.github.io/og-cover.jpg">
+<meta property="og:image:width" content="1734">
+<meta property="og:image:height" content="907">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:locale" content="es_PY">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://notilea25-cloud.github.io/notilea.github.io/og-cover.jpg">
+<link rel="canonical" href="https://notilea25-cloud.github.io/notilea.github.io/">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;900&family=Barlow+Condensed:wght@400;600;700;900&display=swap');
+:root{--r:#d62828;--rv:#ff3030;--y:#f7b731;--bg:#080808;--s1:#111;--s2:#181818;--brd:#252525;--w:#f0f0f0;--ws:#888;--gr:#2dc653;--bl:#1a6ef5}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--w);font-family:'Barlow',sans-serif;overflow-x:hidden}
+
+/* TOPBAR */
+.topbar{background:var(--r);padding:5px 12px;display:flex;align-items:center;justify-content:space-between;font-family:'Barlow Condensed';font-size:12px;font-weight:700;letter-spacing:.5px;position:sticky;top:0;z-index:999}
+.ticker{overflow:hidden;flex:1;margin:0 10px}
+.ticker-t{display:inline-block;white-space:nowrap;animation:tk 40s linear infinite}
+@keyframes tk{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.tr{display:flex;gap:10px;white-space:nowrap}
+#clock{font-weight:900;font-size:13px}
+
+/* HEADER */
+header{background:var(--s1);border-bottom:3px solid var(--r);padding:12px 16px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.logo{font-family:'Bebas Neue';font-size:44px;letter-spacing:2px;cursor:pointer;color:var(--w);line-height:1}
+.logo span{color:var(--r)}
+.logo-sub{font-family:'Barlow Condensed';font-size:11px;color:var(--ws);letter-spacing:1.5px;text-transform:uppercase;margin-top:-6px}
+.fecha-box{text-align:right;font-family:'Barlow Condensed';font-size:13px;color:var(--ws)}
+#fecha-larga{color:var(--w);font-weight:700;font-size:15px}
+
+/* NAV CATS */
+.nav-cats{background:var(--s2);border-bottom:1px solid var(--brd);display:flex;gap:6px;padding:8px 12px;overflow-x:auto;scrollbar-width:none}
+.nav-cats::-webkit-scrollbar{display:none}
+.cat-btn{background:transparent;border:1px solid var(--brd);color:var(--ws);padding:5px 14px;border-radius:20px;font-family:'Barlow Condensed';font-size:13px;font-weight:700;letter-spacing:.5px;cursor:pointer;white-space:nowrap;transition:all .2s}
+.cat-btn:hover,.cat-btn.on{background:var(--r);border-color:var(--r);color:#fff}
+.cat-btn.gv:hover,.cat-btn.gv.on{background:var(--gr);border-color:var(--gr)}
+.cat-btn.bv:hover,.cat-btn.bv.on{background:var(--bl);border-color:var(--bl)}
+.cat-btn.yv:hover,.cat-btn.yv.on{background:var(--y);border-color:var(--y);color:#000}
+
+/* CLIMA */
+.clima{background:linear-gradient(90deg,#0d1b2a,#112233);border-bottom:1px solid #1e3a5f;padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.c-icon{font-size:28px}
+.c-temp{font-family:'Bebas Neue';font-size:32px;color:var(--y);line-height:1}
+.c-info{font-family:'Barlow Condensed';font-size:12px;color:#7eb8e8;line-height:1.4}
+.c-loc{font-size:11px;color:var(--ws);text-transform:uppercase;letter-spacing:1px}
+.c-days{display:flex;gap:12px;margin-left:auto}
+.c-day{text-align:center;font-family:'Barlow Condensed';font-size:12px}
+.c-day .dn{color:var(--ws);font-size:11px;display:block}
+.c-day .dmx{color:var(--r);font-weight:700;display:block}
+.c-day .dmn{color:#7eb8e8;display:block}
+
+/* PAGES */
+.page{display:none}.page.active{display:block}
+main{max-width:1100px;margin:0 auto;padding:16px 12px 60px}
+
+/* EDITORIAL */
+.ed{background:linear-gradient(135deg,#130010,#1a0a00);border:1px solid #3a1500;border-left:4px solid var(--y);border-radius:10px;padding:20px 24px;margin-bottom:22px}
+.ed-lbl{font-family:'Barlow Condensed';font-size:11px;font-weight:700;letter-spacing:2px;color:var(--y);text-transform:uppercase;margin-bottom:6px}
+.ed-h{font-family:'Bebas Neue';font-size:24px;color:var(--w);margin-bottom:10px}
+.ed-p{font-size:14px;color:#ccc;line-height:1.75}
+.ed-f{margin-top:12px;font-size:12px;color:var(--y);font-style:italic}
+
+/* SEC TITLE */
+.sec{font-family:'Bebas Neue';font-size:20px;letter-spacing:2px;border-left:4px solid var(--r);padding-left:10px;margin:24px 0 14px;display:flex;align-items:center;gap:8px}
+.sec.gn{border-color:var(--gr)}.sec.bl{border-color:var(--bl)}.sec.am{border-color:var(--y)}.sec.or{border-color:#ff6b35}
+
+/* HERO */
+.hero{background:var(--s2);border:1px solid var(--brd);border-radius:12px;overflow:hidden;margin-bottom:22px;position:relative}
+.hero-th{width:100%;height:240px;background:linear-gradient(135deg,#1a0000,#350808 50%,#0d0d2b);display:flex;align-items:center;justify-content:center;font-size:72px;border-bottom:1px solid var(--brd)}
+.hero-badge{position:absolute;top:14px;left:14px;background:var(--r);color:#fff;font-family:'Barlow Condensed';font-size:11px;font-weight:700;letter-spacing:1.5px;padding:4px 10px;border-radius:3px;text-transform:uppercase}
+.hero-body{padding:18px 22px}
+.hero-kicker{font-family:'Barlow Condensed';font-size:12px;font-weight:700;color:var(--y);letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
+.hero-h{font-family:'Bebas Neue';font-size:clamp(26px,5vw,46px);line-height:1;color:var(--w);margin-bottom:10px}
+.hero-h em{color:var(--r);font-style:normal}
+.hero-exc{font-size:14px;color:var(--ws);line-height:1.6;margin-bottom:14px}
+
+/* BOTONES */
+.btn{display:inline-flex;align-items:center;gap:5px;border:none;padding:9px 16px;border-radius:6px;font-family:'Barlow Condensed';font-size:13px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;cursor:pointer;transition:all .18s}
+.btn-p{background:var(--r);color:#fff}
+.btn-p:hover{background:var(--rv);transform:translateY(-1px);box-shadow:0 4px 16px rgba(214,40,40,.4)}
+.btn-wa{background:#25d366;color:#fff}
+.btn-wa:hover{background:#1fba59;transform:translateY(-1px)}
+.btn-tk{background:#111;color:#fff;border:1px solid #333}
+.btn-tk:hover{background:#1a1a1a;border-color:#ff0050}
+.btn-ol{background:transparent;border:1px solid var(--brd);color:var(--ws)}
+.btn-ol:hover{border-color:var(--r);color:var(--w)}
+.btn-nav{background:var(--s2);border:1px solid var(--brd);color:var(--w);padding:8px 16px}
+.btn-nav:hover{border-color:var(--r)}
+.btn-sm{padding:6px 13px;font-size:12px}
+.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+
+/* CAROUSEL NAV */
+.carousel-wrap{position:relative}
+.carousel{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:4px}
+.carousel::-webkit-scrollbar{display:none}
+.carousel .card{scroll-snap-align:start;min-width:280px;flex-shrink:0}
+.c-nav{display:flex;gap:8px;justify-content:flex-end;margin-top:10px}
+.c-nav button{background:var(--s2);border:1px solid var(--brd);color:var(--w);width:36px;height:36px;border-radius:50%;font-size:16px;cursor:pointer;transition:all .2s}
+.c-nav button:hover{background:var(--r);border-color:var(--r)}
+
+/* CARD */
+.card{background:var(--s2);border:1px solid var(--brd);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:transform .2s,border-color .2s}
+.card:hover{transform:translateY(-3px);border-color:rgba(214,40,40,.5)}
+.card-th{width:100%;height:140px;display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0}
+.card-body{padding:13px 15px;flex:1;display:flex;flex-direction:column}
+.cat{font-family:'Barlow Condensed';font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:5px}
+.cr{color:var(--r)}.cg{color:var(--gr)}.cb{color:var(--bl)}.cy{color:var(--y)}.co{color:#ff6b35}
+.card-h{font-family:'Barlow Condensed';font-size:16px;font-weight:700;line-height:1.25;color:var(--w);margin-bottom:6px}
+.card-exc{font-size:12px;color:var(--ws);line-height:1.5;margin-bottom:8px;flex:1}
+.card-meta{font-size:11px;color:#444;font-family:'Barlow Condensed';margin-bottom:10px}
+.card-btns{display:flex;gap:6px;flex-wrap:wrap}
+
+/* ARTÍCULO */
+.art-kicker{font-family:'Barlow Condensed';font-size:12px;font-weight:700;color:var(--r);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.art-h{font-family:'Bebas Neue';font-size:clamp(28px,5vw,50px);line-height:1;color:var(--w);margin-bottom:14px}
+.art-meta{font-family:'Barlow Condensed';font-size:12px;color:#555;display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.art-meta span{color:var(--ws)}
+.art-lead{font-size:17px;font-weight:600;color:var(--ws);line-height:1.6;border-left:3px solid var(--r);padding-left:16px;margin-bottom:22px}
+.art-th{width:100%;height:240px;background:linear-gradient(135deg,#1a0000,#2d0808);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:72px;margin-bottom:20px}
+.art-body{font-size:15px;color:#ccc;line-height:1.85}
+.art-body p{margin-bottom:16px}
+.art-body h3{font-family:'Bebas Neue';font-size:22px;color:var(--w);margin:24px 0 10px;border-bottom:1px solid var(--brd);padding-bottom:5px}
+.art-body blockquote{background:var(--s2);border-left:4px solid var(--y);padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;font-style:italic;color:var(--ws)}
+.art-body table{width:100%;border-collapse:collapse;margin:16px 0;font-size:13px}
+.art-body table th{background:var(--r);color:#fff;padding:9px 12px;text-align:left;font-family:'Barlow Condensed';letter-spacing:.8px}
+.art-body table th:first-child{background:#1a1a1a}
+.art-body table td{padding:9px 12px;border-bottom:1px solid var(--brd);color:var(--ws)}
+.art-body table tr:nth-child(even) td{background:rgba(255,255,255,.02)}
+.art-body table td:first-child{color:var(--y);font-weight:600}
+.analbox{background:#0a1220;border:1px solid #1a3a5f;border-radius:10px;padding:18px;margin:20px 0}
+.an-lbl{font-family:'Barlow Condensed';font-size:11px;letter-spacing:2px;color:#7eb8e8;text-transform:uppercase;font-weight:700;margin-bottom:6px}
+.an-h{font-family:'Bebas Neue';font-size:20px;color:var(--w);margin-bottom:8px}
+.an-t{font-size:13px;color:#9ab;line-height:1.7}
+
+/* SHARE BAR */
+.share-bar{background:var(--s2);border:1px solid var(--brd);border-radius:10px;padding:14px 18px;margin:20px 0;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.sh-lbl{font-family:'Barlow Condensed';font-size:12px;color:var(--ws);letter-spacing:1px;text-transform:uppercase}
+
+/* ART NAV (prev/next) */
+.art-nav{display:flex;justify-content:space-between;gap:10px;margin-top:30px;padding-top:20px;border-top:1px solid var(--brd)}
+.art-nav-btn{background:var(--s2);border:1px solid var(--brd);color:var(--ws);padding:10px 16px;border-radius:8px;cursor:pointer;font-family:'Barlow Condensed';font-size:13px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;transition:all .2s;flex:1;max-width:48%;text-align:center}
+.art-nav-btn:hover{border-color:var(--r);color:var(--w)}
+.art-nav-btn.right{text-align:right}
+.art-nav-btn small{display:block;font-size:10px;color:#555;margin-bottom:3px;letter-spacing:1px}
+
+/* TAGS */
+.tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:20px}
+.tag{background:var(--s2);border:1px solid var(--brd);padding:3px 9px;border-radius:3px;font-size:11px;color:var(--ws);font-family:'Barlow Condensed'}
+
+/* FOOTER */
+footer{background:#050505;border-top:1px solid #151515;padding:22px 16px;text-align:center;font-size:12px;color:#444;font-family:'Barlow Condensed';letter-spacing:.5px}
+footer b{color:var(--r)}
+
+/* HIDDEN CAT */
+.cat-sec{transition:opacity .2s}.cat-sec.hidden{display:none}
+
+@media(max-width:600px){
+  .ticker{width:40vw}
+  .c-days{display:none}
+  .carousel .card{min-width:260px}
+  .art-nav{flex-direction:column}
+  .art-nav-btn{max-width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- TICKER -->
+<div class="topbar">
+  <span>🔴 VIVO</span>
+  <div class="ticker">
+    <span class="ticker-t">
+      Alto el fuego EE.UU.-Irán al borde del colapso &nbsp;●&nbsp; Joshua Duerksen top 10 F2 Miami &nbsp;●&nbsp; Paraguayos máximos goleadores Libertadores 2026 &nbsp;●&nbsp; Capturan líder del "Clan Ríos" en Bañado Sur &nbsp;●&nbsp; Trump llama "traición" criticar la guerra con Irán &nbsp;●&nbsp; Peña reglamenta Ley de Etanol &nbsp;●&nbsp; Mercosur-UE: cuero paraguayo bajo fuego &nbsp;●&nbsp; Irán envía propuesta de paz vía Pakistán &nbsp;●&nbsp; Alto el fuego EE.UU.-Irán al borde del colapso &nbsp;●&nbsp; Joshua Duerksen top 10 F2 Miami &nbsp;●&nbsp; Paraguayos máximos goleadores Libertadores 2026 &nbsp;●&nbsp; Capturan líder del "Clan Ríos" en Bañado Sur &nbsp;●&nbsp;
+    </span>
+  </div>
+  <div class="tr">
+    <span id="wx-mini">⛅ --°C</span>
+    <span id="clock">--:--</span>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div>
+    <div class="logo" onclick="goHome()">NOTE<span>I</span>LEA</div>
+    <div class="logo-sub">Lo que pasa en tu barrio · Lo que sacude al país y al planeta</div>
+  </div>
+  <div class="fecha-box">
+    <div id="fecha-larga">Cargando...</div>
+    <div>Asunción · Paraguay</div>
+  </div>
+</header>
+
+<!-- NAV CATS -->
+<nav class="nav-cats">
+  <button class="cat-btn on" onclick="filtrar('all',this)">🏠 Todo</button>
+  <button class="cat-btn" onclick="filtrar('mundo',this)">🌐 Mundo</button>
+  <button class="cat-btn" onclick="filtrar('iran',this)">⚔️ Irán</button>
+  <button class="cat-btn bv" onclick="filtrar('politica',this)">🏛️ Política</button>
+  <button class="cat-btn" onclick="filtrar('policiales',this)">🚔 Policiales</button>
+  <button class="cat-btn gv" onclick="filtrar('deportes',this)">⚽ Deportes</button>
+  <button class="cat-btn yv" onclick="filtrar('economia',this)">💰 Economía</button>
+</nav>
+
+<!-- CLIMA -->
+<div class="clima">
+  <div class="c-icon" id="wx-icon">⛅</div>
+  <div>
+    <div class="c-temp" id="wx-temp">--°C</div>
+    <div class="c-loc">📍 Asunción, Paraguay</div>
+  </div>
+  <div>
+    <div class="c-info" id="wx-desc">Actualizando clima...</div>
+    <div class="c-info" id="wx-ext"></div>
+  </div>
+  <div class="c-days">
+    <div class="c-day"><span class="dn">Hoy</span><span class="dmx" id="d0x">--</span><span class="dmn" id="d0n">--</span></div>
+    <div class="c-day"><span class="dn">Dom</span><span class="dmx" id="d1x">--</span><span class="dmn" id="d1n">--</span></div>
+    <div class="c-day"><span class="dn">Lun</span><span class="dmx" id="d2x">--</span><span class="dmn" id="d2n">--</span></div>
+  </div>
+</div>
+
+<!-- ═══ PORTADA ═══ -->
+<div id="pg-home" class="page active">
+<main>
+
+  <!-- EDITORIAL -->
+  <div class="ed">
+    <div class="ed-lbl">✍ Editorial — Notilea</div>
+    <div class="ed-h">La guerra invisible que el mundo no ve… pero ya siente</div>
+    <div class="ed-p">Cuando un país repite sus errores históricos, la pregunta ya no es si sucederá — sino cuánto costará. EE.UU. lleva décadas ignorando la lección de Vietnam. Hoy, en el Golfo Pérsico, la historia no se copia: se edita. Sin tropas masivas, sin selva, pero con la misma trampa de fondo: un conflicto sin salida clara. Desde el Chaco paraguayo miramos este tablero y nos preguntamos: ¿quién paga el precio del petróleo que se dispara? Nosotros, como siempre, los de abajo.</div>
+    <div class="ed-f">— La Redacción de Notilea · 2 de mayo de 2026</div>
+  </div>
+
+  <!-- HERO -->
+  <div class="cat-sec" data-cat="iran mundo">
+    <div class="sec">🔥 Portada</div>
+    <div class="hero">
+      <div class="hero-th">⚔️<div class="hero-badge">🌍 Análisis Internacional</div></div>
+      <div class="hero-body">
+        <div class="hero-kicker">Vietnam vs Irán · EE.UU. en la encrucijada</div>
+        <div class="hero-h">¿Está EE.UU. <em>Repitiendo</em> Su Peor Error?</div>
+        <div class="hero-exc">No hay selva. No hay tropas masivas. Hay misiles, drones… y una guerra que no se ve pero se siente en todo el mundo. El petróleo, la economía, la tensión global. Todo conectado. Y lo peligroso: no es una guerra que se pierde rápido.</div>
+        <div class="btn-row">
+          <button class="btn btn-p" onclick="verArt('iran-vietnam')">📖 Leer análisis completo</button>
+          <button class="btn btn-wa btn-sm" onclick="waShare('iran-vietnam')">📲 WhatsApp</button>
+          <button class="btn btn-tk btn-sm" onclick="tkShare('iran-vietnam')">🎵 TikTok</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUNDO / IRÁN — CAROUSEL -->
+  <div class="cat-sec" data-cat="mundo iran">
+    <div class="sec">🌐 Lo Que Sacude Al Mundo</div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="car-mundo">
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#1a0505,#2d1010)">🕊️</div>
+          <div class="card-body">
+            <div class="cat cr">Guerra · Irán</div>
+            <div class="card-h">Alto el fuego en Irán: ¿paz real o pausa táctica?</div>
+            <div class="card-exc">Trump notificó al Congreso que las hostilidades "cesaron" — pero 5.000 tropas siguen desplegadas y la propuesta iraní no fue aceptada.</div>
+            <div class="card-meta">2 may 2026 · 4 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('iran-ceasefire')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('iran-ceasefire')">📲</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#1a1200,#2d2000)">🛢️</div>
+          <div class="card-body">
+            <div class="cat cy">Economía Global</div>
+            <div class="card-h">El petróleo se dispara y los mercados tiemblan</div>
+            <div class="card-exc">El cierre del Estrecho de Ormuz sacudió los precios globales. Las reservas mundiales aguantarán pocas semanas.</div>
+            <div class="card-meta">1 may 2026 · 3 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('petroleo')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('petroleo')">📲</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#001a10,#002d1a)">🇺🇸</div>
+          <div class="card-body">
+            <div class="cat cb">Política EE.UU.</div>
+            <div class="card-h">Trump llama "traición" criticar la guerra con Irán</div>
+            <div class="card-exc">El presidente defendió la operación ante el Congreso que debate si extender la autorización de uso de fuerza más allá de 60 días.</div>
+            <div class="card-meta">1 may 2026 · 3 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('trump')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('trump')">📲</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-nav">
+        <button onclick="scroll_car('car-mundo',-1)">‹</button>
+        <button onclick="scroll_car('car-mundo',1)">›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POLÍTICA -->
+  <div class="cat-sec" data-cat="politica">
+    <div class="sec bl">🏛️ Paraguay · Política</div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="car-pol">
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#001020,#001a30)">⚖️</div>
+          <div class="card-body">
+            <div class="cat cb">Política Nacional</div>
+            <div class="card-h">Peña reglamenta la Ley de Etanol</div>
+            <div class="card-exc">El gobierno asegura que beneficiará a miles de trabajadores del sector agroindustrial. Sindicatos critican la medida.</div>
+            <div class="card-meta">1 may 2026 · 2 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('etanol')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('etanol')">📲</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#0a1200,#152000)">🤝</div>
+          <div class="card-body">
+            <div class="cat cg">Economía</div>
+            <div class="card-h">Mercosur-UE: cuero paraguayo bajo fuego de ONGs</div>
+            <div class="card-exc">La UIP rechazó una "campaña difamatoria" internacional contra la industria del cuero en coincidencia con el acuerdo UE-Mercosur.</div>
+            <div class="card-meta">1 may 2026 · 3 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('mercosur')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('mercosur')">📲</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#1a0a00,#2d1500)">📰</div>
+          <div class="card-body">
+            <div class="cat cy">Libertad de Prensa</div>
+            <div class="card-h">Filizzola denuncia uso político de la Fiscalía contra ABC Color</div>
+            <div class="card-exc">El senador acusó al gobierno de usar la institución para silenciar medios críticos. La ANR rechazó las acusaciones.</div>
+            <div class="card-meta">30 abr 2026 · 3 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('fiscalia')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('fiscalia')">📲</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-nav">
+        <button onclick="scroll_car('car-pol',-1)">‹</button>
+        <button onclick="scroll_car('car-pol',1)">›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- POLICIALES -->
+  <div class="cat-sec" data-cat="policiales">
+    <div class="sec or">🚔 Policiales · Más Leídas</div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="car-pol2">
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#1a0000,#300000)">🚨</div>
+          <div class="card-body">
+            <div class="cat cr">Policiales · 🔥 Más leída</div>
+            <div class="card-h">Capturan líder del "Clan Ríos" en megaoperativo en Bañado Sur</div>
+            <div class="card-exc">Rodney Ríos (30), jefe del clan y presunto autor del homicidio de un oficial, detenido en 6 allanamientos simultáneos.</div>
+            <div class="card-meta">29 abr 2026 · 2 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('clan-rios')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('clan-rios')">📲</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#0a001a,#15002d)">💊</div>
+          <div class="card-body">
+            <div class="cat cr">Drogas</div>
+            <div class="card-h">Fentanilo "made in Paraguay": 300 ampollas en Argentina</div>
+            <div class="card-exc">Gendarmería argentina detuvo a un taxista transportando fentanilo presuntamente fabricado en laboratorios clandestinos paraguayos.</div>
+            <div class="card-meta">29 abr 2026 · 3 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('fentanilo')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('fentanilo')">📲</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#0a1a00,#152d00)">🌿</div>
+          <div class="card-body">
+            <div class="cat cr">Chaco · Crimen</div>
+            <div class="card-h">Nuevos ataques armados en Yasy Cañy, zona del secuestro de Almir De Brum</div>
+            <div class="card-exc">Campesinos armados atacaron a estancieros y policías en Concepción, en la misma zona del secuestro aún irresuelto.</div>
+            <div class="card-meta">30 abr 2026 · 2 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('yasy')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('yasy')">📲</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-nav">
+        <button onclick="scroll_car('car-pol2',-1)">‹</button>
+        <button onclick="scroll_car('car-pol2',1)">›</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEPORTES -->
+  <div class="cat-sec" data-cat="deportes">
+    <div class="sec gn">⚽ Deportes · Paraguay en el Mundo</div>
+    <div class="carousel-wrap">
+      <div class="carousel" id="car-dep">
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#001a05,#002d0a)">🏆</div>
+          <div class="card-body">
+            <div class="cat cg">Copa Libertadores · ⚡ Trending</div>
+            <div class="card-h">¡Paraguayos, máximos goleadores de la Libertadores 2026!</div>
+            <div class="card-exc">Carlos González anotó hat-trick con Independiente del Valle. Bareiro, Ávalos, Pitta y Morales también brillan.</div>
+            <div class="card-meta">29 abr 2026 · 2 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('libertadores')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('libertadores')">📲</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#1a1500,#2d2400)">🏎️</div>
+          <div class="card-body">
+            <div class="cat cy">Fórmula 2</div>
+            <div class="card-h">Joshua Duerksen en top 10 en Miami</div>
+            <div class="card-exc">El piloto paraguayo de Invicta Racing clasificó cuarto en la sprint y séptimo en la carrera principal del GP de Miami.</div>
+            <div class="card-meta">2 may 2026 · 2 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('duerksen')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('duerksen')">📲</button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-th" style="background:linear-gradient(135deg,#001520,#002030)">🌍</div>
+          <div class="card-body">
+            <div class="cat cb">Mundial 2026</div>
+            <div class="card-h">Paraguay al Mundial: la lucha por el puesto continúa</div>
+            <div class="card-exc">La abundancia de delanteros encendidos abre el dilema del técnico: muchas opciones, pocos lugares. El sueño sigue vivo.</div>
+            <div class="card-meta">29 abr 2026 · 3 min</div>
+            <div class="card-btns">
+              <button class="btn btn-p btn-sm" onclick="verArt('mundial')">Leer nota</button>
+              <button class="btn btn-wa btn-sm" onclick="waShare('mundial')">📲</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="c-nav">
+        <button onclick="scroll_car('car-dep',-1)">‹</button>
+        <button onclick="scroll_car('car-dep',1)">›</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+</div>
+
+<!-- ═══ ARTÍCULO ═══ -->
+<div id="pg-art" class="page">
+<main>
+  <button class="btn btn-ol" onclick="goHome()" style="margin-bottom:20px">← Volver a Notilea</button>
+  <div id="art-content"></div>
+</main>
+</div>
+
+<footer>
+  <b>NOTILEA</b> · Lo que pasa en tu barrio y lo que sacude al país y al planeta<br>
+  <span style="color:#2a2a2a">© 2026 · notilea25-cloud.github.io/notilea.github.io · Paraguay</span>
+</footer>
+
+<script>
+// ══ RELOJ ══
+const DIAS=['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+const MESES=['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+function tick(){
+  const n=new Date();
+  document.getElementById('clock').textContent=n.toLocaleTimeString('es-PY',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  document.getElementById('fecha-larga').textContent=`${DIAS[n.getDay()]}, ${n.getDate()} de ${MESES[n.getMonth()]} de ${n.getFullYear()}`;
+}
+tick(); setInterval(tick,1000);
+
+// ══ CLIMA ══
+const WXI={0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',51:'🌦️',61:'🌧️',63:'🌧️',80:'🌦️',95:'⛈️',99:'⛈️'};
+const WXD={0:'Despejado',1:'Casi despejado',2:'Parcialmente nublado',3:'Nublado',45:'Niebla',51:'Llovizna',61:'Lluvia leve',63:'Lluvia moderada',80:'Chubascos',95:'Tormenta',99:'Tormenta fuerte'};
+async function getWx(){
+  try{
+    const r=await fetch('https://api.open-meteo.com/v1/forecast?latitude=-25.2867&longitude=-57.647&current=temperature_2m,weathercode,relativehumidity_2m,windspeed_10m&daily=temperature_2m_max,temperature_2m_min&timezone=America%2FAsuncion&forecast_days=3');
+    const d=await r.json(),c=d.current,dd=d.daily;
+    const ic=WXI[c.weathercode]||'🌡️',t=Math.round(c.temperature_2m);
+    document.getElementById('wx-icon').textContent=ic;
+    document.getElementById('wx-temp').textContent=t+'°C';
+    document.getElementById('wx-mini').textContent=ic+' '+t+'°C';
+    document.getElementById('wx-desc').textContent=WXD[c.weathercode]||'Variable';
+    document.getElementById('wx-ext').textContent=`Humedad ${c.relativehumidity_2m}% · Viento ${Math.round(c.windspeed_10m)} km/h`;
+    [['d0x','d0n',0],['d1x','d1n',1],['d2x','d2n',2]].forEach(([mx,mn,i])=>{
+      document.getElementById(mx).textContent=Math.round(dd.temperature_2m_max[i])+'°';
+      document.getElementById(mn).textContent=Math.round(dd.temperature_2m_min[i])+'°';
+    });
+  }catch(e){document.getElementById('wx-desc').textContent='Clima no disponible'}
+}
+getWx();
+
+// ══ SPA ══
+function showPg(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));document.getElementById(id).classList.add('active');window.scrollTo(0,0)}
+function goHome(){showPg('pg-home')}
+
+// ══ FILTRO ══
+function filtrar(cat,btn){
+  document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  document.querySelectorAll('.cat-sec').forEach(s=>{
+    const cats=s.dataset.cat||'';
+    s.classList.toggle('hidden', cat!=='all' && !cats.includes(cat));
+  });
+}
+
+// ══ CAROUSEL SCROLL ══
+function scroll_car(id,dir){
+  const el=document.getElementById(id);
+  el.scrollBy({left:dir*300,behavior:'smooth'});
+}
+
+// ══ COMPARTIR ══
+const BASE='https://notilea25-cloud.github.io/notilea.github.io/';
+function waShare(id){
+  const a=ARTS[id]; if(!a)return;
+  const txt=`📰 *${a.title}*\n\n${a.lead}\n\n👉 Más en Notilea: ${BASE}`;
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
+function tkShare(id){
+  const a=ARTS[id]; if(!a)return;
+  const tags=(a.tags||['Notilea']).map(t=>'#'+t).join(' ');
+  navigator.clipboard?.writeText(`${a.title}\n\n${a.lead}\n\n${tags} #Notilea #Paraguay`).catch(()=>{});
+  window.open('https://www.tiktok.com/','_blank');
+}
+function copyLink(id,btn){
+  navigator.clipboard?.writeText(BASE+'#'+id).then(()=>{
+    const orig=btn.textContent; btn.textContent='✅ Copiado!';
+    setTimeout(()=>btn.textContent=orig,2000);
+  }).catch(()=>alert(BASE+'#'+id));
+}
+
+// ══ ARTÍCULOS ══
+const ORDER=['iran-vietnam','iran-ceasefire','petroleo','trump','etanol','mercosur','fiscalia','clan-rios','fentanilo','yasy','libertadores','duerksen','mundial'];
+
+const ARTS={
+'iran-vietnam':{
+  kicker:'🌍 Análisis Internacional · 2 de mayo de 2026',
+  title:'¿Está EE.UU. Repitiendo Su Peor Error? Vietnam vs Irán',
+  lead:'No hay selva. No hay tropas masivas. Hay misiles, drones… y una guerra que no se ve pero se siente en todo el mundo.',
+  icon:'⚔️', tags:['Irán','EE.UU.','Vietnam','Petróleo'],
+  body:`<p><strong>En la Guerra de Vietnam, Estados Unidos entró confiado… y salió derrotado.</strong> Años de guerra, miles de soldados, y un enemigo imposible de controlar. Hoy, las tensiones con Irán vuelven a encender las alarmas. Pero esto no es Vietnam.</p>
+<h3>Un paralelo incómodo</h3>
+<p>La tentación de comparar es comprensible: en ambos casos EE.UU. se enreda en un conflicto que supera sus expectativas. Vietnam fue desgaste físico en la selva. La guerra con Irán es desgaste político y económico en el ciberespacio, en los mercados y en el Estrecho de Ormuz.</p>
+<blockquote>"No me gusta hablar de ello hasta que los trabajos estén terminados" — Trump, mayo 2026</blockquote>
+<table><tr><th>Factor</th><th>Vietnam (1965-75)</th><th>Irán (2026)</th></tr>
+<tr><td>Tipo de guerra</td><td>Terrestre / selva</td><td>Aérea / naval / ciber</td></tr>
+<tr><td>Bajas EE.UU.</td><td>58.000+ muertos</td><td>Bajas mínimas directas</td></tr>
+<tr><td>Opinión pública</td><td>En contra (tardío)</td><td>Dividida desde inicio</td></tr>
+<tr><td>Presión Congreso</td><td>Tardía</td><td>Inmediata (60 días)</td></tr>
+<tr><td>Impacto económico</td><td>Inflación doméstica</td><td>Petróleo global</td></tr>
+<tr><td>Salida clara</td><td>No</td><td>No</td></tr></table>
+<h3>Lo que hace diferente a Irán</h3>
+<p>Irán tiene 90 millones de personas, capacidad de cerrar el Estrecho de Ormuz — por donde pasa el 20% del petróleo mundial — y una red de aliados armados desde el Líbano hasta Yemen. La guerra comenzó el 28 de febrero de 2026 con bombardeos de EE.UU. e Israel. En respuesta, Irán lanzó misiles y drones contra Israel y bases en el Golfo. El Ayatolá Jameneí fue asesinado en los primeros ataques.</p>
+<h3>El alto el fuego que nadie cree</h3>
+<p>El 7 de abril Trump declaró el cese de hostilidades. Pero la Ley de Poderes de Guerra obliga a solicitar autorización al Congreso si el conflicto supera 60 días. El plazo venció el 1° de mayo. La Casa Blanca dice que el cese "suspende" el contador — los críticos dicen que eso no existe en la ley.</p>
+<div class="analbox"><div class="an-lbl">🔍 Análisis Notilea</div><div class="an-h">¿Trampa de Vietnam o algo peor?</div><div class="an-t">Vietnam desgastó a EE.UU. durante una década. Irán podría hacer algo más sutil: crear una situación donde no se puede ganar ni salir sin costo altísimo. El petróleo encarece todo. La tensión inhibe inversiones. Desde Paraguay, donde los precios del combustible ya sienten el impacto, el costo de esta guerra es muy real.</div></div>`
+},
+'iran-ceasefire':{
+  kicker:'🕊️ Guerra · Irán — 2 de mayo de 2026',
+  title:'Alto el Fuego en Irán: ¿Paz Real o Pausa Táctica?',
+  lead:'Trump notificó al Congreso que las hostilidades "cesaron" — pero 5.000 tropas siguen en la región y la propuesta iraní no fue aceptada.',
+  icon:'🕊️', tags:['Irán','AltoElFuego','Trump','Congreso'],
+  body:`<p>El presidente Trump declaró el cese de hostilidades con Irán el 7 de abril de 2026, pero la realidad sobre el terreno contradice esa versión. Aproximadamente 5.000 tropas siguen desplegadas, e Irán envió una propuesta de paz revisada vía Pakistán que aún no fue respondida.</p>
+<h3>El problema de los 60 días</h3>
+<p>La Constitución de EE.UU. establece que solo el Congreso puede declarar la guerra. La ley de 1973 permite intervenciones de emergencia, pero obliga a solicitar autorización si superan 60 días. Ese plazo venció el 1° de mayo de 2026.</p>
+<blockquote>"El límite de 60 días queda suspendido por el alto el fuego" — Pete Hegseth, Secretario de Defensa</blockquote>
+<p>La senadora Lisa Murkowski anunció que presentará una Autorización para el Uso de la Fuerza Militar (AUMF) si no ve un plan creíble antes del 11 de mayo.</p>
+<h3>La propuesta iraní de paz</h3>
+<p>A través de mediadores paquistaníes, Irán envió una propuesta revisada. El obstáculo: Trump exige garantías absolutas sobre el programa nuclear iraní — condición que Teherán rechaza.</p>
+<div class="analbox"><div class="an-lbl">📊 Datos clave</div><div class="an-h">62 días de conflicto activo</div><div class="an-t">Desde el 28 de febrero: miles de civiles iraníes muertos, Ayatolá Jameneí eliminado, Estrecho de Ormuz parcialmente bloqueado y precios del petróleo en máximos históricos.</div></div>`
+},
+'petroleo':{
+  kicker:'🛢️ Economía Global — 1 de mayo de 2026',
+  title:'El Petróleo Se Dispara y Los Mercados Tiemblan',
+  lead:'El cierre del Estrecho de Ormuz sacudió los precios globales. Las reservas mundiales aguantarán pocas semanas más.',
+  icon:'🛢️', tags:['Petróleo','Economía','Ormuz','Paraguay'],
+  body:`<p>En respuesta a los bombardeos del 28 de febrero, Irán impuso un cierre selectivo del Estrecho de Ormuz — el paso por donde transita el 20% del petróleo mundial. Los precios del crudo alcanzaron récords históricos.</p>
+<h3>El efecto dominó global</h3>
+<p>Las instalaciones energéticas de ambos bandos fueron atacadas, agravando la crisis. Los mercados asiáticos registraron caídas abruptas. Europa aceleró la búsqueda de alternativas. Paraguay — que importa casi toda su gasolina — vio subir los precios en las bombas semanas después del inicio del conflicto.</p>
+<h3>¿Qué significa para Paraguay?</h3>
+<p>Paraguay importa combustibles fósiles casi en su totalidad. Cuando el petróleo sube internacionalmente, el impacto llega a las surtidoras en pocas semanas. Los transportistas ya reportan ajustes. Los alimentos serán los primeros en resentirse.</p>
+<div class="analbox"><div class="an-lbl">🔍 Impacto en Paraguay</div><div class="an-h">Guerra lejana, combustible caro acá</div><div class="an-t">Cada dólar adicional en el barril de Brent se traduce en aproximadamente Gs. 200-400 adicionales por litro de nafta en Paraguay. La guerra en Irán no es solo geopolítica: es una amenaza directa al bolsillo paraguayo.</div></div>`
+},
+'trump':{
+  kicker:'🇺🇸 Política EE.UU. — 1 de mayo de 2026',
+  title:'Trump Llama "Traición" Criticar la Guerra con Irán',
+  lead:'El presidente defendió la operación en Florida mientras el Congreso debate si extender la autorización de uso de fuerza.',
+  icon:'🇺🇸', tags:['Trump','Irán','Congreso','GuerraIrán'],
+  body:`<p>Durante un discurso en The Villages, Florida, Trump calificó de "traición" decir que EE.UU. no está ganando la guerra con Irán. "¿Quieren saber la verdad? Es traición", dijo, mientras en el Senado varios legisladores exigen un plan claro.</p>
+<h3>La presión del Congreso</h3>
+<p>La senadora Lisa Murkowski fue una de las voces más firmes: "No acepto que debamos involucrarnos en una acción militar indefinida sin dirección clara ni rendición de cuentas". Presentará una AUMF si no ve plan creíble antes del 11 de mayo.</p>
+<h3>La paradoja del "éxito"</h3>
+<p>Trump comparó la acción en Irán con la operación de enero en Venezuela pero evitó comparaciones directas. La contradicción es evidente: dice que las hostilidades "terminaron" pero también que no quiere hablar de victoria "hasta que los trabajos estén terminados".</p>`
+},
+'etanol':{
+  kicker:'🏛️ Política Nacional — 1 de mayo de 2026',
+  title:'Peña Reglamenta la Ley de Etanol: ¿Beneficio Real o Marketing?',
+  lead:'El presidente Santiago Peña promulgó la reglamentación que, según el gobierno, beneficiará a miles de trabajadores del sector agroindustrial.',
+  icon:'⚖️', tags:['Peña','Etanol','Paraguay','DíaDelTrabajador'],
+  body:`<p>El presidente Peña firmó la reglamentación de la Ley de Etanol, asegurando que generará empleo y dinamizará el sector energético paraguayo. La medida regula producción, comercialización y mezcla de etanol en combustibles.</p>
+<h3>Contexto: ¿Por qué ahora?</h3>
+<p>La reglamentación llega cuando los precios del petróleo se disparan por la guerra en Irán. El etanol — producido localmente a partir de caña de azúcar — podría ser una alternativa estratégica para reducir la dependencia de importaciones. Críticos advierten que la implementación será larga y compleja.</p>
+<h3>La voz sindical</h3>
+<p>Las centrales obreras, que este Día del Trabajador exigieron un reajuste del 25% del salario mínimo, criticaron que el gobierno celebra leyes de largo plazo mientras los trabajadores no llegan a fin de mes.</p>`
+},
+'mercosur':{
+  kicker:'🤝 Economía — 1 de mayo de 2026',
+  title:'Mercosur-UE: La Industria del Cuero Paraguayo Bajo Fuego',
+  lead:'La UIP rechazó una "campaña difamatoria" de ONGs internacionales, coincidiendo con la entrada en vigor del acuerdo UE-Mercosur.',
+  icon:'🤝', tags:['Mercosur','UE','Paraguay','Cuero','Exportaciones'],
+  body:`<p>La Unión Industrial Paraguaya (UIP) denunció una "campaña difamatoria" de ONGs internacionales contra la industria del cuero paraguayo, justo cuando entró en vigencia el acuerdo comercial Mercosur-UE.</p>
+<h3>El trasfondo del acuerdo</h3>
+<p>El acuerdo Mercosur-UE abre el mercado europeo a productos paraguayos, pero con condiciones: estándares ambientales y laborales más estrictos. Las ONGs argumentan que la industria del cuero paraguayo incumple normas de bienestar animal y trazabilidad. La UIP lo niega y acusa de competencia desleal disfrazada de preocupación ética.</p>`
+},
+'fiscalia':{
+  kicker:'📰 Libertad de Prensa — 30 de abril de 2026',
+  title:'Filizzola: La Fiscalía es Usada Como Arma Política Contra ABC Color',
+  lead:'El senador acusó al gobierno de instrumentalizar la institución para silenciar medios críticos.',
+  icon:'📰', tags:['LibertadDePrensa','ABCColor','Paraguay','Fiscalía'],
+  body:`<p>El senador Filizzola denunció que la acusación contra el Grupo ABC Color es "resultado de una puja interna del cartismo" y una demostración del uso político de la Fiscalía para atacar medios críticos. La senadora Cecilia Pérez rechazó la lectura.</p>
+<h3>El patrón regional</h3>
+<p>Paraguay se suma a una tendencia regional de presión contra medios independientes a través de mecanismos judiciales. Organizaciones como la SIP ya advirtieron sobre el deterioro de las condiciones para el periodismo en el país.</p>`
+},
+'clan-rios':{
+  kicker:'🚨 Policiales — 29 de abril de 2026',
+  title:'Megaoperativo en Bañado Sur: Capturan al Líder del "Clan Ríos"',
+  lead:'Rodney Ríos (30), sindicado como jefe del clan y presunto autor del homicidio de un oficial, detenido en seis allanamientos simultáneos.',
+  icon:'🚨', tags:['Policiales','BañadoSur','Narcotráfico','Asunción'],
+  body:`<p>En un megaoperativo coordinado, agentes de la Policía Nacional ejecutaron seis allanamientos simultáneos en el Bañado Sur y lograron la detención de Rodney Ríos (30), sindicado como líder del "Clan Ríos". Se incautaron armas, drogas y dinero en efectivo.</p>
+<h3>El perfil del detenido</h3>
+<p>Ríos es señalado como presunto autor del homicidio de un oficial de la Policía Nacional y principal coordinador del tráfico de cocaína, marihuana y crack en el Bañado Sur. Su red operaba con vigilancia que dificultaba operativos anteriores.</p>
+<h3>El problema de fondo</h3>
+<p>La captura es un golpe, pero expertos advierten que en barrios con alta vulnerabilidad social la eliminación de un líder criminal suele generar violencia por disputa de territorio antes de que una nueva estructura tome el control.</p>`
+},
+'fentanilo':{
+  kicker:'💊 Policiales · Drogas — 29 de abril de 2026',
+  title:'Fentanilo "Made in Paraguay": 300 Ampollas Interceptadas en Argentina',
+  lead:'Gendarmería argentina detuvo a un taxista transportando fentanilo presuntamente fabricado en laboratorios paraguayos.',
+  icon:'💊', tags:['Fentanilo','Narcotráfico','Paraguay','Argentina'],
+  body:`<p>La Gendarmería de Argentina detuvo a un taxista con 300 ampollas de fentanilo fabricadas presuntamente en un laboratorio clandestino de Paraguay, poniendo en foco la creciente capacidad de producción local de opioides sintéticos.</p>
+<h3>La ola de la tirzepatida</h3>
+<p>Paralelamente en Paraguay se registra una ola de robos de tirzepatida — medicamento para diabetes y obesidad que se volvió viral como "droga adelgazante". Farmacéuticos en Alto Paraná denuncian la impunidad del mercado negro.</p>
+<h3>La ruta del narcotráfico</h3>
+<p>El caso refleja una sofisticación del crimen organizado paraguayo: ya no solo es un país de tránsito, sino de producción y exportación de sustancias sintéticas de alta peligrosidad. Los especialistas lo llaman "industrialización del narcotráfico".</p>`
+},
+'yasy':{
+  kicker:'🌿 Policiales · Chaco — 30 de abril de 2026',
+  title:'Nuevos Ataques en Yasy Cañy: La Zona del Secuestro de Almir De Brum Vuelve a Arder',
+  lead:'Campesinos armados atacaron a estancieros y policías en Concepción, misma zona donde permanece secuestrado el ganadero brasileño.',
+  icon:'🌿', tags:['YasyCañy','Concepción','Secuestro','ConflictoTierras'],
+  body:`<p>La zona de Yasy Cañy, departamento de Concepción, volvió a ser escenario de violencia. Campesinos armados realizaron nuevos ataques contra estancieros y efectivos policiales, en la misma zona del secuestro del ganadero brasileño Almir De Brum, aún sin resolución.</p>
+<h3>Un conflicto de larga data</h3>
+<p>El conflicto refleja décadas de disputa por la tierra en el norte del Paraguay: estancieros con títulos de propiedad históricamente cuestionados versus comunidades campesinas que reivindican el acceso a la tierra como derecho.</p>
+<h3>El caso Almir De Brum</h3>
+<p>El ganadero brasileño fue secuestrado en la zona hace semanas. Sin capturas ni resolución. Gremios ganaderos exigen mayor presencia del Estado en la región. La geografía — monte cerrado — dificulta las tareas policiales.</p>`
+},
+'libertadores':{
+  kicker:'🏆 Copa Libertadores 2026 — 29 de abril',
+  title:'¡Paraguayos, Máximos Goleadores de la Libertadores 2026!',
+  lead:'Carlos González anotó hat-trick con Independiente del Valle. Bareiro, Ávalos, Pitta y Morales también brillan en el exterior.',
+  icon:'🏆', tags:['Libertadores','Paraguay','CarlosGonzález','Mundial2026'],
+  body:`<p>Carlos González protagonizó uno de los momentos más recordados del torneo al anotar los tres goles de la victoria del Independiente del Valle sobre Libertad. Los paraguayos se convirtieron en los máximos goleadores colectivos de la Copa Libertadores 2026.</p>
+<h3>El boom de los delanteros paraguayos</h3>
+<p>Bareiro, Ávalos, Pitta, Arce y Morales llegan a sus equipos extranjeros en un momento de forma excepcional. El buen momento abre un dilema para el técnico de la selección: muchas opciones de calidad, pero pocos puestos disponibles.</p>
+<h3>El sueño del Mundial 2026</h3>
+<p>El Mundial FIFA 2026 se disputará en EE.UU., Canadá y México con 48 selecciones. Paraguay tiene una oportunidad histórica de regresar al torneo más importante del fútbol, ausente desde 2010.</p>`
+},
+'duerksen':{
+  kicker:'🏎️ Fórmula 2 — 2 de mayo de 2026',
+  title:'Joshua Duerksen Brilla en Miami: Top 10 en Fórmula 2',
+  lead:'El piloto paraguayo de Invicta Racing clasificó cuarto en la sprint y séptimo en la carrera principal del GP de Miami.',
+  icon:'🏎️', tags:['Duerksen','F2','Paraguay','Miami','Motor'],
+  body:`<p>Joshua Duerksen integró el top 10 de la clasificación en la Fórmula 2 durante el Gran Premio de Miami, consolidando su presencia en la categoría de acceso a la Fórmula 1. Saldrá cuarto en la sprint y séptimo en la principal — resultado que refuerza sus aspiraciones.</p>
+<h3>Un paraguayo en la antesala de la F1</h3>
+<p>La Fórmula 2 es el escalón previo a la F1, y cada punto cuenta para el campeonato. Duerksen es el piloto paraguayo más cercano a la cima del automovilismo mundial en décadas, y su rendimiento en Miami confirma que no es casualidad.</p>`
+},
+'mundial':{
+  kicker:'🌍 Copa del Mundo 2026 — 29 de abril',
+  title:'Paraguay al Mundial: La Abundancia de Talentos y el Dilema del Técnico',
+  lead:'Muchas opciones de delanteros en el exterior, pocos lugares. La lucha por el boleto mundialista sigue viva.',
+  icon:'🌍', tags:['Paraguay','Mundial2026','Selección','Eliminatorias'],
+  body:`<p>El buen momento ofensivo de Bareiro, Ávalos, Pitta, Arce y Morales en el exterior abre un dilema: cómo elegir entre tantos delanteros en forma. La lucha por el Mundial se vive cada fin de semana.</p>
+<h3>El Mundial 2026</h3>
+<p>La Copa del Mundo 2026 será la primera edición con 48 selecciones. Para Sudamérica hay más cupos disponibles. Paraguay tiene una oportunidad histórica de regresar al torneo, ausente en 2018 y 2022.</p>
+<p>Con delanteros en racha en el exterior, la presión recae sobre el colectivo: si la defensa y el mediocampo responden, la delantera puede hacer historia.</p>`
+}
+};
+
+function verArt(id){
+  const a=ARTS[id]; if(!a)return;
+  const idx=ORDER.indexOf(id);
+  const prev=idx>0?ORDER[idx-1]:null;
+  const next=idx<ORDER.length-1?ORDER[idx+1]:null;
+  const tagsHtml=(a.tags||[]).map(t=>`<span class="tag">#${t}</span>`).join('');
+
+  const prevBtn=prev
+    ? `<button class="art-nav-btn" onclick="verArt('${prev}')"><small>← anterior</small>${ARTS[prev].title.substring(0,50)}…</button>`
+    : `<span></span>`;
+  const nextBtn=next
+    ? `<button class="art-nav-btn right" onclick="verArt('${next}')"><small>siguiente →</small>${ARTS[next].title.substring(0,50)}…</button>`
+    : `<span></span>`;
+
+  document.getElementById('art-content').innerHTML=`
+    <div class="art-kicker">${a.kicker}</div>
+    <div class="art-h">${a.title}</div>
+    <div class="art-meta">
+      <span>Notilea · Redacción</span>
+      <span>${new Date().toLocaleDateString('es-PY',{day:'numeric',month:'long',year:'numeric'})}</span>
+    </div>
+    <div class="art-th">${a.icon}</div>
+    <div class="art-lead">${a.lead}</div>
+    <div class="art-body">${a.body}</div>
+    <div class="share-bar">
+      <span class="sh-lbl">📤 Compartir:</span>
+      <button class="btn btn-wa btn-sm" onclick="waShare('${id}')">📲 WhatsApp</button>
+      <button class="btn btn-tk btn-sm" onclick="tkShare('${id}')">🎵 TikTok</button>
+      <button class="btn btn-ol btn-sm" onclick="copyLink('${id}',this)">🔗 Copiar enlace</button>
+    </div>
+    <div class="tags">${tagsHtml}</div>
+    <div class="art-nav">${prevBtn}${nextBtn}</div>
+  `;
+  showPg('pg-art');
+}
+</script>
+</body>
+</html>
