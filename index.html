@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>NOTILEA25 — Noticias de Paraguay y el Mundo</title>
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:url" content="https://notilea25-cloud.github.io/notilea.github.io/"/>
+  <meta property="og:title" content="NOTILEA25 — Noticias de Paraguay y el Mundo"/>
+  <meta property="og:description" content="🚨 Indignación en la ciudadanía por presunto caso de maltrato animal en Nanawa. Noticias locales, nacionales e internacionales."/>
+  <meta property="og:image" content="https://notilea25-cloud.github.io/notilea.github.io/og-cover.jpg"/>
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
+  <meta property="og:image:type" content="image/jpeg"/>
+  <meta property="og:site_name" content="NOTILEA25"/>
+  <meta property="og:locale" content="es_PY"/>
+  <meta property="fb:app_id" content=""/>
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image"/>
+  <meta name="twitter:title" content="NOTILEA25 — Noticias de Paraguay y el Mundo"/>
+  <meta name="twitter:description" content="🚨 Presunto caso de maltrato animal en Nanawa. Vecinos exigen intervención urgente."/>
+  <meta name="twitter:image" content="https://notilea25-cloud.github.io/notilea.github.io/og-cover.jpg"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet"/>
+
+  <style>
+    :root {
+      --red: #cc1111;
+      --red-dark: #990d0d;
+      --yellow: #f5c400;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --surface: #181818;
+      --border: #2a2a2a;
+      --text: #e8e8e8;
+      --muted: #888;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--text);
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      background: var(--red);
+      overflow: hidden;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      position: sticky; top: 0; z-index: 100;
+    }
+    .ticker-label {
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Oswald', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+      padding: 0 14px;
+      white-space: nowrap;
+      height: 100%;
+      display: flex; align-items: center;
+      letter-spacing: 1px;
+      flex-shrink: 0;
+    }
+    .ticker-track {
+      display: flex;
+      animation: ticker 40s linear infinite;
+      white-space: nowrap;
+    }
+    .ticker-track span {
+      font-family: 'Source Sans 3', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 0 40px 0 12px;
+      color: white;
+    }
+    @keyframes ticker {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--dark);
+      border-bottom: 3px solid var(--red);
+      padding: 0 20px;
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0 10px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .brand {
+      font-family: 'Oswald', sans-serif;
+      font-size: 42px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      color: white;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .brand span { color: var(--yellow); }
+    .header-meta {
+      text-align: right;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    #live-clock {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      color: var(--yellow);
+      font-weight: 500;
+    }
+    #live-date { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+    /* ── WEATHER BAR ── */
+    #weather-bar {
+      background: #141414;
+      border-bottom: 1px solid var(--border);
+      padding: 8px 20px;
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    #weather-bar .w-item { display: flex; align-items: center; gap: 6px; }
+    #weather-bar .w-label { color: var(--yellow); font-weight: 700; font-size: 11px; letter-spacing: 1px; font-family: 'Oswald', sans-serif; }
+    #weather-bar .w-val { color: var(--text); font-weight: 600; }
+
+    /* ── NAV ── */
+    nav {
+      background: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    nav::-webkit-scrollbar { display: none; }
+    .nav-inner { display: flex; gap: 0; min-width: max-content; }
+    .nav-btn {
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+      background: none;
+      border: none;
+      border-bottom: 3px solid transparent;
+      padding: 12px 16px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      white-space: nowrap;
+    }
+    .nav-btn:hover, .nav-btn.active {
+      color: white;
+      border-bottom-color: var(--red);
+    }
+
+    /* ── PAGES ── */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* ── FRONT PAGE LAYOUT ── */
+    .front-wrap { max-width: 1200px; margin: 0 auto; padding: 24px 20px; }
+
+    /* Hero */
+    .hero {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+      margin-bottom: 32px;
+    }
+    @media (max-width: 768px) {
+      .hero { grid-template-columns: 1fr; }
+    }
+
+    .hero-main {
+      background: var(--surface);
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      cursor: pointer;
+      transition: opacity 0.2s;
+    }
+    .hero-main:hover { opacity: 0.9; }
+    .hero-img {
+      width: 100%;
+      max-height: 420px;
+      object-fit: cover;
+      display: block;
+    }
+    .hero-img-placeholder {
+      width: 100%;
+      height: 380px;
+      background: linear-gradient(135deg, #1a0000 0%, #330000 40%, #1a0505 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 30px;
+    }
+    .hero-img-placeholder .paw { font-size: 80px; opacity: 0.3; }
+    .hero-img-placeholder .alert-emoji { font-size: 48px; }
+    .hero-body { padding: 20px; }
+    .section-tag {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 3px 10px;
+      margin-bottom: 10px;
+    }
+    .hero-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: white;
+      margin-bottom: 10px;
+    }
+    .hero-title em { color: var(--yellow); font-style: normal; }
+    .hero-lead {
+      font-size: 15px;
+      color: #bbb;
+      line-height: 1.7;
+      margin-bottom: 12px;
+    }
+    .read-more-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--red);
+      color: white;
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: none;
+      padding: 9px 18px;
+      cursor: pointer;
+      transition: background 0.2s;
+      text-transform: uppercase;
+    }
+    .read-more-btn:hover { background: var(--red-dark); }
+
+    /* Sidebar */
+    .hero-sidebar { display: flex; flex-direction: column; gap: 16px; }
+    .sidebar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .sidebar-card:hover { border-color: var(--red); }
+    .sidebar-card-inner { padding: 14px; }
+    .sidebar-tag {
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 6px;
+      display: block;
+    }
+    .sidebar-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1.3;
+      color: white;
+      margin-bottom: 6px;
+    }
+    .sidebar-excerpt { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+    /* Section divider */
+    .section-divider {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 28px 0 18px;
+    }
+    .section-divider-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 20px;
+      font-weight: 700;
+      color: white;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .section-divider-line { flex: 1; height: 2px; background: var(--border); }
+    .section-divider-line.red { background: var(--red); width: 60px; flex: none; }
+
+    /* News grid */
+    .news-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .news-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 16px;
+      cursor: pointer;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .news-card:hover { border-color: var(--red); transform: translateY(-2px); }
+    .news-card-tag { font-family: 'Oswald', sans-serif; font-size: 10px; letter-spacing: 1px; font-weight: 700; color: var(--red); margin-bottom: 8px; display: block; }
+    .news-card-title { font-family: 'Oswald', sans-serif; font-size: 18px; font-weight: 600; line-height: 1.3; color: white; margin-bottom: 8px; }
+    .news-card-excerpt { font-size: 13px; color: var(--muted); line-height: 1.55; }
+    .news-card-meta { margin-top: 10px; font-size: 11px; color: #555; font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; }
+
+    /* ── EDITORIAL BOX ── */
+    .editorial-box {
+      background: linear-gradient(135deg, #14000a 0%, #1a0010 100%);
+      border: 1px solid #3a1020;
+      border-left: 4px solid var(--yellow);
+      border-radius: 4px;
+      padding: 24px 28px;
+      margin-bottom: 32px;
+    }
+    .editorial-label {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
+      font-weight: 700;
+      color: var(--yellow);
+      margin-bottom: 10px;
+      display: block;
+    }
+    .editorial-title {
+      font-family: 'Lora', serif;
+      font-size: 26px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .editorial-body {
+      font-family: 'Lora', serif;
+      font-size: 15px;
+      color: #ccc;
+      line-height: 1.85;
+    }
+    .editorial-body p + p { margin-top: 12px; }
+    .editorial-sig { margin-top: 14px; font-size: 13px; color: var(--muted); font-style: italic; }
+
+    /* ── ARTICLE PAGE ── */
+    .article-page { max-width: 800px; margin: 0 auto; padding: 30px 20px 60px; }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--surface);
+      color: var(--muted);
+      border: 1px solid var(--border);
+      font-family: 'Oswald', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 14px;
+      cursor: pointer;
+      transition: color 0.2s, border-color 0.2s;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+    .back-btn:hover { color: white; border-color: var(--red); }
+
+    .article-section-tag {
+      display: inline-block;
+      background: var(--red);
+      color: white;
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      padding: 4px 12px;
+      margin-bottom: 16px;
+    }
+    .article-headline {
+      font-family: 'Oswald', sans-serif;
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      line-height: 1.1;
+      color: white;
+      margin-bottom: 16px;
+    }
+    .article-headline em { color: var(--yellow); font-style: normal; }
+    .article-byline {
+      font-size: 13px;
+      color: var(--muted);
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 20px;
+    }
+    .article-byline strong { color: var(--yellow); }
+    .article-hero-img {
+      width: 100%;
+      border-radius: 4px;
+      margin-bottom: 24px;
+      max-height: 450px;
+      object-fit: cover;
+    }
+    .article-hero-placeholder {
+      width: 100%;
+      height: 350px;
+      background: linear-gradient(135deg, #1a0000 0%, #2d0000 100%);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      font-size: 70px;
+    }
+    .article-body {
+      font-family: 'Lora', serif;
+      font-size: 17px;
+      line-height: 1.9;
+      color: #ccc;
+    }
+    .article-body p { margin-bottom: 18px; }
+    .article-body strong { color: white; }
+    .article-body h3 {
+      font-family: 'Oswald', sans-serif;
+      font-size: 22px;
+      color: white;
+      margin: 28px 0 12px;
+      border-left: 3px solid var(--red);
+      padding-left: 12px;
+    }
+    .article-body blockquote {
+      border-left: 3px solid var(--yellow);
+      padding: 12px 20px;
+      margin: 20px 0;
+      background: #141414;
+      font-style: italic;
+      color: #bbb;
+    }
+    .article-share {
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .article-share span { font-family: 'Oswald', sans-serif; font-size: 13px; color: var(--muted); letter-spacing: 1px; }
+    .share-btn {
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
+      font-size: 13px;
+      padding: 7px 14px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: background 0.2s;
+    }
+    .share-btn:hover { background: var(--border); }
+    .share-btn.fb { border-color: #1877f2; color: #1877f2; }
+    .share-btn.wa { border-color: #25d366; color: #25d366; }
+
+    /* ── FOOTER ── */
+    footer {
+      background: #080808;
+      border-top: 2px solid var(--red);
+      padding: 24px 20px;
+      text-align: center;
+    }
+    .footer-brand { font-family: 'Oswald', sans-serif; font-size: 28px; font-weight: 700; color: white; margin-bottom: 8px; }
+    .footer-brand span { color: var(--yellow); }
+    .footer-tagline { font-size: 13px; color: var(--muted); margin-bottom: 12px; }
+    .footer-links { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { color: var(--muted); font-size: 12px; text-decoration: none; transition: color 0.2s; font-family: 'Oswald', sans-serif; letter-spacing: 0.5px; }
+    .footer-links a:hover { color: var(--yellow); }
+
+    /* Responsive tweaks */
+    @media (max-width: 600px) {
+      .brand { font-size: 30px; }
+      .hero-title { font-size: 24px; }
+      .article-page { padding: 20px 14px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BREAKING TICKER -->
+<div class="ticker-wrap">
+  <div class="ticker-label">🔴 URGENTE</div>
+  <div style="overflow:hidden;flex:1">
+    <div class="ticker-track" id="tickerTrack">
+      <span>🚨 Presunto maltrato animal en Nanawa sacude a la ciudadanía · Vecinos piden intervención urgente de defensores animales</span>
+      <span>🌍 Guerra EE.UU.–Israel vs Irán: alto el fuego frágil · negociaciones en curso · Teherán evalúa propuesta de paz</span>
+      <span>🏛️ Sesión en la Junta de Asunción: se tratarán balances del municipio</span>
+      <span>⚽ Encuesta ubica a Camilo como favorito en internas de Honor Colorado para Asunción</span>
+      <span>💔 Caso Pecci: reportan avances sobre autores intelectuales y rastreo de fuentes financieras</span>
+      <span>🌡️ Clima Paraguay: temperaturas frescas con posibilidad de lluvias en el este del país</span>
+      <span>🚨 Presunto maltrato animal en Nanawa sacude a la ciudadanía · Vecinos piden intervención urgente de defensores animales</span>
+      <span>🌍 Guerra EE.UU.–Israel vs Irán: alto el fuego frágil · negociaciones en curso · Teherán evalúa propuesta de paz</span>
+      <span>🏛️ Sesión en la Junta de Asunción: se tratarán balances del municipio</span>
+      <span>⚽ Encuesta ubica a Camilo como favorito en internas de Honor Colorado para Asunción</span>
+    </div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <a class="brand" onclick="showPage('front')" href="#">NOTILEA<span>25</span></a>
+    <div class="header-meta">
+      <div id="live-clock">--:--:--</div>
+      <div id="live-date">Cargando fecha…</div>
+    </div>
+  </div>
+</header>
+
+<!-- WEATHER BAR -->
+<div id="weather-bar">
+  <div class="w-item"><span class="w-label">📍 ASÚ</span><span class="w-val" id="w-asu">Cargando…</span></div>
+  <div class="w-item"><span class="w-label">🌿 CHACO</span><span class="w-val" id="w-chaco">Cargando…</span></div>
+  <div class="w-item"><span class="w-label">🏙️ ALTO PARANÁ</span><span class="w-val" id="w-alto">Cargando…</span></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <button class="nav-btn active" onclick="showSection('portada')">PORTADA</button>
+    <button class="nav-btn" onclick="showSection('paraguay')">PARAGUAY</button>
+    <button class="nav-btn" onclick="showSection('mundo')">MUNDO</button>
+    <button class="nav-btn" onclick="showSection('iran')">GUERRA IRÁN</button>
+    <button class="nav-btn" onclick="showSection('editorial')">EDITORIAL</button>
+    <button class="nav-btn" onclick="showSection('clima')">CLIMA</button>
+  </div>
+</nav>
+
+<!-- ══════════════ FRONT PAGE ══════════════ -->
+<div class="page active" id="page-front">
+<div class="front-wrap">
+
+  <!-- HERO -->
+  <div class="hero" id="sect-portada">
+    <!-- Main hero -->
+    <div class="hero-main" onclick="showArticle('maltrato')">
+      <div class="hero-img-placeholder">
+        <div class="alert-emoji">🚨🐾</div>
+        <div style="font-family:'Oswald',sans-serif;font-size:18px;color:#e8c840;text-align:center;line-height:1.4">PRESUNTO CASO DE<br>MALTRATO ANIMAL<br><span style="color:#888;font-size:14px">Nanawa · Ex Pto. Elsa</span></div>
+      </div>
+      <div class="hero-body">
+        <span class="section-tag">🚨 CASO URGENTE · NANAWA</span>
+        <div class="hero-title"><em>INDIGNACIÓN EN LA CIUDADANÍA</em> POR PRESUNTO CASO DE MALTRATO ANIMAL EN NANAWA</div>
+        <p class="hero-lead">Vecinos expresaron su profunda preocupación e indignación ante un presunto caso de maltrato animal ocurrido en la ciudad de Nanawa, Ex Puerto Elsa. Según denuncias realizadas en redes sociales, varias personas solicitan la intervención urgente de alguna organización o defensa animal que pueda actuar y brindar ayuda a los perritos afectados.</p>
+        <button class="read-more-btn" onclick="showArticle('maltrato')">LEER NOTA COMPLETA →</button>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="hero-sidebar">
+      <div class="sidebar-card" onclick="showArticle('iran')">
+        <div class="sidebar-card-inner">
+          <span class="sidebar-tag">🌍 MUNDO · URGENTE</span>
+          <div class="sidebar-title">Guerra EE.UU.–Israel vs Irán: alto el fuego frágil y negociaciones en curso</div>
+          <div class="sidebar-excerpt">Trump amenaza con reanudar bombardeos si Irán no acepta acuerdo. Teherán evalúa propuesta de paz.</div>
+        </div>
+      </div>
+      <div class="sidebar-card" onclick="showArticle('junta')">
+        <div class="sidebar-card-inner">
+          <span class="sidebar-tag">🏛️ PARAGUAY · POLÍTICA</span>
+          <div class="sidebar-title">Sesión en la Junta de Asunción para aprobar balances este domingo</div>
+          <div class="sidebar-excerpt">Sesión convocada para el domingo. Varias propuestas en agenda municipal.</div>
+        </div>
+      </div>
+      <div class="sidebar-card" onclick="showArticle('camilo')">
+        <div class="sidebar-card-inner">
+          <span class="sidebar-tag">⚽ POLÍTICA · ELECCIONES</span>
+          <div class="sidebar-title">Encuesta ubica a Camilo como ganador de las internas en Honor Colorado</div>
+          <div class="sidebar-excerpt">El precandidato lidera las preferencias para la intendencia de Asunción según datos recientes.</div>
+        </div>
+      </div>
+      <div class="sidebar-card" onclick="showArticle('pecci')">
+        <div class="sidebar-card-inner">
+          <span class="sidebar-tag">⚖️ JUDICIALES</span>
+          <div class="sidebar-title">Caso Pecci: avances sobre autores intelectuales y fuentes financieras</div>
+          <div class="sidebar-excerpt">El fiscal Manuel Doldán reportó novedades en la investigación sobre el asesinato del fiscal Marcelo Pecci.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PARAGUAY SECTION -->
+  <div id="sect-paraguay">
+    <div class="section-divider">
+      <div class="section-divider-line red"></div>
+      <div class="section-divider-title">🇵🇾 PARAGUAY</div>
+      <div class="section-divider-line"></div>
+    </div>
+    <div class="news-grid">
+      <div class="news-card" onclick="showArticle('marilina')">
+        <span class="news-card-tag">🎤 ESPECTÁCULOS</span>
+        <div class="news-card-title">FIFA anuncia artistas para el Mundial 2026 y Marilina Bogado no está en la lista</div>
+        <div class="news-card-excerpt">La cantante paraguaya no figura entre los confirmados para la ceremonia de inauguración del campeonato del mundo.</div>
+        <div class="news-card-meta">HOY.COM.PY · 9 MAY 2026</div>
+      </div>
+      <div class="news-card" onclick="showArticle('nene')">
+        <span class="news-card-tag">🚨 SUCESOS</span>
+        <div class="news-card-title">Muere adolescente de 15 años al mando de un auto al chocar contra un camión</div>
+        <div class="news-card-excerpt">El percance fatal ocurrió en horas de la noche. El menor falleció dentro del vehículo tras el violento impacto.</div>
+        <div class="news-card-meta">HOY.COM.PY · 9 MAY 2026</div>
+      </div>
+      <div class="news-card" onclick="showArticle('pecci')">
+        <span class="news-card-tag">⚖️ JUDICIALES</span>
+        <div class="news-card-title">Caso Pecci: reportan avances sobre autores intelectuales</div>
+        <div class="news-card-excerpt">Las autoridades rastrean fuentes financieras vinculadas al asesinato del fiscal Marcelo Pecci.</div>
+        <div class="news-card-meta">HOY.COM.PY · 9 MAY 2026</div>
+      </div>
+      <div class="news-card" onclick="showArticle('junta')">
+        <span class="news-card-tag">🏛️ NACIONALES</span>
+        <div class="news-card-title">Sesión en la Junta de Asunción el domingo para aprobar balances</div>
+        <div class="news-card-excerpt">La sesión fue convocada para este domingo a la siesta con varios puntos en la agenda municipal.</div>
+        <div class="news-card-meta">HOY.COM.PY · 9 MAY 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MUNDO SECTION -->
+  <div id="sect-mundo">
+    <div class="section-divider">
+      <div class="section-divider-line red"></div>
+      <div class="section-divider-title">🌍 MUNDO</div>
+      <div class="section-divider-line"></div>
+    </div>
+    <div class="news-grid">
+      <div class="news-card" onclick="showArticle('iran')">
+        <span class="news-card-tag">💥 CONFLICTO ARMADO</span>
+        <div class="news-card-title">EE.UU. e Israel vs Irán: negociaciones para poner fin a la guerra</div>
+        <div class="news-card-excerpt">Washington espera respuesta de Teherán a una propuesta que incluiría el envío del uranio enriquecido a EE.UU. Trump amenaza reanudar bombardeos.</div>
+        <div class="news-card-meta">CNN ESPAÑOL · 10 MAY 2026</div>
+      </div>
+      <div class="news-card" onclick="showArticle('ormuz')">
+        <span class="news-card-tag">⚓ ESTRECHO DE ORMUZ</span>
+        <div class="news-card-title">Tensión en el estrecho de Ormuz: ataques navales elevan costos energéticos globales</div>
+        <div class="news-card-excerpt">EE.UU. suspende el "Proyecto Libertad". Hezbollah adjudica 26 ataques, incluyendo dos dentro de Israel por primera vez desde el alto el fuego.</div>
+        <div class="news-card-meta">CNN ESPAÑOL · 10 MAY 2026</div>
+      </div>
+      <div class="news-card" onclick="showArticle('iran-china')">
+        <span class="news-card-tag">🤝 DIPLOMACIA</span>
+        <div class="news-card-title">Canciller iraní visita Pekín buscando apoyo antes de llegada de Trump a China</div>
+        <div class="news-card-excerpt">La gira diplomática de Abbas Araghchi busca recabar respaldo internacional para resolver el conflicto con EE.UU.</div>
+        <div class="news-card-meta">CNN ESPAÑOL · 7 MAY 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- IRAN SECTION (brief) -->
+  <div id="sect-iran">
+    <div class="section-divider">
+      <div class="section-divider-line red"></div>
+      <div class="section-divider-title">🔥 GUERRA EN IRÁN</div>
+      <div class="section-divider-line"></div>
+    </div>
+    <div class="news-grid">
+      <div class="news-card" onclick="showArticle('iran')">
+        <span class="news-card-tag">💥 ÚLTIMO MOMENTO</span>
+        <div class="news-card-title">El conflicto entra en su tercer mes: ¿paz o reanudación de bombardeos?</div>
+        <div class="news-card-excerpt">Trump declaró "muy buenas conversaciones" con Irán. Sin embargo, amenazó con reanudar los ataques si Teherán rechaza el acuerdo propuesto.</div>
+        <div class="news-card-meta">CNN ESPAÑOL · 10 MAY 2026</div>
+      </div>
+      <div class="news-card" onclick="showArticle('ormuz')">
+        <span class="news-card-tag">⛽ ECONOMÍA GLOBAL</span>
+        <div class="news-card-title">Cierre del estrecho de Ormuz eleva costos de energía y fertilizantes a nivel global</div>
+        <div class="news-card-excerpt">La FAO advierte sobre impacto en el suministro mundial de cereales. Población en economías desarrolladas reduce sus ahorros.</div>
+        <div class="news-card-meta">CNN ESPAÑOL · 9 MAY 2026</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- EDITORIAL -->
+  <div id="sect-editorial">
+    <div class="section-divider">
+      <div class="section-divider-line red"></div>
+      <div class="section-divider-title">✒️ EDITORIAL</div>
+      <div class="section-divider-line"></div>
+    </div>
+    <div class="editorial-box">
+      <span class="editorial-label">EDITORIAL · NOTILEA25 · 10 DE MAYO DE 2026</span>
+      <div class="editorial-title">El silencio también es complicidad: el caso de Nanawa y la urgencia de una ley de bienestar animal en Paraguay</div>
+      <div class="editorial-body">
+        <p>Las imágenes que circularon esta semana en redes sociales desde Nanawa, Ex Puerto Elsa, no solo muestran a dos perritos indefensos siendo sometidos a actos de presunta crueldad. Muestran, también, el vacío institucional que persiste en nuestro país cuando se trata de proteger a los animales más vulnerables.</p>
+        <p>Paraguay cuenta con la Ley N° 4840/13 de bienestar animal, pero su aplicación sigue siendo laxa, fragmentada y dependiente de la iniciativa ciudadana. No existe un organismo nacional de control con poder real de intervención. Las organizaciones protectoras operan a pulmón, con recursos propios y voluntad desmedida, mientras el Estado mira hacia otro lado.</p>
+        <p>Lo que ocurrió en Nanawa no es un hecho aislado. Es el síntoma de una cultura que aún no ha terminado de comprender que la violencia contra los animales está directamente correlacionada con la violencia social. Los estudios criminológicos son contundentes: el maltrato animal es un predictor confiable de violencia interpersonal.</p>
+        <p>Desde <strong>Notilea25</strong> hacemos un llamado urgente: a las autoridades municipales de Nanawa y a las organizaciones de defensa animal para que actúen sin demora. A la ciudadanía, para que denuncie, documente y no guarde silencio. Y al Congreso Nacional, para que modernice y refuerce los mecanismos de aplicación de la ley vigente.</p>
+        <p><strong>Compartí. Denunciá. Exigí justicia.</strong> El silencio también es una forma de crueldad.</p>
+        <div class="editorial-sig">— Redacción Notilea25 · Santa Rita, Alto Paraná</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CLIMA SECTION -->
+  <div id="sect-clima">
+    <div class="section-divider">
+      <div class="section-divider-line red"></div>
+      <div class="section-divider-title">🌤️ CLIMA PARAGUAY</div>
+      <div class="section-divider-line"></div>
+    </div>
+    <div id="clima-cards" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px;margin-bottom:32px">
+      <!-- filled by JS -->
+    </div>
+  </div>
+
+</div><!-- /front-wrap -->
+</div><!-- /page-front -->
+
+<!-- ══════════════ ARTICLE PAGES ══════════════ -->
+<div class="page" id="page-article">
+  <div class="article-page" id="article-content">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">NOTILEA<span>25</span></div>
+  <div class="footer-tagline">Noticias de Paraguay y el Mundo · Santa Rita, Alto Paraná</div>
+  <div class="footer-links">
+    <a href="https://www.hoy.com.py" target="_blank">HOY.COM.PY</a>
+    <a href="https://www.ultimahora.com" target="_blank">ÚLTIMA HORA</a>
+    <a href="https://cnnespanol.cnn.com" target="_blank">CNN ESPAÑOL</a>
+    <a href="https://notilea25-cloud.github.io/notilea.github.io/" target="_blank">INICIO</a>
+  </div>
+  <div style="margin-top:14px;font-size:11px;color:#333">© 2026 Notilea25 · Todos los derechos reservados</div>
+</footer>
+
+<script>
+// ── CLOCK ──
+function updateClock() {
+  const now = new Date();
+  const pad = n => String(n).padStart(2,'0');
+  document.getElementById('live-clock').textContent =
+    `${pad(now.getHours())}:${pad(now.getMinutes())}:${pad(now.getSeconds())}`;
+  const days = ['Domingo','Lunes','Martes','Miércoles','Jueves','Viernes','Sábado'];
+  const months = ['enero','febrero','marzo','abril','mayo','junio','julio','agosto','septiembre','octubre','noviembre','diciembre'];
+  document.getElementById('live-date').textContent =
+    `${days[now.getDay()]}, ${now.getDate()} de ${months[now.getMonth()]} de ${now.getFullYear()}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// ── WEATHER ──
+async function fetchWeather(lat, lon, elId) {
+  try {
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&hourly=relativehumidity_2m&timezone=America/Asuncion`;
+    const r = await fetch(url);
+    const d = await r.json();
+    const w = d.current_weather;
+    const codes = {0:'☀️ Despejado',1:'🌤️ Mayormente despejado',2:'⛅ Parcialmente nublado',3:'☁️ Nublado',45:'🌫️ Niebla',48:'🌫️ Niebla',51:'🌦️ Llovizna',61:'🌧️ Lluvia',63:'🌧️ Lluvia',71:'❄️ Nieve',80:'🌧️ Chubascos',95:'⛈️ Tormenta'};
+    const desc = codes[w.weathercode] || `Código ${w.weathercode}`;
+    document.getElementById(elId).textContent = `${w.temperature}°C · ${desc}`;
+    return w.temperature;
+  } catch(e) {
+    document.getElementById(elId).textContent = 'No disponible';
+  }
+}
+fetchWeather(-25.2867, -57.647, 'w-asu');
+fetchWeather(-22.0, -60.0, 'w-chaco');
+fetchWeather(-25.5, -54.7, 'w-alto');
+
+// Full climate cards
+async function buildClimaCards() {
+  const cities = [
+    {name:'Asunción', lat:-25.2867, lon:-57.647, emoji:'🏙️'},
+    {name:'Alto Paraná', lat:-25.5, lon:-54.7, emoji:'🌿'},
+    {name:'Chaco', lat:-22.0, lon:-60.0, emoji:'🌵'},
+    {name:'Encarnación', lat:-27.33, lon:-55.86, emoji:'🌊'},
+    {name:'Concepción', lat:-23.41, lon:-57.43, emoji:'🌾'},
+    {name:'Pedro Juan C.', lat:-22.56, lon:-55.71, emoji:'🌲'},
+  ];
+  const container = document.getElementById('clima-cards');
+  for (const c of cities) {
+    try {
+      const url = `https://api.open-meteo.com/v1/forecast?latitude=${c.lat}&longitude=${c.lon}&current_weather=true&hourly=precipitation_probability&timezone=America/Asuncion`;
+      const r = await fetch(url);
+      const d = await r.json();
+      const w = d.current_weather;
+      const codes = {0:'Despejado',1:'Mayorm. despejado',2:'Parcialm. nublado',3:'Nublado',45:'Niebla',51:'Llovizna',61:'Lluvia',63:'Lluvia',80:'Chubascos',95:'Tormenta'};
+      const emojis = {0:'☀️',1:'🌤️',2:'⛅',3:'☁️',45:'🌫️',51:'🌦️',61:'🌧️',63:'🌧️',80:'🌧️',95:'⛈️'};
+      const desc = codes[w.weathercode] || 'Variable';
+      const em = emojis[w.weathercode] || '🌡️';
+      const windDir = ['N','NE','E','SE','S','SO','O','NO'][Math.round(w.winddirection/45)%8];
+      container.innerHTML += `
+        <div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:18px">
+          <div style="font-size:28px;margin-bottom:6px">${c.emoji} ${em}</div>
+          <div style="font-family:'Oswald',sans-serif;font-size:16px;font-weight:700;color:white;margin-bottom:4px">${c.name}</div>
+          <div style="font-size:32px;font-family:'Oswald',sans-serif;font-weight:700;color:var(--yellow)">${w.temperature}°C</div>
+          <div style="font-size:13px;color:#aaa;margin-top:4px">${desc}</div>
+          <div style="font-size:12px;color:#666;margin-top:4px">Viento: ${w.windspeed} km/h ${windDir}</div>
+        </div>`;
+    } catch(e) {
+      container.innerHTML += `<div style="background:var(--surface);border:1px solid var(--border);border-radius:4px;padding:18px"><div style="color:var(--muted)">${c.emoji} ${c.name}<br><span style="color:#444">Sin datos</span></div></div>`;
+    }
+  }
+}
+
+// ── NAVIGATION ──
+function showPage(p) {
+  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
+  document.getElementById('page-' + p).classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  if (p === 'front') buildClimaCards();
+}
+
+function showSection(s) {
+  showPage('front');
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  setTimeout(() => {
+    const el = document.getElementById('sect-' + s);
+    if (el) el.scrollIntoView({behavior:'smooth', block:'start'});
+  }, 100);
+}
+
+// ── ARTICLES DATA ──
+const articles = {
+  'maltrato': {
+    tag: '🚨 CASO URGENTE · NANAWA',
+    title: '¡INDIGNACIÓN EN LA CIUDADANÍA! Presunto caso de maltrato animal sacude a Nanawa — Ex Puerto Elsa',
+    byline: 'Redacción Notilea25 · Santa Rita, Alto Paraná · 10 de mayo de 2026',
+    emoji: '🐾🚨',
+    body: `
+      <p><strong>NANAWA (Notilea25) —</strong> Dos perritos indefensos habrían sido víctimas de violencia en la ciudad de Nanawa, Ex Puerto Elsa, según denuncias que se viralizaron rápidamente en las redes sociales durante los últimos días. Las imágenes y videos difundidos muestran situaciones que generaron una ola de indignación entre los ciudadanos.</p>
+      <h3>Lo que se sabe hasta ahora</h3>
+      <p>Según las denuncias realizadas por vecinos a través de Facebook y otras plataformas, un hombre habría sometido a dos canes de pequeño tamaño a tratos violentos en la vía pública, en las cercanías de un lavadero en el barrio. Los hechos habrían ocurrido en repetidas oportunidades, lo que motivó que varios vecinos comenzaran a documentar y difundir el material.</p>
+      <p>Las publicaciones rápidamente acumularon cientos de compartidos, con mensajes que exigen justicia y piden la intervención de organizaciones de protección animal con presencia en la zona del departamento de Presidente Hayes y áreas limítrofes del Chaco paraguayo.</p>
+      <blockquote>"Basta de maltrato. Alguien que los ayude, que intervengan por favor. Esos perritos no tienen la culpa de nada." — Comentario de vecino en redes sociales.</blockquote>
+      <h3>¿Qué dice la ley?</h3>
+      <p>Paraguay cuenta con la <strong>Ley N° 4840/13 de Bienestar Animal</strong>, que tipifica el maltrato animal como infracción y en casos graves puede derivar en sanciones penales. Sin embargo, su aplicación efectiva depende en gran medida de la denuncia formal ante la Fiscalía del Ambiente o la Policía Nacional, y de la voluntad de actuación de las autoridades locales.</p>
+      <p>Organizaciones como <em>Rescate Animal Paraguay</em> y varias fundaciones privadas han señalado en reiteradas ocasiones que la ley existe pero los mecanismos de control son insuficientes, especialmente en ciudades del interior y zonas rurales.</p>
+      <h3>El pedido urgente de la ciudadanía</h3>
+      <p>Los vecinos de Nanawa piden que alguna organización de defensa animal con capacidad operativa pueda desplazarse a la zona para rescatar a los animales afectados, brindarles atención veterinaria y, de ser posible, facilitar su adopción responsable.</p>
+      <p>Desde <strong>Notilea25</strong> nos sumamos al llamado ciudadano y exhortamos a las autoridades competentes y a las organizaciones animalistas a tomar conocimiento de este caso y actuar con la urgencia que la situación amerita. Los animales también tienen derechos, y la comunidad no puede seguir callando.</p>
+      <p><strong>Si tenés información sobre el caso o podés brindar ayuda, comunicate con las organizaciones de protección animal de tu zona o realizá la denuncia formal en la Fiscalía.</strong></p>
+    `
+  },
+  'iran': {
+    tag: '🌍 GUERRA · MEDIO ORIENTE',
+    title: 'Guerra EE.UU.–Israel vs Irán: alto el fuego frágil, negociaciones y amenaza de nuevos bombardeos',
+    byline: 'Fuente: CNN Español · Actualización: 10 de mayo de 2026',
+    emoji: '💥🕊️',
+    body: `
+      <p>El conflicto entre Estados Unidos, Israel e Irán, iniciado el <strong>28 de febrero de 2026</strong> con una serie de bombardeos aéreos sorpresivos sobre ciudades iraníes, entró en su segundo mes sin una resolución definitiva. Si bien se anunció un alto el fuego a mediados de abril, este ha sido objeto de crecientes infracciones.</p>
+      <h3>Estado actual del conflicto</h3>
+      <p>El presidente Donald Trump declaró haber mantenido "muy buenas conversaciones" con Irán en las últimas 24 horas, pero también amenazó con reanudar los bombardeos si Teherán no acepta el acuerdo propuesto. Según fuentes diplomáticas citadas por CNN, el borrador de paz contempla que Irán entregue su uranio altamente enriquecido a EE.UU. y que se comprometa a no operar sus instalaciones subterráneas.</p>
+      <blockquote>"Cualquier acuerdo incluirá el envío del uranio iraní a Estados Unidos y el cierre de instalaciones nucleares subterráneas." — Donald Trump, 6 de mayo de 2026.</blockquote>
+      <h3>El estrecho de Ormuz, epicentro de la tensión</h3>
+      <p>Teherán y Washington intercambiaron ataques a través del estratégico estrecho a última hora del jueves, mientras ambas partes se acusaban mutuamente de disparar contra buques no aliados en el Golfo. EE.UU. suspendió el llamado "Proyecto Libertad", iniciativa que buscaba guiar a buques mercantes por el estrecho.</p>
+      <p>El cierre intermitente de Ormuz está elevando los costos globales de energía y fertilizantes, con impacto directo en el suministro de cereales a nivel mundial, según advirtió la FAO.</p>
+      <h3>El frente libanés</h3>
+      <p>Israel también llevó a cabo ataques contra Hezbollah en el sur del Líbano, con más de 85 sitios alcanzados en las últimas 24 horas. Al menos 16 personas murieron en ataques israelíes en el sur libanés. Hezbollah adjudicó 26 ataques, incluyendo dos dentro de Israel por primera vez desde el acuerdo de alto el fuego ampliado.</p>
+      <h3>La diplomacia iraní en Pekín</h3>
+      <p>El canciller iraní Abbas Araghchi visitó Pekín en gira diplomática para recabar apoyo chino, en una reunión que se produjo antes del arribo del presidente Trump a China. Es el primer encuentro entre los máximos diplomáticos iraní y chino desde el inicio de la guerra.</p>
+    `
+  },
+  'ormuz': {
+    tag: '⛽ ECONOMÍA GLOBAL',
+    title: 'Tensión en el estrecho de Ormuz impacta precios de energía y alimentos a nivel mundial',
+    byline: 'Fuente: CNN Español · 9 de mayo de 2026',
+    emoji: '⛽🚢',
+    body: `
+      <p>El estrecho de Ormuz, por donde transita cerca del <strong>20% del petróleo mundial</strong>, se ha convertido en el epicentro de las escaramuzas entre las fuerzas de EE.UU. e Irán durante el conflicto que comenzó en febrero de 2026. Las consecuencias económicas se sienten a nivel global.</p>
+      <h3>Impacto en los precios globales</h3>
+      <p>La FAO señaló que, si bien el suministro mundial de cereales se mantendría estable durante 2026 con un aumento proyectado del 6% en producción, persiste la incertidumbre sobre el trigo del año próximo debido al encarecimiento de la energía y los fertilizantes derivado del conflicto.</p>
+      <p>En las economías desarrolladas, las personas están reduciendo sus ahorros para mantener su nivel de vida ante los mayores costos vinculados al conflicto. Los analistas advierten que una prolongación de la guerra podría generar presiones inflacionarias significativas a nivel global.</p>
+      <h3>EE.UU. suspende el "Proyecto Libertad"</h3>
+      <p>El presidente Trump anunció la suspensión de la iniciativa diseñada para guiar buques mercantes a través del estrecho de Ormuz, horas después de que el secretario de Estado Marco Rubio declarara el fin de las operaciones de combate contra Irán.</p>
+    `
+  },
+  'iran-china': {
+    tag: '🤝 DIPLOMACIA',
+    title: 'Canciller iraní visita Pekín buscando apoyo antes de la llegada de Trump a China',
+    byline: 'Fuente: CNN Español · 7 de mayo de 2026',
+    emoji: '🇮🇷🇨🇳',
+    body: `
+      <p>El ministro de Relaciones Exteriores de Irán, <strong>Abbas Araghchi</strong>, se reunió en Pekín con su homólogo chino en una visita que marca el primer encuentro entre los máximos diplomáticos de estos estrechos aliados desde el comienzo de la guerra entre EE.UU., Israel e Irán.</p>
+      <p>La gira diplomática de Araghchi, que incluyó varias capitales, está diseñada para recabar apoyo internacional para Irán y explorar vías para resolver el conflicto con Washington. La visita a Pekín se produce justo una semana antes de que el presidente Trump aterrice en China.</p>
+      <blockquote>China aún no ha emitido su comentario oficial sobre la reunión. Las conversaciones se producen antes del encuentro Trump–Xi Jinping previsto para la próxima semana.</blockquote>
+      <p>Analistas señalan que el acercamiento iraní-chino tiene el potencial de complicar las negociaciones de paz, ya que Pekín podría actuar como garante de cualquier acuerdo final o, alternativamente, respaldar posiciones iraníes más duras en la mesa negociadora.</p>
+    `
+  },
+  'junta': {
+    tag: '🏛️ NACIONALES · ASUNCIÓN',
+    title: 'Sesión en la Junta de Asunción este domingo para aprobar balances del municipio',
+    byline: 'Fuente: Hoy.com.py · 9 de mayo de 2026',
+    emoji: '🏛️📋',
+    body: `
+      <p>La Junta Municipal de Asunción convocó a una sesión para este <strong>domingo a la siesta</strong> con el objetivo principal de tratar y aprobar los balances del municipio de la capital. La convocatoria generó cierta polémica por realizarse en horario y día atípico para las sesiones legislativas municipales.</p>
+      <p>Según fuentes de la Junta, la urgencia responde a plazos administrativos que vencen en los próximos días. La sesión incluirá también otros puntos en la agenda relacionados con la gestión financiera del municipio capitalino.</p>
+      <p>Concejales de la oposición cuestionaron la modalidad de convocatoria, señalando que este tipo de sesiones en días no hábiles limita la participación y la transparencia ciudadana.</p>
+    `
+  },
+  'camilo': {
+    tag: '⚽ POLÍTICA · ELECCIONES',
+    title: 'Encuesta ubica a Camilo Pérez como ganador de las internas de Honor Colorado para la intendencia de Asunción',
+    byline: 'Fuente: Hoy.com.py · 9 de mayo de 2026',
+    emoji: '🗳️📊',
+    body: `
+      <p><strong>Camilo Pérez</strong>, precandidato de Honor Colorado para la intendencia de Asunción, lidera las preferencias según los últimos datos de encuesta conocidos. El político, con perfil joven y discurso renovador dentro del partido colorado, aventaja a sus competidores internos de cara a las primarias.</p>
+      <p>Las encuestas internas reflejan un escenario favorable para Camilo, aunque los competidores señalan que aún hay mucho camino por recorrer antes de los comicios internos. El resultado de estas elecciones internas será determinante para la representación del Partido Colorado en las elecciones municipales de Asunción.</p>
+      <p>La ciudad capital es uno de los bastiones electorales más disputados del país, y su conducción tiene impacto directo en políticas de toda el Área Metropolitana.</p>
+    `
+  },
+  'pecci': {
+    tag: '⚖️ JUDICIALES',
+    title: 'Caso Pecci: reportan avances sobre autores intelectuales y rastreo de fuentes financieras',
+    byline: 'Fuente: Hoy.com.py · 9 de mayo de 2026',
+    emoji: '⚖️🔍',
+    body: `
+      <p>El fiscal <strong>Manuel Doldán</strong> reveló avances en la investigación sobre el asesinato del fiscal especializado en crimen organizado <strong>Marcelo Pecci</strong>, ocurrido el 10 de mayo de 2022 en Barú, Colombia, durante su luna de miel.</p>
+      <p>Según el funcionario del Ministerio Público, las pesquisas se centran actualmente en identificar a los autores intelectuales del crimen y en rastrear las fuentes financieras que financiaron la operación. Hasta ahora se logró la condena de varios autores materiales, pero la cadena de mando superior aún no fue desarticulada completamente.</p>
+      <p>El caso Pecci se convirtió en un símbolo de la lucha del Paraguay contra el crimen organizado y el narcotráfico, y su investigación sigue siendo seguida de cerca por organismos internacionales de justicia y transparencia.</p>
+    `
+  },
+  'marilina': {
+    tag: '🎤 ESPECTÁCULOS · MUNDIAL 2026',
+    title: 'FIFA anuncia artistas para la inauguración del Mundial 2026 y Marilina Bogado no figura en la lista',
+    byline: 'Fuente: Hoy.com.py · 9 de mayo de 2026',
+    emoji: '🎤⚽',
+    body: `
+      <p>La <strong>FIFA</strong> confirmó la nómina de artistas que actuarán durante la ceremonia de inauguración del <strong>Mundial 2026</strong>, y el nombre de <strong>Marilina Bogado</strong>, la cantante paraguaya más popular del momento, no aparece en la lista de confirmados.</p>
+      <p>La noticia generó decepción entre los fanáticos paraguayos de la artista, que esperaban verla en el escenario del torneo más importante del fútbol mundial, que se realizará de forma conjunta entre Estados Unidos, Canadá y México.</p>
+      <p>Por el momento, Marilina no se ha pronunciado públicamente sobre su ausencia en el evento. Sus representantes tampoco emitieron un comunicado oficial. Algunos seguidores especulan con que podría participar en otros eventos culturales vinculados al Mundial.</p>
+    `
+  },
+  'nene': {
+    tag: '🚨 SUCESOS · PARAGUAY',
+    title: 'Muere adolescente de 15 años al mando de un auto al chocar contra un camión',
+    byline: 'Fuente: Hoy.com.py · 9 de mayo de 2026',
+    emoji: '🚗💔',
+    body: `
+      <p>Un <strong>adolescente de 15 años</strong> perdió la vida en un accidente vial ocurrido en horas de la noche, después de que el vehículo que conducía colisionara violentamente con un camión. El menor falleció dentro del automóvil antes de que pudiera recibir asistencia médica.</p>
+      <p>El hecho volvió a poner en el centro del debate la problemática del acceso de menores a vehículos sin la supervisión adulta adecuada y la falta de controles viales efectivos en zonas urbanas y periurbanas del país.</p>
+      <p>Organismos de seguridad vial han reiterado en reiteradas ocasiones que la conducción de menores de edad no solo es ilegal sino extremadamente peligrosa. Las autoridades investigan las circunstancias exactas del accidente y cómo el adolescente accedió al vehículo.</p>
+    `
+  }
+};
+
+function showArticle(id) {
+  const a = articles[id];
+  if (!a) return;
+  const shareUrl = encodeURIComponent('https://notilea25-cloud.github.io/notilea.github.io/');
+  const shareText = encodeURIComponent(a.title + ' — Notilea25');
+  document.getElementById('article-content').innerHTML = `
+    <button class="back-btn" onclick="showPage('front')">← VOLVER A PORTADA</button>
+    <span class="article-section-tag">${a.tag}</span>
+    <h1 class="article-headline">${a.title}</h1>
+    <div class="article-byline">🗓️ <strong>${a.byline}</strong> · Notilea25</div>
+    <div class="article-hero-placeholder">${a.emoji}</div>
+    <div class="article-body">${a.body}</div>
+    <div class="article-share">
+      <span>COMPARTIR:</span>
+      <button class="share-btn fb" onclick="window.open('https://www.facebook.com/sharer/sharer.php?u=${shareUrl}','_blank')">📘 Facebook</button>
+      <button class="share-btn wa" onclick="window.open('https://wa.me/?text=${shareText}%20${shareUrl}','_blank')">📱 WhatsApp</button>
+    </div>
+  `;
+  showPage('article');
+}
+
+// Initial load
+buildClimaCards();
+</script>
+
+</body>
+</html>
